@@ -15,7 +15,8 @@ public class Mezzo {
     @ManyToOne
     @JoinColumn(name = "mezzi_tratta")
     private Tratta tratte;
-    @Column ( nullable = true, insertable = true, length = 10)
+    @ManyToOne
+    @JoinColumn(name = "mezzi_tratta")
     private boolean manutenzione;
     @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate periodo_servizio;
