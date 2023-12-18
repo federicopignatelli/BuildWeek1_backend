@@ -9,6 +9,8 @@ public class Application {
     public static void main(String[] args) {
         EntityManager entityManager= managerFactory.createEntityManager();
 
+        System.out.println("ciaone");
+
         entityManager.close();
         managerFactory.close();
     }
