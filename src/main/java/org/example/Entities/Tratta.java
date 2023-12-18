@@ -11,17 +11,21 @@ public class Tratta {
     @Id
     @GeneratedValue
     private long id_tratta;  // Chiave primaria
+    @Column(name = "zona_partenza",nullable = false)
         private String zonaPartenza;
+    @Column(name = "capolinea_arrivo",nullable = false)
         private String capolineaArrivo;
+    @Column(name = "durata_tratta",nullable = false)
         private LocalDate durataTratta;
+    @Column(name = "durata_media_percorsa",nullable = false)
         private LocalDate durataMediaPercorsa;
+    @Column(name = "km_tratta",precision = 10, scale=2)
         private double kmTratta;
-        private List<String> mezziTratta;
-
+        private List<Mezzo> mezziTratta;
         public Tratta (){
         }
 
-    public Tratta(long id_tratta, String zonaPartenza, String capolineaArrivo, LocalDate durataTratta, LocalDate durataMediaPercorsa, double kmTratta, List<String> mezziTratta) {
+    public Tratta(long id_tratta, String zonaPartenza, String capolineaArrivo, LocalDate durataTratta, LocalDate durataMediaPercorsa, double kmTratta, List<Mezzo> mezziTratta) {
         this.id_tratta = id_tratta;
         this.zonaPartenza = zonaPartenza;
         this.capolineaArrivo = capolineaArrivo;
@@ -79,11 +83,11 @@ public class Tratta {
         this.kmTratta = kmTratta;
     }
 
-    public List<String> getMezziTratta() {
+    public List<Mezzo> getMezziTratta() {
         return mezziTratta;
     }
 
-    public void setMezziTratta(List<String> mezziTratta) {
+    public void setMezziTratta(List<Mezzo> mezziTratta) {
         this.mezziTratta = mezziTratta;
     }
 
