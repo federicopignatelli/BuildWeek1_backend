@@ -1,14 +1,26 @@
 package org.example.Entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "mezzi")
 public class Mezzo {
+    @Id
+    @Column (name = "mezzo_id")
     private Long mezzoId;
+    @Enumerated(EnumType.STRING)
     private MezzoType mezzoType;
+    @Column ( nullable = false, insertable = true)
     private int capienza;
+    @ManyToOne
+    @JoinColumn(name = "mezzi_tratta")
+    @Column ( nullable = false, insertable = true)
     private Tratta tratte;
+    @Column ( nullable = true, insertable = true, length = 10)
     private boolean manutenzione;
+    @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate periodo_servizio;
+    @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
 
     /*----------------------< Costruttori >---------------------------*/
@@ -55,4 +67,19 @@ public class Mezzo {
     }
     /*---------------------------< Metodi >-----------------------------*/
 
+
+
+    /*---------------------------< Override >-----------------------------*/
+    @Override
+    public String toString() {
+        return "Mezzo{" +
+                "mezzoId=" + mezzoId +
+                ", mezzoType=" + mezzoType +
+                ", capienza=" + capienza +
+                ", tratte=" + tratte +
+                ", manutenzione=" + manutenzione +
+                ", periodo_servizio=" + periodo_servizio +
+                ", tot_biglietti_vidimati=" + tot_biglietti_vidimati +
+                '}';
+    }
 }

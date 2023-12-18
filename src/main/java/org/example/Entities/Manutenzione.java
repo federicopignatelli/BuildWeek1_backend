@@ -1,16 +1,26 @@
 package org.example.Entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
 public class Manutenzione {
+    @Id
+    @Column(name = "manutenzione_id")
+    private Long manutenzioneId;
+    @Column ( nullable = false, insertable = true)
     private int numero_manutenzione;
+    @Enumerated(EnumType.STRING)
     private VeicoloType veicoloType;
+    @Column ( nullable = false, insertable = true, length = 30)
     private String officina;
+    @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate data_inizio;
+    @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate data_fine;
+    @Column ( nullable = false, insertable = true, length = 20)
     private String descrizione_manutenzione;
+    @Column ( nullable = false, insertable = true)
     private double costo;
-
     /*----------------------< Costruttori >---------------------------*/
 
     public Manutenzione() {
@@ -56,4 +66,23 @@ public class Manutenzione {
         return costo;
     }
     /*---------------------------< Metodi >-----------------------------*/
+
+
+
+
+
+    /*---------------------------< Override >-----------------------------*/
+    @Override
+    public String toString() {
+        return "Manutenzione{" +
+                "manutenzioneId=" + manutenzioneId +
+                ", numero_manutenzione=" + numero_manutenzione +
+                ", veicoloType=" + veicoloType +
+                ", officina='" + officina + '\'' +
+                ", data_inizio=" + data_inizio +
+                ", data_fine=" + data_fine +
+                ", descrizione_manutenzione='" + descrizione_manutenzione + '\'' +
+                ", costo=" + costo +
+                '}';
+    }
 }
