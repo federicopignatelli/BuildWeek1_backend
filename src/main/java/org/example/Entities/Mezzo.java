@@ -14,7 +14,6 @@ public class Mezzo {
     private int capienza;
     @ManyToOne
     @JoinColumn(name = "mezzi_tratta")
-    @Column ( nullable = false, insertable = true)
     private Tratta tratte;
     @Column ( nullable = true, insertable = true, length = 10)
     private boolean manutenzione;
