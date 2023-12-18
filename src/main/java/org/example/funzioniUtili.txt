@@ -13,3 +13,5 @@
     }
 
     GENERA DATE RANDOM DA MODIFICARE
+    LocalDate localDate=LocalDate.now().plusYears(1);
+            System.out.println(localDate);

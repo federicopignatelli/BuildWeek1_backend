@@ -8,8 +8,8 @@ import javax.persistence.Enumerated;
 @Entity (name = "distributori_automatici")
 public class Distributoreautomatico extends Distributore {
 
-   @Column (name = "codice_macchina", insertable = false, updatable = false, nullable = false, unique = true)
-    private String codiceMacchina;
+   /*@Column (name = "codice_macchina", insertable = false, updatable = false, nullable = false, unique = true)
+    private String codiceMacchina;*/
     @Column (name = "servizi")
     @Enumerated (EnumType.STRING)
     Servizi servizi;
@@ -32,9 +32,9 @@ public class Distributoreautomatico extends Distributore {
 
     /*----------------------< Getter and Setter >---------------------------*/
 
-    public String getCodiceMacchina() {
+  /*  public String getCodiceMacchina() {
         return codiceMacchina;
-    }
+    }*/
 
     public Servizi getServizi() {
         return servizi;

@@ -1,6 +1,11 @@
 package org.example.Entities;
 
+import net.bytebuddy.asm.Advice;
+
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Locale;
 
 @Entity
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
@@ -47,4 +52,7 @@ public abstract class Distributore {
     //--> Setter
 
     /*---------------------------< Metodi >-----------------------------*/
+
+
+
 }
