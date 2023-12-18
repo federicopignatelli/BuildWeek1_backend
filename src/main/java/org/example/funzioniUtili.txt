@@ -1,0 +1,15 @@
+ public static String generateRandomDate() {
+        Random random = new Random();
+
+        // Imposta una data casuale nell'intervallo degli ultimi 10 anni
+        int year = LocalDate.now().getYear() - random.nextInt(10);
+        int month = random.nextInt(12) + 1; // Mesi da 1 a 12
+        int day = random.nextInt(31) + 1; // Giorni da 1 a 31
+
+        LocalDate randomDate = LocalDate.of(year, month, day);
+
+        // Formatta la data nel formato desiderato
+        return randomDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    GENERA DATE RANDOM DA MODIFICARE
