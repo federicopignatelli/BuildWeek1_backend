@@ -103,6 +103,10 @@ public class Biglietto {
     public void setVidimazione(boolean vidimazione) {
         this.vidimazione = vidimazione;
     }
+
+    public LocalDate getDataVidimazione() {
+        return null;
+    }
 }
 
 

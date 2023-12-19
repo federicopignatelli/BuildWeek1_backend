@@ -24,11 +24,9 @@ public class BigliettoDAO {
 
     public void delete(Biglietto bi){}
 
-
-    class Biglietto {
         private LocalDate dataVidimazione;
 
-        public Biglietto(LocalDate dataVidimazione) {
+        public BigliettoDAO(LocalDate dataVidimazione) {
             this.dataVidimazione = dataVidimazione;
         }
 
@@ -62,4 +60,4 @@ public class BigliettoDAO {
         }
     }
 
-}
+
