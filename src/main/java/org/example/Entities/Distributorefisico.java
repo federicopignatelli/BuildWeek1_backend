@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Random;
 
-@Entity (name = "distributore_fisico")
-
+@Entity
+@Table(name = "distributore_fisico")
 public class Distributorefisico extends Distributore {
     @Column (name = "name_company", nullable = false, unique = true)
     private String companyName;
@@ -16,6 +16,12 @@ public class Distributorefisico extends Distributore {
     private String pIva;
     @OneToMany(mappedBy = "distributori_fisico")
     private List<Biglietto> biglietti;
+
+
+
+
+
+
 
 
 

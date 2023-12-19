@@ -1,7 +1,9 @@
 package org.example.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import org.example.Entities.Abbonamento;
 
 @Entity (name = "distributori_automatici")
 public class Distributoreautomatico extends Distributore {
@@ -13,6 +15,10 @@ public class Distributoreautomatico extends Distributore {
     Servizi servizi;
     @OneToMany(mappedBy = "distributori_automatici")
     private List<Biglietto> biglietti;
+
+    @OneToMany (mappedBy = "distributoreautomatico", orphanRemoval = true)
+    private List<Abbonamento> abbonamenti = new ArrayList<>();
+
 
 
     /*----------------------< Costruttori >---------------------------*/

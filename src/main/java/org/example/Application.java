@@ -1,15 +1,8 @@
 package org.example;
 
-import org.example.Entities.Distributore;
-import org.example.Entities.Distributoreautomatico;
-import org.example.Entities.Distributorefisico;
-import org.example.EntitiesDAO.DistributoreDAO;
-import org.example.EntitiesDAO.DistributorefisicoDAO;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDate;
 
 public class Application {
     public static final EntityManagerFactory managerFactory= Persistence.createEntityManagerFactory("bw1812");

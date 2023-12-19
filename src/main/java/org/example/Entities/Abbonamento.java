@@ -6,14 +6,15 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "abbonamenti")
 public class Abbonamento {
     @Id
     @GeneratedValue
     private Long id_abbondamento;
-//    private User user;
+
     private LocalDate dataemissioneAbbondamento;
     private Tipologia_abbonamento tipologia_abbonamento;
-//    private Mezzo mezzo;
+
 //    private Tratta tratta;
     private Double prezzo;
     private LocalDate dataScadenzaAbbondamento;
@@ -21,6 +22,18 @@ public class Abbonamento {
     @ManyToOne
     @JoinColumn(name="tratte")
     private Tratta tratte;
+
+    @ManyToOne
+    @JoinColumn(name = "distributore_automatico")
+    private Distributoreautomatico distributoreautomatico;
+    @ManyToOne
+    @JoinColumn(name = "distributore")
+    private Distributorefisico distributorefisico;
+
+    @ManyToOne (optional = false)
+    @JoinColumn (name = "card_id", nullable = false)
+    private Card card;
+
 
     public Abbonamento() {
     }

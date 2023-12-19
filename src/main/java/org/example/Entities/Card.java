@@ -2,6 +2,8 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "card")
@@ -19,6 +21,11 @@ public class Card {
     private LocalDate stopDate; //Di default +1 anno dalla data di rilascio
     @OneToOne (fetch = FetchType.EAGER)
     private User user;
+
+    @OneToMany (mappedBy = "card")
+    private Set<Abbonamento> abbonamenti = new LinkedHashSet<>();
+
+
 
 
     /*----------------------< Costruttori >---------------------------*/

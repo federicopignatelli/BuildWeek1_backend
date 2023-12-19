@@ -25,11 +25,11 @@ public class Biglietto {
     private List<Tratta> tratta;
 
     @ManyToOne
-    @JoinColumn(name="biglietterieAutomatiche")
+    @JoinColumn(name="biglietterie_automatiche")
     private Distributoreautomatico distributori_automatici;
 
     @ManyToOne
-    @JoinColumn(name="biglietterieFisiche")
+    @JoinColumn(name="biglietterie_fisiche")
     private Distributorefisico distributori_fisico;
 
 

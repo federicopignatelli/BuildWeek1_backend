@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>1768</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1862</IntrospectionStateNumber>
       <ServerVersion>16.1</ServerVersion>
       <StartupTime>1702768218</StartupTime>
       <TimeZones>true ACDT
@@ -808,7 +800,7 @@ false Zulu
 14643||10|C|G
 14643||-9223372036854775808|U|G
 14643||10|U|G</Grants>
-      <IntrospectionStateNumber>1768</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1862</IntrospectionStateNumber>
       <ObjectId>17712</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4249,18 +4241,18 @@ false Zulu
     <schema id="267" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1768</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2023-12-18.17:58:42</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>1862</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2023-12-19.11:51:48</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>524</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="268" parent="267" name="card_card_id_seq">
       <DasType>bigint|0s</DasType>
-      <ObjectId>17777</ObjectId>
+      <ObjectId>17879</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>1747</StateNumber>
+      <StateNumber>1789</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <sequence id="269" parent="267" name="distributore_seq">
@@ -4271,7 +4263,15 @@ false Zulu
       <StateNumber>1740</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <sequence id="270" parent="267" name="users_userid_seq">
+    <sequence id="270" parent="267" name="hibernate_sequence">
+      <DasType>bigint|0s</DasType>
+      <ObjectId>17852</ObjectId>
+      <SequenceIdentity>1</SequenceIdentity>
+      <StartValue>1</StartValue>
+      <StateNumber>1774</StateNumber>
+      <OwnerName>postgres</OwnerName>
+    </sequence>
+    <sequence id="271" parent="267" name="users_userid_seq">
       <DasType>bigint|0s</DasType>
       <ObjectId>17793</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
@@ -4279,261 +4279,659 @@ false Zulu
       <StateNumber>1749</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
-    <table id="271" parent="267" name="card">
-      <ObjectId>17778</ObjectId>
-      <StateNumber>1752</StateNumber>
+    <table id="272" parent="267" name="abbonamento">
+      <ObjectId>17925</ObjectId>
+      <StateNumber>1813</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="272" parent="267" name="distributore_fisico">
-      <ObjectId>17812</ObjectId>
-      <StateNumber>1755</StateNumber>
+    <table id="273" parent="267" name="biglietterie">
+      <ObjectId>18040</ObjectId>
+      <StateNumber>1859</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="273" parent="267" name="distributori_automatici">
-      <ObjectId>17784</ObjectId>
-      <StateNumber>1748</StateNumber>
+    <table id="274" parent="267" name="biglietti">
+      <ObjectId>18005</ObjectId>
+      <StateNumber>1849</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="274" parent="267" name="users">
+    <table id="275" parent="267" name="card">
+      <ObjectId>17880</ObjectId>
+      <StateNumber>1799</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="276" parent="267" name="distributore_fisico">
+      <ObjectId>18010</ObjectId>
+      <StateNumber>1845</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="277" parent="267" name="distributori_automatici">
+      <ObjectId>18019</ObjectId>
+      <StateNumber>1846</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="278" parent="267" name="manutenzione">
+      <ObjectId>17835</ObjectId>
+      <StateNumber>1771</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="279" parent="267" name="mezzi">
+      <ObjectId>17840</ObjectId>
+      <StateNumber>1778</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="280" parent="267" name="tratta">
+      <ObjectId>17845</ObjectId>
+      <StateNumber>1775</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <table id="281" parent="267" name="users">
       <ObjectId>17794</ObjectId>
       <StateNumber>1752</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="275" parent="271" name="card_id">
+    <column id="282" parent="272" name="id_abbondamento">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1809</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="283" parent="272" name="datascadenzaabbondamento">
+      <DasType>date|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>1809</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="284" parent="272" name="dataemissioneabbondamento">
+      <DasType>date|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>1809</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="285" parent="272" name="prezzo">
+      <DasType>double precision|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>1809</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="286" parent="272" name="tipologia_abbonamento">
+      <DasType>integer|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>1809</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="287" parent="272" name="tratte">
+      <DasType>bigint|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>1809</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="288" parent="272" name="fk2hs9d7ueu2gn1ldkd0s01mytw">
+      <ColNames>tratte</ColNames>
+      <ObjectId>17951</ObjectId>
+      <StateNumber>1813</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>17845</RefTableId>
+    </foreign-key>
+    <index id="289" parent="272" name="abbonamento_pkey">
+      <ColNames>id_abbondamento</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17928</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1809</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="290" parent="272" name="abbonamento_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17929</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1809</StateNumber>
+      <UnderlyingIndexId>17928</UnderlyingIndexId>
+    </key>
+    <column id="291" parent="273" name="idbiglietteria">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1859</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="292" parent="273" name="abbonamenti_venduti">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>1859</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="293" parent="273" name="biglietti_venduti">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>1859</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="294" parent="273" name="locazione">
+      <DasType>varchar(50)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1859</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="295" parent="273" name="tipologia">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>1859</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="296" parent="273" name="biglietterie_pkey">
+      <ColNames>idbiglietteria</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18045</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1859</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="297" parent="273" name="biglietterie_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18046</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1859</StateNumber>
+      <UnderlyingIndexId>18045</UnderlyingIndexId>
+    </key>
+    <column id="298" parent="274" name="id_biglietto">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="299" parent="274" name="dataemissionebiglietto">
+      <DasType>date|0s</DasType>
+      <Position>2</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="300" parent="274" name="prezzo">
+      <DasType>double precision|0s</DasType>
+      <Position>3</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="301" parent="274" name="tipologia_biglietto">
+      <DasType>integer|0s</DasType>
+      <Position>4</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="302" parent="274" name="vidimazione">
+      <DasType>boolean|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="303" parent="274" name="biglietterie">
+      <DasType>bigint|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="304" parent="274" name="users">
+      <DasType>bigint|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>1844</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="305" parent="274" name="fkl9o0pvuc93dw6erc6rmd344t8">
+      <ColNames>users</ColNames>
+      <ObjectId>18030</ObjectId>
+      <StateNumber>1849</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>17794</RefTableId>
+    </foreign-key>
+    <index id="306" parent="274" name="biglietti_pkey">
+      <ColNames>id_biglietto</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18008</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1844</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="307" parent="274" name="biglietti_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18009</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1844</StateNumber>
+      <UnderlyingIndexId>18008</UnderlyingIndexId>
+    </key>
+    <column id="308" parent="275" name="card_id">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;card_card_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1747</StateNumber>
-      <SequenceId>17777</SequenceId>
+      <StateNumber>1789</StateNumber>
+      <SequenceId>17879</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="276" parent="271" name="card_number">
+    <column id="309" parent="275" name="card_number">
       <DasType>varchar(16)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1747</StateNumber>
+      <StateNumber>1789</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="277" parent="271" name="issue_date">
+    <column id="310" parent="275" name="issue_date">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>1747</StateNumber>
+      <StateNumber>1789</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="278" parent="271" name="stop_date">
+    <column id="311" parent="275" name="stop_date">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>1747</StateNumber>
+      <StateNumber>1789</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="279" parent="271" name="user_userid">
+    <column id="312" parent="275" name="user_userid">
       <DasType>bigint|0s</DasType>
       <Position>5</Position>
-      <StateNumber>1747</StateNumber>
+      <StateNumber>1789</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="280" parent="271" name="fk2v47ye9r8ou99nnrrwp1sfc1r">
+    <foreign-key id="313" parent="275" name="fk2v47ye9r8ou99nnrrwp1sfc1r">
       <ColNames>user_userid</ColNames>
-      <ObjectId>17802</ObjectId>
-      <StateNumber>1752</StateNumber>
+      <ObjectId>17915</ObjectId>
+      <StateNumber>1799</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>17794</RefTableId>
     </foreign-key>
-    <index id="281" parent="271" name="card_pkey">
+    <index id="314" parent="275" name="card_pkey">
       <ColNames>card_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17782</ObjectId>
+      <ObjectId>17884</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1747</StateNumber>
+      <StateNumber>1789</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="282" parent="271" name="uk_by1nk98m2hq5onhl68bo09sc1">
+    <index id="315" parent="275" name="uk_by1nk98m2hq5onhl68bo09sc1">
       <ColNames>card_number</ColNames>
-      <ObjectId>17800</ObjectId>
-      <StateNumber>1751</StateNumber>
+      <ObjectId>17904</ObjectId>
+      <StateNumber>1793</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="283" parent="271" name="card_pkey">
+    <key id="316" parent="275" name="card_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17783</ObjectId>
+      <ObjectId>17885</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1747</StateNumber>
-      <UnderlyingIndexId>17782</UnderlyingIndexId>
+      <StateNumber>1789</StateNumber>
+      <UnderlyingIndexId>17884</UnderlyingIndexId>
     </key>
-    <key id="284" parent="271" name="uk_by1nk98m2hq5onhl68bo09sc1">
-      <ObjectId>17801</ObjectId>
-      <StateNumber>1751</StateNumber>
-      <UnderlyingIndexId>17800</UnderlyingIndexId>
+    <key id="317" parent="275" name="uk_by1nk98m2hq5onhl68bo09sc1">
+      <ObjectId>17905</ObjectId>
+      <StateNumber>1793</StateNumber>
+      <UnderlyingIndexId>17904</UnderlyingIndexId>
     </key>
-    <column id="285" parent="272" name="idbiglietteria">
+    <column id="318" parent="276" name="idbiglietteria">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1845</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="286" parent="272" name="abbonamenti_venduti">
+    <column id="319" parent="276" name="abbonamenti_venduti">
       <DasType>integer|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1845</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="287" parent="272" name="biglietti_venduti">
+    <column id="320" parent="276" name="biglietti_venduti">
       <DasType>integer|0s</DasType>
       <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1845</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="288" parent="272" name="locazione">
+    <column id="321" parent="276" name="locazione">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1845</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="289" parent="272" name="tipologia">
+    <column id="322" parent="276" name="tipologia">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1845</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="290" parent="272" name="name_company">
+    <column id="323" parent="276" name="name_company">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1845</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="291" parent="272" name="p_iva">
-      <DasType>varchar(11)|0s</DasType>
+    <index id="324" parent="276" name="distributore_fisico_pkey">
+      <ColNames>idbiglietteria</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18017</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1845</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <index id="325" parent="276" name="uk_kek4nnv3fp5at0d6hellc2j9o">
+      <ColNames>name_company</ColNames>
+      <ObjectId>18028</ObjectId>
+      <StateNumber>1848</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="326" parent="276" name="distributore_fisico_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18018</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1845</StateNumber>
+      <UnderlyingIndexId>18017</UnderlyingIndexId>
+    </key>
+    <key id="327" parent="276" name="uk_kek4nnv3fp5at0d6hellc2j9o">
+      <ObjectId>18029</ObjectId>
+      <StateNumber>1848</StateNumber>
+      <UnderlyingIndexId>18028</UnderlyingIndexId>
+    </key>
+    <column id="328" parent="277" name="idbiglietteria">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1846</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="329" parent="277" name="abbonamenti_venduti">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>1846</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="330" parent="277" name="biglietti_venduti">
+      <DasType>integer|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>1846</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="331" parent="277" name="locazione">
+      <DasType>varchar(50)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1846</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="332" parent="277" name="tipologia">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>1846</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="333" parent="277" name="servizi">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>6</Position>
+      <StateNumber>1846</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="334" parent="277" name="distributori_automatici_pkey">
+      <ColNames>idbiglietteria</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18026</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1846</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="335" parent="277" name="distributori_automatici_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18027</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1846</StateNumber>
+      <UnderlyingIndexId>18026</UnderlyingIndexId>
+    </key>
+    <column id="336" parent="278" name="manutenzione_id">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="337" parent="278" name="costo">
+      <DasType>double precision|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="338" parent="278" name="data_fine">
+      <DasType>date|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="339" parent="278" name="data_inizio">
+      <DasType>date|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="340" parent="278" name="descrizione_manutenzione">
+      <DasType>varchar(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="341" parent="278" name="numero_manutenzione">
+      <DasType>integer|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="342" parent="278" name="officina">
+      <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1771</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="292" parent="272" name="distributore_fisico_pkey">
-      <ColNames>idbiglietteria</ColNames>
+    <column id="343" parent="278" name="veicolotype">
+      <DasType>varchar(255)|0s</DasType>
+      <Position>8</Position>
+      <StateNumber>1771</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="344" parent="278" name="manutenzione_pkey">
+      <ColNames>manutenzione_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17819</ObjectId>
+      <ObjectId>17838</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1755</StateNumber>
+      <StateNumber>1771</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="293" parent="272" name="uk_kek4nnv3fp5at0d6hellc2j9o">
-      <ColNames>name_company</ColNames>
-      <ObjectId>17821</ObjectId>
-      <StateNumber>1758</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationNames>default</CollationNames>
-      <CollationIds>100</CollationIds>
-      <CollationParentNames>pg_catalog</CollationParentNames>
-    </index>
-    <index id="294" parent="272" name="uk_f7h8boxkx8e0t3jbgji1s9wj8">
-      <ColNames>p_iva</ColNames>
-      <ObjectId>17823</ObjectId>
-      <StateNumber>1760</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-      <CollationNames>default</CollationNames>
-      <CollationIds>100</CollationIds>
-      <CollationParentNames>pg_catalog</CollationParentNames>
-    </index>
-    <key id="295" parent="272" name="distributore_fisico_pkey">
+    <key id="345" parent="278" name="manutenzione_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17820</ObjectId>
+      <ObjectId>17839</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1755</StateNumber>
-      <UnderlyingIndexId>17819</UnderlyingIndexId>
+      <StateNumber>1771</StateNumber>
+      <UnderlyingIndexId>17838</UnderlyingIndexId>
     </key>
-    <key id="296" parent="272" name="uk_kek4nnv3fp5at0d6hellc2j9o">
-      <ObjectId>17822</ObjectId>
-      <StateNumber>1758</StateNumber>
-      <UnderlyingIndexId>17821</UnderlyingIndexId>
-    </key>
-    <key id="297" parent="272" name="uk_f7h8boxkx8e0t3jbgji1s9wj8">
-      <ObjectId>17824</ObjectId>
-      <StateNumber>1760</StateNumber>
-      <UnderlyingIndexId>17823</UnderlyingIndexId>
-    </key>
-    <column id="298" parent="273" name="idbiglietteria">
+    <column id="346" parent="279" name="mezzo_id">
       <DasType>bigint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1748</StateNumber>
+      <StateNumber>1772</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="299" parent="273" name="abbonamenti_venduti">
+    <column id="347" parent="279" name="capienza">
       <DasType>integer|0s</DasType>
-      <DefaultExpression>0</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1748</StateNumber>
+      <StateNumber>1772</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="300" parent="273" name="biglietti_venduti">
-      <DasType>integer|0s</DasType>
-      <DefaultExpression>0</DefaultExpression>
-      <NotNull>1</NotNull>
+    <column id="348" parent="279" name="mezzotype">
+      <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>1748</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>1772</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <column id="301" parent="273" name="locazione">
-      <DasType>varchar(50)|0s</DasType>
+    <column id="349" parent="279" name="periodo_servizio">
+      <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>1748</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>1772</StateNumber>
+      <TypeId>1082</TypeId>
     </column>
-    <column id="302" parent="273" name="tipologia">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="350" parent="279" name="tot_biglietti_vidimati">
+      <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>1748</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>1772</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="303" parent="273" name="servizi">
-      <DasType>varchar(255)|0s</DasType>
+    <column id="351" parent="279" name="tratte">
+      <DasType>bigint|0s</DasType>
       <Position>6</Position>
-      <StateNumber>1748</StateNumber>
-      <TypeId>1043</TypeId>
+      <StateNumber>1772</StateNumber>
+      <TypeId>20</TypeId>
     </column>
-    <index id="304" parent="273" name="distributori_automatici_pkey">
-      <ColNames>idbiglietteria</ColNames>
+    <foreign-key id="352" parent="279" name="fkjshhxnrifgw99gvach3n7i5h">
+      <ColNames>tratte</ColNames>
+      <ObjectId>17868</ObjectId>
+      <StateNumber>1778</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>17845</RefTableId>
+    </foreign-key>
+    <index id="353" parent="279" name="mezzi_pkey">
+      <ColNames>mezzo_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17791</ObjectId>
+      <ObjectId>17843</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1748</StateNumber>
+      <StateNumber>1772</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="305" parent="273" name="distributori_automatici_pkey">
+    <key id="354" parent="279" name="mezzi_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>17792</ObjectId>
+      <ObjectId>17844</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1748</StateNumber>
-      <UnderlyingIndexId>17791</UnderlyingIndexId>
+      <StateNumber>1772</StateNumber>
+      <UnderlyingIndexId>17843</UnderlyingIndexId>
     </key>
-    <column id="306" parent="274" name="userid">
+    <column id="355" parent="280" name="id_tratta">
+      <DasType>bigint|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="356" parent="280" name="capolinea_arrivo">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="357" parent="280" name="durata_media_percorsa">
+      <DasType>date|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="358" parent="280" name="durata_tratta">
+      <DasType>date|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="359" parent="280" name="km_tratta">
+      <DasType>double precision|0s</DasType>
+      <Position>5</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="360" parent="280" name="zona_partenza">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="361" parent="280" name="biglietti">
+      <DasType>bigint|0s</DasType>
+      <Position>7</Position>
+      <StateNumber>1773</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="362" parent="280" name="fkduvfd79b4xjva4iqilcqgrngw">
+      <ColNames>biglietti</ColNames>
+      <ObjectId>18035</ObjectId>
+      <StateNumber>1850</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>18005</RefTableId>
+    </foreign-key>
+    <index id="363" parent="280" name="tratta_pkey">
+      <ColNames>id_tratta</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17850</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1773</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="364" parent="280" name="tratta_pkey">
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>17851</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1773</StateNumber>
+      <UnderlyingIndexId>17850</UnderlyingIndexId>
+    </key>
+    <column id="365" parent="281" name="userid">
       <DasType>bigint|0s</DasType>
       <DefaultExpression>nextval(&apos;users_userid_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
@@ -4542,48 +4940,48 @@ false Zulu
       <SequenceId>17793</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="307" parent="274" name="birth_date">
+    <column id="366" parent="281" name="birth_date">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>1749</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="308" parent="274" name="residential_address">
+    <column id="367" parent="281" name="residential_address">
       <DasType>varchar(100)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>1749</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="309" parent="274" name="user_last_name">
+    <column id="368" parent="281" name="user_last_name">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>1749</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="310" parent="274" name="user_name">
+    <column id="369" parent="281" name="user_name">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
       <StateNumber>1749</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="311" parent="274" name="card_card_id">
+    <column id="370" parent="281" name="card_card_id">
       <DasType>bigint|0s</DasType>
       <Position>6</Position>
       <StateNumber>1749</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="312" parent="274" name="fkhs8il4hp96t7qc5yc0x3v8bew">
+    <foreign-key id="371" parent="281" name="fkhs8il4hp96t7qc5yc0x3v8bew">
       <ColNames>card_card_id</ColNames>
-      <ObjectId>17807</ObjectId>
-      <StateNumber>1753</StateNumber>
+      <ObjectId>17920</ObjectId>
+      <StateNumber>1800</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>17778</RefTableId>
+      <RefTableId>17880</RefTableId>
     </foreign-key>
-    <index id="313" parent="274" name="users_pkey">
+    <index id="372" parent="281" name="users_pkey">
       <ColNames>userid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17798</ObjectId>
@@ -4592,7 +4990,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="314" parent="274" name="users_pkey">
+    <key id="373" parent="281" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>17799</ObjectId>
       <Primary>1</Primary>
