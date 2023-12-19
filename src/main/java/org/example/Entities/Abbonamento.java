@@ -2,9 +2,7 @@ package org.example.Entities;
 
 import org.example.Entities.ENUM.Tipologia_abbonamento;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -12,24 +10,28 @@ public class Abbonamento {
     @Id
     @GeneratedValue
     private Long id_abbondamento;
-    private User user;
+//    private User user;
     private LocalDate dataemissioneAbbondamento;
     private Tipologia_abbonamento tipologia_abbonamento;
-    private Mezzo mezzo;
-    private Tratta tratta;
+//    private Mezzo mezzo;
+//    private Tratta tratta;
     private Double prezzo;
     private LocalDate dataScadenzaAbbondamento;
+
+    @ManyToOne
+    @JoinColumn(name="tratte")
+    private Tratta tratte;
 
     public Abbonamento() {
     }
 
-    public Abbonamento(User user, LocalDate dataemissioneAbbondamento, Tipologia_abbonamento tipologia_abbonamento, Mezzo mezzo, Tratta tratta, Double prezzo, LocalDate dataScadenzaAbbondamento) {
+    public Abbonamento(/*User user,*/ LocalDate dataemissioneAbbondamento, Tipologia_abbonamento tipologia_abbonamento, /*Mezzo mezzo*/ /*Tratta tratta*/ Double prezzo, LocalDate dataScadenzaAbbondamento) {
         this.id_abbondamento = getId_abbondamento();
-        this.user = user;
+//        this.user = user;
         this.dataemissioneAbbondamento = dataemissioneAbbondamento;
         this.tipologia_abbonamento = tipologia_abbonamento;
-        this.mezzo = mezzo;
-        this.tratta = tratta;
+//        this.mezzo = mezzo;
+//        this.tratta = tratta;
         this.prezzo = prezzo;
         this.dataScadenzaAbbondamento = dataScadenzaAbbondamento;
     }
@@ -38,13 +40,13 @@ public class Abbonamento {
         return id_abbondamento;
     }
 
-    public User getUser() {
+   /* public User getUser() {
         return user;
-    }
+    }*/
 
-    public void setUser(User user) {
+    /*public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
     public LocalDate getDataemissioneAbbondamento() {
         return dataemissioneAbbondamento;
@@ -62,21 +64,21 @@ public class Abbonamento {
         this.tipologia_abbonamento = tipologia_abbonamento;
     }
 
-    public Mezzo getMezzo() {
-        return mezzo;
-    }
+//    public Mezzo getMezzo() {
+//        return mezzo;
+//    }
 
-    public void setMezzo(Mezzo mezzo) {
-        this.mezzo = mezzo;
-    }
+//    public void setMezzo(Mezzo mezzo) {
+//        this.mezzo = mezzo;
+//    }
 
-    public Tratta getTratta() {
+/*    public Tratta getTratta() {
         return tratta;
     }
 
     public void setTratta(Tratta tratta) {
         this.tratta = tratta;
-    }
+    }*/
 
     public Double getPrezzo() {
         return prezzo;

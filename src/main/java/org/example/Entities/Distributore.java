@@ -5,6 +5,7 @@ import net.bytebuddy.asm.Advice;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 
 @Entity
@@ -25,6 +26,9 @@ public abstract class Distributore {
     //da AGGIUNGERE CONTATORE OGNI VOLTA CHE SI AGGIUNGE UN BIGLIETTO
     @Column(name = "abbonamenti_venduti", columnDefinition = "INTEGER DEFAULT 0", nullable = false, insertable = true, updatable = true)
     protected long abbonamentiVenduti;
+
+    @OneToMany(mappedBy = "biglietterie")
+    private List<Biglietto> biglietti;
 
     public Distributore() {}
 

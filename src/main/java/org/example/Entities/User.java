@@ -2,6 +2,7 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -26,6 +27,9 @@ public class User {
     //FETCH TYPE EAGER PERCHE VOGLIO RECUPERARE ANCHE I DATI RELATIVI ALLA TESSERE UTENTE
     @OneToOne (fetch = FetchType.EAGER)
     private Card card;
+
+    @OneToMany (fetch = FetchType.LAZY , mappedBy = "users")
+    private List<Biglietto> biglietto;
 
     /*----------------------< Costruttori >---------------------------*/
     public User() {

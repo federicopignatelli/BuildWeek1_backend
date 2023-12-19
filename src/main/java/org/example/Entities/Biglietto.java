@@ -2,30 +2,48 @@ package org.example.Entities;
 import org.example.Entities.ENUM.Tipologia_biglietto;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Table(name = "biglietti")
 public class Biglietto {
     @Id
     @GeneratedValue
     private Long id_biglietto;
     private Tipologia_biglietto tipologia_biglietto;
-    private Mezzo mezzo;
+//    private Mezzo mezzo;
     private Double prezzo;
     private LocalDate dataemissioneBiglietto;
-    private Tratta tratta;
+//    private Tratta tratta;
     private boolean vidimazione;
+
+    @ManyToOne
+    @JoinColumn(name="users")
+    User users;
+
+    @OneToMany (mappedBy="biglietti")
+    private List<Tratta> tratta;
+
+    @ManyToOne
+    @JoinColumn(name="biglietterie")
+    private Distributoreautomatico biglietterie;
+
+//    @ManyToOne
+//    @JoinColumn(name="biglietteriefisiche")
+//    private Distributorefisico biglietteriefisiche;
+
 
     //COSTRUTTORI
     public Biglietto() {
     }
 
-    public Biglietto(Tipologia_biglietto tipologia_biglietto, Mezzo mezzo, Double prezzo, LocalDate dataemissioneBiglietto, Tratta tratta, boolean vidimazione) {
+    public Biglietto(Tipologia_biglietto tipologia_biglietto, /*Mezzo mezzo,*/ Double prezzo, LocalDate dataemissioneBiglietto, /*Tratta tratta,*/ boolean vidimazione) {
         this.id_biglietto = getId_biglietto();
         this.tipologia_biglietto = tipologia_biglietto;
-        this.mezzo = mezzo;
+//        this.mezzo = mezzo;
         this.prezzo = prezzo;
         this.dataemissioneBiglietto = dataemissioneBiglietto;
-        this.tratta = tratta;
+//        this.tratta = tratta;
         this.vidimazione = vidimazione;
     }
 
@@ -41,13 +59,13 @@ public class Biglietto {
         this.tipologia_biglietto = tipologia_biglietto;
     }
 
-    public Mezzo getMezzo() {
+/*    public Mezzo getMezzo() {
         return mezzo;
     }
 
     public void setMezzo(Mezzo mezzo) {
         this.mezzo = mezzo;
-    }
+    }*/
 
     public Double getPrezzo() {
         return prezzo;
@@ -65,13 +83,13 @@ public class Biglietto {
         this.dataemissioneBiglietto = dataemissioneBiglietto;
     }
 
-    public Tratta getTratta() {
+/*    public Tratta getTratta() {
         return tratta;
     }
 
     public void setTratta(Tratta tratta) {
         this.tratta = tratta;
-    }
+    }*/
 
     public boolean isVidimazione() {
         return vidimazione;

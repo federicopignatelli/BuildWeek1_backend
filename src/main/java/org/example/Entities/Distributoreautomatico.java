@@ -1,9 +1,7 @@
 package org.example.Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity (name = "distributori_automatici")
 public class Distributoreautomatico extends Distributore {
@@ -13,6 +11,7 @@ public class Distributoreautomatico extends Distributore {
     @Column (name = "servizi")
     @Enumerated (EnumType.STRING)
     Servizi servizi;
+
 
 
     /*----------------------< Costruttori >---------------------------*/
