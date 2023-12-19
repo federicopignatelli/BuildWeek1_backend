@@ -21,6 +21,8 @@ public class Application {
         /*Distributorefisico ds= new Distributorefisico();
         ds.generatePiva();*/
 
+        System.out.println("ciaone");
+
         entityManager.close();
         managerFactory.close();
     }
