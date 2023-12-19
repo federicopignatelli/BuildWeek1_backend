@@ -35,13 +35,13 @@ public class User {
     public User() {
     }
 
-    public User(Long userId, String userName, String userLastName, LocalDate birthDate, String residentialAddress, Card card) {
-        this.userId = userId;
+    public User(/*Long userId,*/ String userName, String userLastName, LocalDate birthDate, String residentialAddress, Card card) {
+//        this.userId = userId;
         this.userName = userName;
         this.userLastName = userLastName;
         this.birthDate = birthDate;
         this.residentialAddress = residentialAddress;
-        this.card = card;
+//        this.card = card;
     }
 
     //DA VERIFICARE SE EFFETIVAMENTE SERVE UN COSTRUTTORE SOLO CON LA CARD
