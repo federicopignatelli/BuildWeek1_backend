@@ -11,7 +11,9 @@ public class DistributoreDAO {
     public DistributoreDAO(EntityManager em){this.em = em;}
     public void save(Distributoreautomatico dm){
         em.getTransaction().begin();
+
         em.persist(dm);
+
         em.getTransaction().commit();
     }
 
