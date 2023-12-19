@@ -6,8 +6,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "mezzi")
+@NamedQuery(name = "Mezzo.countMezziPerTratta", query = "")
 public class Mezzo {
     @Id
+    @GeneratedValue
     @Column (name = "mezzo_id")
     private Long mezzoId;
     @Enumerated(EnumType.STRING)
@@ -33,15 +35,13 @@ public class Mezzo {
     public Mezzo() {
     }
 
-public Mezzo( MezzoType mezzoType, int capienza, /*Tratta tratte, boolean manutenzione,*/ LocalDate periodo_servizio, int tot_biglietti_vidimati) {
-        this.mezzoId = getMezzoId();
+    public Mezzo(MezzoType mezzoType, int capienza, LocalDate periodo_servizio, Tratta tratte) {
         this.mezzoType = mezzoType;
         this.capienza = capienza;
-//        this.tratte = tratte;
-//        this.manutenzione = manutenzione;
         this.periodo_servizio = periodo_servizio;
-        this.tot_biglietti_vidimati = tot_biglietti_vidimati;
+        this.tratte = tratte;
     }
+
     /*--------------------< Getter and Setter >--------------------------*/
 
     public Long getMezzoId() {
