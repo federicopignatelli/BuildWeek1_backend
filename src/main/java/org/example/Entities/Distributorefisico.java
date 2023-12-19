@@ -32,16 +32,16 @@ public Distributorefisico(){}
 
     /*---------------------------< Metodi >----------------------*/
 
-    public String generatePiva(){
+   /* public String generatePiva(){
         String number="1234567890";
         String piva = "";
         Random rd=new Random();
         DistributorefisicoDAO de=new DistributorefisicoDAO(em);
-        /*do {
+        *//*do {
 
 
-        }while()*/
+        }while()*//*
         System.out.println(piva);
         return piva;
-    }
+    }*/
 }
