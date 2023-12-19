@@ -11,10 +11,8 @@ public class Biglietto {
     @GeneratedValue
     private Long id_biglietto;
     private Tipologia_biglietto tipologia_biglietto;
-//    private Mezzo mezzo;
     private Double prezzo;
     private LocalDate dataemissioneBiglietto;
-//    private Tratta tratta;
     private boolean vidimazione;
 
     @ManyToOne
@@ -37,15 +35,31 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(Tipologia_biglietto tipologia_biglietto, /*Mezzo mezzo,*/ Double prezzo, LocalDate dataemissioneBiglietto, /*Tratta tratta,*/ boolean vidimazione) {
+    public Biglietto(Tipologia_biglietto tipologia_biglietto, Double prezzo, LocalDate dataemissioneBiglietto, /*Tratta tratta,*/ boolean vidimazione) {
         this.id_biglietto = getId_biglietto();
         this.tipologia_biglietto = tipologia_biglietto;
-//        this.mezzo = mezzo;
         this.prezzo = prezzo;
         this.dataemissioneBiglietto = dataemissioneBiglietto;
 //        this.tratta = tratta;
         this.vidimazione = vidimazione;
     }
+
+    public Biglietto(Distributoreautomatico distributori_automatici) {
+        this.distributori_automatici = distributori_automatici;
+    }
+
+    public Biglietto(Distributorefisico distributori_fisico) {
+        this.distributori_fisico = distributori_fisico;
+    }
+
+
+    /*    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }*/
 
     public Long getId_biglietto() {
         return id_biglietto;
@@ -58,15 +72,6 @@ public class Biglietto {
     public void setTipologia_biglietto(Tipologia_biglietto tipologia_biglietto) {
         this.tipologia_biglietto = tipologia_biglietto;
     }
-
-/*    public Mezzo getMezzo() {
-        return mezzo;
-    }
-
-    public void setMezzo(Mezzo mezzo) {
-        this.mezzo = mezzo;
-    }*/
-
     public Double getPrezzo() {
         return prezzo;
     }
