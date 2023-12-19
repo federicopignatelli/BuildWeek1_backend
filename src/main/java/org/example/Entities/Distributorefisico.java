@@ -14,7 +14,8 @@ public class Distributorefisico extends Distributore {
 
     @Column (name = "p_iva", unique = true, nullable = false, length = 11)
     private String pIva;
-
+    @OneToMany(mappedBy = "distributori_fisico")
+    private List<Biglietto> biglietti;
 
 
 

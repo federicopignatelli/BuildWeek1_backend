@@ -27,8 +27,8 @@ public abstract class Distributore {
     @Column(name = "abbonamenti_venduti", columnDefinition = "INTEGER DEFAULT 0", nullable = false, insertable = true, updatable = true)
     protected long abbonamentiVenduti;
 
-    @OneToMany(mappedBy = "biglietterie")
-    private List<Biglietto> biglietti;
+//    @OneToMany(mappedBy = "biglietterie")
+//    private List<Biglietto> biglietti;
 
     public Distributore() {}
 

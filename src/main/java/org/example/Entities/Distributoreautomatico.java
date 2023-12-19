@@ -11,7 +11,8 @@ public class Distributoreautomatico extends Distributore {
     @Column (name = "servizi")
     @Enumerated (EnumType.STRING)
     Servizi servizi;
-
+    @OneToMany(mappedBy = "distributori_automatici")
+    private List<Biglietto> biglietti;
 
 
     /*----------------------< Costruttori >---------------------------*/
