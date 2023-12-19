@@ -12,27 +12,30 @@ public class Mezzo {
     private MezzoType mezzoType;
     @Column ( nullable = false, insertable = true)
     private int capienza;
-    @ManyToOne
-    @JoinColumn(name = "mezzi_tratta")
-    private Tratta tratte;
-    @ManyToOne
-    @JoinColumn(name = "mezzi_tratta")
-    private boolean manutenzione;
+//    @ManyToOne
+//    @JoinColumn(name = "mezzi_tratta")
+//    private Tratta tratte;
+//    @ManyToOne
+//    @JoinColumn(name = "mezzi_tratta")
+//    private boolean manutenzione;
     @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate periodo_servizio;
     @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
 
+    @ManyToOne
+    @JoinColumn (name = "tratte")
+    private Tratta tratte;
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
     }
 
-    public Mezzo( MezzoType mezzoType, int capienza, Tratta tratte, boolean manutenzione, LocalDate periodo_servizio, int tot_biglietti_vidimati) {
+public Mezzo( MezzoType mezzoType, int capienza, /*Tratta tratte, boolean manutenzione,*/ LocalDate periodo_servizio, int tot_biglietti_vidimati) {
         this.mezzoId = getMezzoId();
         this.mezzoType = mezzoType;
         this.capienza = capienza;
-        this.tratte = tratte;
-        this.manutenzione = manutenzione;
+//        this.tratte = tratte;
+//        this.manutenzione = manutenzione;
         this.periodo_servizio = periodo_servizio;
         this.tot_biglietti_vidimati = tot_biglietti_vidimati;
     }
@@ -50,13 +53,13 @@ public class Mezzo {
         return capienza;
     }
 
-    public Tratta getTratte() {
+/*    public Tratta getTratte() {
         return tratte;
     }
 
     public boolean isManutenzione() {
         return manutenzione;
-    }
+    }*/
 
     public LocalDate getPeriodo_servizio() {
         return periodo_servizio;
@@ -76,8 +79,8 @@ public class Mezzo {
                 "mezzoId=" + mezzoId +
                 ", mezzoType=" + mezzoType +
                 ", capienza=" + capienza +
-                ", tratte=" + tratte +
-                ", manutenzione=" + manutenzione +
+                /*", tratte=" + tratte +
+                ", manutenzione=" + manutenzione +*/
                 ", periodo_servizio=" + periodo_servizio +
                 ", tot_biglietti_vidimati=" + tot_biglietti_vidimati +
                 '}';

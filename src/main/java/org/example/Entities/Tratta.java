@@ -21,18 +21,30 @@ public class Tratta {
         private LocalDate durataMediaPercorsa;
     @Column(name = "km_tratta",precision = 10, scale=2)
         private double kmTratta;
-        private List<Mezzo> mezziTratta;
-        public Tratta (){
+//        private List<Mezzo> mezziTratta;
+@OneToMany(mappedBy = "tratte")
+private List <Mezzo> mezzi;
+
+@ManyToOne
+@JoinColumn (name = "biglietti")
+private Biglietto biglietti;
+
+@OneToMany(mappedBy="tratte")
+private List<Abbonamento> abbonamenti;
+
+
+
+    public Tratta (){
         }
 
-    public Tratta(long id_tratta, String zonaPartenza, String capolineaArrivo, LocalDate durataTratta, LocalDate durataMediaPercorsa, double kmTratta, List<Mezzo> mezziTratta) {
+    public Tratta(long id_tratta, String zonaPartenza, String capolineaArrivo, LocalDate durataTratta, LocalDate durataMediaPercorsa, double kmTratta/*List<Mezzo> mezziTratta*/) {
         this.id_tratta = id_tratta;
         this.zonaPartenza = zonaPartenza;
         this.capolineaArrivo = capolineaArrivo;
         this.durataTratta = durataTratta;
         this.durataMediaPercorsa = durataMediaPercorsa;
         this.kmTratta = kmTratta;
-        this.mezziTratta = mezziTratta;
+//        this.mezziTratta = mezziTratta;
     }
 
     public long getId_tratta() {
@@ -83,13 +95,13 @@ public class Tratta {
         this.kmTratta = kmTratta;
     }
 
-    public List<Mezzo> getMezziTratta() {
+/*    public List<Mezzo> getMezziTratta() {
         return mezziTratta;
     }
 
     public void setMezziTratta(List<Mezzo> mezziTratta) {
         this.mezziTratta = mezziTratta;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -100,7 +112,7 @@ public class Tratta {
                 ", durataTratta=" + durataTratta +
                 ", durataMediaPercorsa=" + durataMediaPercorsa +
                 ", kmTratta=" + kmTratta +
-                ", mezziTratta=" + mezziTratta +
+//                ", mezziTratta=" + mezziTratta +
                 '}';
     }
 }
