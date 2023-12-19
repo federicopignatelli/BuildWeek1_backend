@@ -14,8 +14,6 @@ public class Abbonamento {
 
     private LocalDate dataemissioneAbbondamento;
     private Tipologia_abbonamento tipologia_abbonamento;
-
-//    private Tratta tratta;
     private Double prezzo;
     private LocalDate dataScadenzaAbbondamento;
 
