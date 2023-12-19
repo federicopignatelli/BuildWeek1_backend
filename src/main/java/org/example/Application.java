@@ -1,5 +1,8 @@
 package org.example;
 
+import org.example.Entities.Distributoreautomatico;
+import org.example.EntitiesDAO.DistributoreDAO;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

@@ -12,7 +12,12 @@ public class BigliettoDAO {
         this.em = em;
     }
 
-    public void create(Biglietto bi){}
+    public void create(Biglietto bi, Long idDistributore){
+
+
+
+
+    }
 
     public void delete(Biglietto bi){}
 

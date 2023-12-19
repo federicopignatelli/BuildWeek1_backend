@@ -13,15 +13,15 @@ public class DistributorefisicoDAO {
     public DistributorefisicoDAO(EntityManager entityManager){this.em=entityManager;}
 
 
-    public void save (Distributorefisico ds){
+   /* public void save (Distributorefisico ds){
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(ds);
         transaction.commit();
-    }
+    }*/
 
 
-    public List getPiva(String piva){
+    /*public List getPiva(String piva){
         EntityTransaction transaction = this.em.getTransaction();
         transaction.begin();
         Query q= em.createQuery("SELECT c from  Distributore c where distributore_fisico.pIva = :piva");
@@ -30,5 +30,5 @@ public class DistributorefisicoDAO {
         transaction.commit();
         return results;
     }
-
+*/
 }
