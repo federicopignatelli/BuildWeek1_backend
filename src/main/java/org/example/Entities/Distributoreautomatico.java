@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.example.Entities.Abbonamento;
 
-@Entity (name = "distributori_automatici")
+@Entity
+@Table(name = "distributori_automatici")
 public class Distributoreautomatico extends Distributore {
 
    /*@Column (name = "codice_macchina", insertable = false, updatable = false, nullable = false, unique = true)
@@ -25,13 +26,13 @@ public class Distributoreautomatico extends Distributore {
     public Distributoreautomatico() {
     }
 
-    public Distributoreautomatico(String locazione, String tipologia, long bigliettivenduti, long abbonamentiVenduti,
+    public Distributoreautomatico(String locazione, String tipologia, long abbonamentiVenduti,
                                   String servizi) {
         this.idBiglietteria = getIdBiglietteria();
         this.locazione = locazione;
         this.tipologia = Tipologia.getName(tipologia);
         /*this.codiceMacchina=generateCode();*/
-        this.bigliettivenduti = bigliettivenduti;
+        this.bigliettivenduti = getBigliettivenduti();
         this.abbonamentiVenduti = abbonamentiVenduti;
         this.servizi = Servizi.getName(servizi);
     }

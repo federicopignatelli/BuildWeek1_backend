@@ -11,7 +11,7 @@ import java.util.Locale;
 @Entity
 @Inheritance (strategy = InheritanceType.TABLE_PER_CLASS)
 @Table (name = "biglietterie")
-public abstract class Distributore {
+public class Distributore {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "distributore_seq")
     @SequenceGenerator(name = "distributore_seq", sequenceName = "distributore_seq", allocationSize = 1)
@@ -26,11 +26,13 @@ public abstract class Distributore {
     //da AGGIUNGERE CONTATORE OGNI VOLTA CHE SI AGGIUNGE UN BIGLIETTO
     @Column(name = "abbonamenti_venduti", columnDefinition = "INTEGER DEFAULT 0", nullable = false, insertable = true, updatable = true)
     protected long abbonamentiVenduti;
-
-//    @OneToMany(mappedBy = "biglietterie")
-//    private List<Biglietto> biglietti;
-
     public Distributore() {}
+
+    public Distributore(String locazione, String tipologia){
+        this.locazione=locazione;
+        this.tipologia= Tipologia.getName(tipologia);
+
+    }
 
     /*----------------------< Getter and Setter >---------------------------*/
     //--> Getter
@@ -54,6 +56,11 @@ public abstract class Distributore {
         return abbonamentiVenduti;
     }
     //--> Setter
+
+    public void setBigliettivenduti(long bigliettivenduti) {
+        this.bigliettivenduti = bigliettivenduti;
+    }
+
 
     /*---------------------------< Metodi >-----------------------------*/
 
