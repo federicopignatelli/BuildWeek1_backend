@@ -2,6 +2,8 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "mezzi")
 public class Mezzo {
@@ -22,7 +24,8 @@ public class Mezzo {
     private LocalDate periodo_servizio;
     @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
-
+    @OneToMany(mappedBy = "mezzi")
+    private List<Manutenzione> manutenzione;
     @ManyToOne
     @JoinColumn (name = "tratte")
     private Tratta tratte;

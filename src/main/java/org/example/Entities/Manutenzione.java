@@ -21,6 +21,9 @@ public class Manutenzione {
     private String descrizione_manutenzione;
     @Column ( nullable = false, insertable = true)
     private double costo;
+    @ManyToOne
+    @JoinColumn(name = "manutenzione")
+    private Mezzo mezzi;
     /*----------------------< Costruttori >---------------------------*/
 
     public Manutenzione() {
