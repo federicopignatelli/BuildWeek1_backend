@@ -12,12 +12,9 @@ public class AbbonamentoDAO {
     }
 
     public void create(Abbonamento abbonamento) {
-    }
-
-
+    };
 
     public void delete(Abbonamento abbonamento) {
-    }
-
+    };
 
 }

@@ -33,8 +33,8 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long id, String cardNumber, LocalDate issueDate, LocalDate stopDate, User user) {
-        this.id = id;
+    public Card(/*Long id,*/ String cardNumber, LocalDate issueDate, LocalDate stopDate, User user) {
+//        this.id = id;
         this.cardNumber = cardNumber;
         this.issueDate = issueDate;
         this.stopDate = stopDate;
