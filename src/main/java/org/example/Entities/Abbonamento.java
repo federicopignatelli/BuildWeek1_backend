@@ -13,6 +13,7 @@ public class Abbonamento {
     private Long id_abbondamento;
 
     private LocalDate dataemissioneAbbondamento;
+    @Enumerated(EnumType.STRING)
     private Tipologia_abbonamento tipologia_abbonamento;
     private Double prezzo;
     private LocalDate dataScadenzaAbbondamento;
@@ -36,7 +37,7 @@ public class Abbonamento {
     public Abbonamento() {
     }
 
-    public Abbonamento(/*User user,*/ LocalDate dataemissioneAbbondamento, Tipologia_abbonamento tipologia_abbonamento, /*Mezzo mezzo*/ /*Tratta tratta*/ Double prezzo, LocalDate dataScadenzaAbbondamento) {
+    public Abbonamento(/*User user,*/ LocalDate dataemissioneAbbondamento, Tipologia_abbonamento tipologia_abbonamento, /*Mezzo mezzo*/ /*Tratta tratta*/ Double prezzo, LocalDate dataScadenzaAbbondamento, Card card) {
         this.id_abbondamento = getId_abbondamento();
 //        this.user = user;
         this.dataemissioneAbbondamento = dataemissioneAbbondamento;
@@ -45,6 +46,7 @@ public class Abbonamento {
 //        this.tratta = tratta;
         this.prezzo = prezzo;
         this.dataScadenzaAbbondamento = dataScadenzaAbbondamento;
+        this.card = card;
     }
 
     public Long getId_abbondamento() {
@@ -106,4 +108,6 @@ public class Abbonamento {
     public void setDataScadenzaAbbondamento(LocalDate dataScadenzaAbbondamento) {
         this.dataScadenzaAbbondamento = dataScadenzaAbbondamento;
     }
+
+
 }

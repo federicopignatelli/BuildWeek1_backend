@@ -33,11 +33,11 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long id, String cardNumber, LocalDate issueDate, LocalDate stopDate, User user) {
+    public Card(String cardNumber, LocalDate issueDate, User user) {
         this.id = id;
         this.cardNumber = cardNumber;
         this.issueDate = issueDate;
-        this.stopDate = stopDate;
+        this.stopDate = issueDate.plusYears(1);
         this.user = user;
     }
 
@@ -67,6 +67,10 @@ public class Card {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /*---------------------------< Metodi >-----------------------------*/

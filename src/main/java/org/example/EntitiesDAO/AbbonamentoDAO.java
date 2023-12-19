@@ -6,49 +6,50 @@ import org.example.Entities.Tratta;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 
 public class AbbonamentoDAO {
-    EntityManager em;
+    private final EntityManager entityManager;
 
-    public AbbonamentoDAO(EntityManager em) {
-        this.em = em;
+    public AbbonamentoDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public void create(Abbonamento abbonamento) {
-        EntityTransaction transaction = em.getTransaction();
+        EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        em.persist(abbonamento);
+        entityManager.persist(abbonamento);
         transaction.commit();
     }
 
     public Abbonamento findById(long id){
-        return em.find(Abbonamento.class, id);
+        return entityManager.find(Abbonamento.class, id);
     }
 
     public void delete(long id) {
-        Abbonamento found = em.find(Abbonamento.class, id);
+        Abbonamento found = entityManager.find(Abbonamento.class, id);
         if(found != null){
-            EntityTransaction transaction = em.getTransaction();
+            EntityTransaction transaction = entityManager.getTransaction();
             transaction.begin();
-            em.remove(found);
+            entityManager.remove(found);
             transaction.commit();
         }else{
             System.err.println("Abbonamento non trovato!");
         }
     }
+
     //funzione per la verifica rapida della validità di un abbonamento
     // in base al numero di tessera
 
     public boolean verificaValidita(String cardNumber){
-        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND a.currentDate BETWEEN a.dataemissioneAbbondamento AND a.dataScadenzaAbbondamento"; //filtra gli abbonamenti della tessera passata come parametro
-        Query query =  em.createQuery(queryString);
-                query.setParameter("cardNumber", cardNumber);
-                query.setParameter("currentDate", LocalDate.now() );
+        LocalDate today = LocalDate.now();
+        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND :today BETWEEN a.dataemissioneAbbondamento AND a.dataScadenzaAbbondamento < :today"; //filtra gli abbonamenti della tessera passata come parametro
+        TypedQuery<Abbonamento> query = entityManager.createQuery(queryString, Abbonamento.class);
+        query.setParameter("cardNumber", cardNumber);
+        query.setParameter("today", today );
         //eseguo la query restituendo il risultato
-        Abbonamento abbonamento = (Abbonamento) query.getSingleResult();
+        Abbonamento abbonamento = query.getSingleResult();
         return true;
     }
-
-
 }
