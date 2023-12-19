@@ -35,7 +35,7 @@ public class User {
     public User() {
     }
 
-    public User(/*Long userId,*/ String userName, String userLastName, LocalDate birthDate, String residentialAddress, Card card) {
+    public User(/*Long userId,*/ String userName, String userLastName, LocalDate birthDate, String residentialAddress /*Card card*/) {
 //        this.userId = userId;
         this.userName = userName;
         this.userLastName = userLastName;

@@ -2,7 +2,6 @@ package org.example;
 
 import org.example.Entities.Card;
 import org.example.Entities.User;
-import org.example.EntitiesDAO.CardDAO;
 import org.example.EntitiesDAO.UserDAO;
 
 import javax.persistence.EntityManager;
@@ -24,12 +23,10 @@ EntityManager entityManager= managerFactory.createEntityManager();
 //        Distributorefisico ds= new Distributorefisico("Padova", "FISICO", 30, 34);
 //        df.save(ds);
 
-//        UserDAO ud= new UserDAO(entityManager);
-//        CardDAO cd = new CardDAO(entityManager);
-////        Card general = new Card("348576", LocalDate.of(2023, 9,8), LocalDate.of(2023, 10,8), marco);
-////        User marco = new User("marco", "cielo", LocalDate.of(1998, 02,22), "via ciaone 33", general);
+/*        UserDAO ud= new UserDAO(entityManager);
+        User marco = new User("marco", "pezza", LocalDate.of(1998, 1, 1),"via lorenzo gasperi 2");
 
-        System.out.println("ciaone");
+        System.out.println("ciaone");*/
 
         entityManager.close();
         managerFactory.close();
