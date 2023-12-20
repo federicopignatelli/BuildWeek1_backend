@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 @Entity
 @Table(name = "mezzi")
@@ -34,6 +36,8 @@ public class Mezzo {
 
     @Column
     private LocalTime durata_tratta;
+    @Column
+    private String targa;
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
@@ -45,6 +49,7 @@ public class Mezzo {
         this.periodo_servizio = periodo_servizio;
         this.tratte = tratte;
         this.durata_tratta = tratte.getDurataTratta();
+        this.targa = generaTarga();
     }
     /*--------------------< Getter and Setter >--------------------------*/
 
@@ -79,7 +84,25 @@ public class Mezzo {
     public static void eseguiTratta(){
 
     }
-
+    public String generaTarga(){
+        Random rm = new Random();
+        StringBuilder targa = new StringBuilder(7);
+        for(int i = 0; i<2; i++){
+            char lettera = (char)('A'+ rm.nextInt(26));
+            targa.append(lettera);
+        }
+        targa.append(" ");
+        for(int i = 0; i<3; i++){
+            int numero = rm.nextInt(10);
+            targa.append(numero);
+        }
+        targa.append(" ");
+        for(int i = 0; i<2; i++){
+            char lettera = (char)('A'+ rm.nextInt(26));
+            targa.append(lettera);
+        }
+        return targa.toString();
+    }
 
     /*---------------------------< Override >-----------------------------*/
     @Override

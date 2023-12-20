@@ -58,10 +58,10 @@ public class Application {
         Tratta colosseo = new Tratta("Colosseo","Testaccio", LocalTime.of(0,20,41),19);
         Tratta eur = new Tratta("Termini","Trevi", LocalTime.of(1,1,21),39);
 //        trattaDAO.save(colosseo);
-//        trattaDAO.save(eur);
+        trattaDAO.save(eur);
         Mezzo arpa = new Mezzo(MezzoType.TRAM, 50, LocalDate.of(2022,7,2),colosseo);
         Mezzo tram1 = new Mezzo(MezzoType.TRAM,140,LocalDate.of(2023,9,6),eur);
-//        mezzoDAO.save(tram1);
+        mezzoDAO.save(tram1);
 //        mezzoDAO.save(tram1);
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //
