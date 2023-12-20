@@ -22,12 +22,12 @@ public class Application {
         DistributoreDAO dm = new DistributoreDAO(entityManager);
         BigliettoDAO bid = new BigliettoDAO(entityManager);
 
-        Distributore ds = new Distributorefisico("Padova", "FISICO", 0, 34, "Gimmy S.N.C");
+        /*Distributore ds = new Distributorefisico("Padova", "FISICO", 0, 34, "Gimmy S.N.C");*/
 
-        Distributore da = new Distributorefisico("Missingi", "AUTOMATICO", 79, "ABBONAMENTI");
+        Distributore da = new Distributorefisico("Missingi", "AUTOMATICO", 0, 0, "ABBONAMENTI");
         dm.save(da);
-        Biglietto biglietto = new Biglietto(Tipologia_biglietto.NOVANTAMINUTI, 2.50, LocalDate.of(2022, 2, 21));
-        bid.create(biglietto, da);
+       /* Biglietto biglietto = new Biglietto(Tipologia_biglietto.NOVANTAMINUTI, 2.50, LocalDate.of(2022, 2, 21));
+        bid.create(biglietto, da);*/
         System.out.println(da.toString());
 
         entityManager.close();

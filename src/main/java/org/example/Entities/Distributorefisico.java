@@ -15,7 +15,7 @@ public class Distributorefisico extends Distributore implements iva {
     @Column (name = "name_company", nullable = false, unique = true)
     private String companyName;
 
-    @Column (name = "p_iva", unique = true, nullable = false, length = 11)
+    @Column (name = "p_iva", unique = true, nullable = false, length = 30)
     private String pIva;
     @OneToMany(mappedBy = "distributori_fisico")
     private List<Biglietto> biglietti;
@@ -57,7 +57,7 @@ public Distributorefisico(){}
                     System.out.println("Esiste già");
                 }
             }
-            ivaList.add(generatePiva());
+            ivaList.add(stringBuilder.toString());
         }while(!ivaList.contains(stringBuilder.toString()));
 
 
