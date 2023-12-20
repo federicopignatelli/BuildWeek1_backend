@@ -3,10 +3,7 @@ package org.example.EntitiesDAO;
 import org.example.Entities.Abbonamento;
 import org.example.Entities.Tratta;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 public class AbbonamentoDAO {
@@ -44,12 +41,20 @@ public class AbbonamentoDAO {
 
     public boolean verificaValidita(String cardNumber){
         LocalDate today = LocalDate.now();
-        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND :today BETWEEN a.dataemissioneAbbondamento AND a.dataScadenzaAbbondamento < :today"; //filtra gli abbonamenti della tessera passata come parametro
+        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND a.dataScadenzaAbbondamento > :today"; //filtra gli abbonamenti della tessera passata come parametro
         TypedQuery<Abbonamento> query = entityManager.createQuery(queryString, Abbonamento.class);
         query.setParameter("cardNumber", cardNumber);
         query.setParameter("today", today );
         //eseguo la query restituendo il risultato
-        Abbonamento abbonamento = query.getSingleResult();
-        return true;
+        try{
+            Abbonamento abbonamento = query.getSingleResult();
+            //se ci sono risultati è true
+            return true;
+        }catch(NoResultException e){
+            //se non ci sono risultati è false
+            return false;
+        }
+
+
     }
 }

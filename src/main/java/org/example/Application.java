@@ -50,6 +50,7 @@ EntityManager entityManager= managerFactory.createEntityManager();
         Abbonamento abbGianni = abbDAO.findById(2);
 //verifica validità abbonamento
         boolean isValid = abbDAO.verificaValidita("023");
+            System.out.println(isValid);
 
 
 
