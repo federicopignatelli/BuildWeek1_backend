@@ -1,17 +1,19 @@
 package org.example.Entities;
+
 import org.example.Entities.ENUM.Tipologia_biglietto;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "biglietti")
+@Table (name = "biglietti")
 public class Biglietto {
     @Id
     @GeneratedValue
     private Long id_biglietto;
     private Tipologia_biglietto tipologia_biglietto;
-    @Enumerated(EnumType.STRING)
+    @Enumerated (EnumType.STRING)
     private MezzoType mezzo;
     private Double prezzo;
     private LocalDate dataemissioneBiglietto;
@@ -19,18 +21,18 @@ public class Biglietto {
     private boolean vidimazione;
 
     @ManyToOne
-    @JoinColumn(name="users")
+    @JoinColumn (name = "users")
     User users;
 
-    @OneToMany (mappedBy="biglietti")
+    @OneToMany (mappedBy = "biglietti")
     private List<Tratta> tratta;
 
     @ManyToOne
-    @JoinColumn(name="biglietterie_automatiche")
+    @JoinColumn (name = "biglietterie_automatiche")
     private Distributoreautomatico distributori_automatici;
 
     @ManyToOne
-    @JoinColumn(name="biglietterie_fisiche")
+    @JoinColumn (name = "biglietterie_fisiche")
     private Distributorefisico distributori_fisico;
 
 
@@ -55,7 +57,6 @@ public class Biglietto {
     }*/
 
 
-
     /*----------------------< Getter and Setter >---------------------------*/
     // --> GETTER
     public Long getId_biglietto() {
@@ -69,6 +70,7 @@ public class Biglietto {
     public void setTipologia_biglietto(Tipologia_biglietto tipologia_biglietto) {
         this.tipologia_biglietto = tipologia_biglietto;
     }
+
     public Double getPrezzo() {
         return prezzo;
     }
@@ -80,7 +82,8 @@ public class Biglietto {
     public LocalDate getdataemissioneBiglietto() {
         return dataemissioneBiglietto;
     }
-//--> SETTER
+
+    //--> SETTER
     public void setdataemissioneBiglietto(LocalDate dataemissioneBiglietto) {
         this.dataemissioneBiglietto = dataemissioneBiglietto;
     }

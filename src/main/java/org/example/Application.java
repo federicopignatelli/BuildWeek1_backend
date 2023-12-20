@@ -2,9 +2,7 @@ package org.example;
 
 import org.example.Entities.Biglietto;
 import org.example.Entities.Distributore;
-import org.example.Entities.Distributoreautomatico;
 import org.example.Entities.Distributorefisico;
-import org.example.Entities.ENUM.Tipologia_biglietto;
 import org.example.EntitiesDAO.BigliettoDAO;
 import org.example.EntitiesDAO.DistributoreDAO;
 
