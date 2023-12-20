@@ -1,14 +1,17 @@
 package org.example.Entities;
 
 import org.example.Entities.ENUM.Tipologia_biglietto;
+import org.example.Entities.Interface.Emissione;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 @Table (name = "biglietti")
-public class Biglietto {
+public class Biglietto implements Emissione {
     @Id
     @GeneratedValue
     private Long id_biglietto;
@@ -40,15 +43,23 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(String tipologia_biglietto, Double prezzo, LocalDate dataemissioneBiglietto /*Tratta tratta,*/) {
+    public Biglietto(String tipologia_biglietto, Double prezzo /*Tratta tratta,*/) {
         this.id_biglietto = getId_biglietto();
         this.tipologia_biglietto = Tipologia_biglietto.getType(tipologia_biglietto);
         this.prezzo = prezzo;
-        this.dataemissioneBiglietto = dataemissioneBiglietto;
+        this.dataemissioneBiglietto = LocalDate.now();
 //        this.tratta = tratta;
         this.vidimazione = false;
     }
- /*    public Mezzo getMezzo() {
+
+    public Biglietto(Tipologia_biglietto tipologia_biglietto, Double prezzo, boolean vidimazione, Distributore di) {
+        this.tipologia_biglietto = tipologia_biglietto;
+        this.prezzo = prezzo;
+        this.dataemissioneBiglietto = LocalDate.now();
+        this.vidimazione = vidimazione;
+    }
+
+    /*    public Mezzo getMezzo() {
         return mezzo;
     }
 
@@ -110,6 +121,14 @@ public class Biglietto {
     public void setTratta(Tratta tratta) {
         this.tratta = tratta;
     }*/
+
+
+    @Override
+    public Biglietto emettiBiglietto(String tipologia, Double price) {
+        return new Biglietto(tipologia, price);
+    }
+
+
 }
 
 

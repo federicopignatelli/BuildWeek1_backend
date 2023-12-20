@@ -1,5 +1,7 @@
 package org.example.Entities;
 
+import org.example.Entities.Interface.iva;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
