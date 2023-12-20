@@ -2,11 +2,11 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
 @Table(name = "mezzi")
-@NamedQuery(name = "Mezzo.countMezziPerTratta", query = "")
 public class Mezzo {
     @Id
     @GeneratedValue
@@ -31,6 +31,10 @@ public class Mezzo {
     @ManyToOne
     @JoinColumn (name = "tratte")
     private Tratta tratte;
+
+    @Column
+    private LocalTime durata_tratta;
+
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
     }
@@ -40,8 +44,8 @@ public class Mezzo {
         this.capienza = capienza;
         this.periodo_servizio = periodo_servizio;
         this.tratte = tratte;
+        this.durata_tratta = tratte.getDurataTratta();
     }
-
     /*--------------------< Getter and Setter >--------------------------*/
 
     public Long getMezzoId() {
@@ -72,7 +76,9 @@ public class Mezzo {
         return tot_biglietti_vidimati;
     }
     /*---------------------------< Metodi >-----------------------------*/
+    public static void eseguiTratta(){
 
+    }
 
 
     /*---------------------------< Override >-----------------------------*/

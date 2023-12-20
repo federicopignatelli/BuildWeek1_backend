@@ -28,9 +28,5 @@ public class MezzoDAO {
         System.out.println("Mezzo " + mezzo.getMezzoType()  + " rimosso dal db");
     }
 
-    public List<Object[]> countMezziPerTratta (long id){
-        TypedQuery<Object[]> query = em.createNamedQuery("Mezzo.countMezziPerTratta", Object[].class);
-        query.setParameter("id", id);
-        return query.getResultList();
-    }
+
 }
