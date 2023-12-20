@@ -24,7 +24,7 @@ public class Application {
 
         /*Distributore ds = new Distributorefisico("Padova", "FISICO", 0, 34, "Gimmy S.N.C");*/
 
-        Distributore da = new Distributorefisico("Milano", "FISICO", 0, 0, "Biglietteria al Santo' s.n.c");
+        Distributore da = new Distributorefisico("Milano", "FISICO", 0, 0, "Biglietteria al crepuscolo' s.n.c");
         dm.save(da);
         Biglietto biglietto = new Biglietto("SESSANTAMINUTI", 1.70, LocalDate.of(2023, 12, 20));
         bid.create(biglietto, da);
