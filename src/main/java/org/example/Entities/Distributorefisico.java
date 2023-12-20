@@ -12,27 +12,22 @@ public class Distributorefisico extends Distributore {
     @Column (name = "name_company", nullable = false, unique = true)
     private String companyName;
 
-    @Column (name = "p_iva", unique = true, nullable = false, length = 11)
-    private String pIva;
+   /* @Column (name = "p_iva", unique = true, nullable = false, length = 11)
+    private String pIva;*/
     @OneToMany(mappedBy = "distributori_fisico")
     private List<Biglietto> biglietti;
 
 
 
-
-
-
-
-
-
 public Distributorefisico(){}
 
-    public Distributorefisico(String locazione, String tipologia, long bigliettivenduti, long abbonamentiVenduti) {
+    public Distributorefisico(String locazione, String tipologia, long bigliettivenduti, long abbonamentiVenduti, String companyName) {
         this.idBiglietteria = getIdBiglietteria();
         this.locazione = locazione;
         this.tipologia = Tipologia.getName(tipologia);
         this.bigliettivenduti = bigliettivenduti;
         this.abbonamentiVenduti = abbonamentiVenduti;
+        this.companyName=companyName;
     }
 
     /*---------------------------< Metodi >----------------------*/

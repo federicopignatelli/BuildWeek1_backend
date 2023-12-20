@@ -11,10 +11,11 @@ public class Biglietto {
     @GeneratedValue
     private Long id_biglietto;
     private Tipologia_biglietto tipologia_biglietto;
-//    private Mezzo mezzo;
+    @Enumerated(EnumType.STRING)
+    private MezzoType mezzo;
     private Double prezzo;
     private LocalDate dataemissioneBiglietto;
-//    private Tratta tratta;
+
     private boolean vidimazione;
 
     @ManyToOne
@@ -37,16 +38,26 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(Tipologia_biglietto tipologia_biglietto, /*Mezzo mezzo,*/ Double prezzo, LocalDate dataemissioneBiglietto, /*Tratta tratta,*/ boolean vidimazione) {
+    public Biglietto(Tipologia_biglietto tipologia_biglietto, Double prezzo, LocalDate dataemissioneBiglietto /*Tratta tratta,*/) {
         this.id_biglietto = getId_biglietto();
         this.tipologia_biglietto = tipologia_biglietto;
-//        this.mezzo = mezzo;
         this.prezzo = prezzo;
         this.dataemissioneBiglietto = dataemissioneBiglietto;
 //        this.tratta = tratta;
-        this.vidimazione = vidimazione;
+        this.vidimazione = false;
+    }
+ /*    public Mezzo getMezzo() {
+        return mezzo;
     }
 
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }*/
+
+
+
+    /*----------------------< Getter and Setter >---------------------------*/
+    // --> GETTER
     public Long getId_biglietto() {
         return id_biglietto;
     }
@@ -58,15 +69,6 @@ public class Biglietto {
     public void setTipologia_biglietto(Tipologia_biglietto tipologia_biglietto) {
         this.tipologia_biglietto = tipologia_biglietto;
     }
-
-/*    public Mezzo getMezzo() {
-        return mezzo;
-    }
-
-    public void setMezzo(Mezzo mezzo) {
-        this.mezzo = mezzo;
-    }*/
-
     public Double getPrezzo() {
         return prezzo;
     }
@@ -78,18 +80,18 @@ public class Biglietto {
     public LocalDate getdataemissioneBiglietto() {
         return dataemissioneBiglietto;
     }
-
+//--> SETTER
     public void setdataemissioneBiglietto(LocalDate dataemissioneBiglietto) {
         this.dataemissioneBiglietto = dataemissioneBiglietto;
     }
 
-/*    public Tratta getTratta() {
-        return tratta;
+    public void setDistributori_fisico(Distributorefisico distributori_fisico) {
+        this.distributori_fisico = distributori_fisico;
     }
 
-    public void setTratta(Tratta tratta) {
-        this.tratta = tratta;
-    }*/
+    public void setDistributori_automatico(Distributoreautomatico distributori_automatici) {
+        this.distributori_automatici = distributori_automatici;
+    }
 
     public boolean isVidimazione() {
         return vidimazione;
@@ -98,6 +100,13 @@ public class Biglietto {
     public void setVidimazione(boolean vidimazione) {
         this.vidimazione = vidimazione;
     }
+     /*    public Tratta getTratta() {
+        return tratta;
+    }
+
+    public void setTratta(Tratta tratta) {
+        this.tratta = tratta;
+    }*/
 }
 
 
