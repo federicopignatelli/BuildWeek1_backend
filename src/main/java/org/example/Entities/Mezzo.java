@@ -36,8 +36,11 @@ public class Mezzo {
 
     @Column
     private LocalTime durata_tratta;
-    @Column
+    @Column(unique = true)
     private String targa;
+
+    @Column(name = "num_percorrenza")
+    private long numeroPercorrenza;
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
@@ -50,8 +53,13 @@ public class Mezzo {
 //        this.tratte = tratte;
 //        this.durata_tratta = tratte.getDurataTratta();
         this.targa = generaTarga();
+        this.numeroPercorrenza = getNumeroPercorrenza();
     }
     /*--------------------< Getter and Setter >--------------------------*/
+
+    public long getNumeroPercorrenza() {
+        return numeroPercorrenza;
+    }
 
     public Long getMezzoId() {
         return mezzoId;
@@ -87,9 +95,11 @@ public class Mezzo {
             this.durata_tratta = tratte.getDurataTratta();
         }
     }
-
+    public String getTarga(){return targa;}
     /*---------------------------< Metodi >-----------------------------*/
-    public static void eseguiTratta(){
+    public static void percorriTratta(Mezzo mezzi, Tratta tratta){
+        long idMezzo = mezzi.getMezzoId();
+        long idTratta = tratta.getId_tratta();
 
     }
     public String generaTarga(){
