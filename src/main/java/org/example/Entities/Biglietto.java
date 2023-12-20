@@ -11,7 +11,7 @@ import java.util.Locale;
 
 @Entity
 @Table (name = "biglietti")
-public class Biglietto implements Emissione {
+public class Biglietto {
     @Id
     @GeneratedValue
     private Long id_biglietto;
@@ -50,13 +50,6 @@ public class Biglietto implements Emissione {
         this.dataemissioneBiglietto = LocalDate.now();
 //        this.tratta = tratta;
         this.vidimazione = false;
-    }
-
-    public Biglietto(Tipologia_biglietto tipologia_biglietto, Double prezzo, boolean vidimazione, Distributore di) {
-        this.tipologia_biglietto = tipologia_biglietto;
-        this.prezzo = prezzo;
-        this.dataemissioneBiglietto = LocalDate.now();
-        this.vidimazione = vidimazione;
     }
 
     /*    public Mezzo getMezzo() {
@@ -121,12 +114,6 @@ public class Biglietto implements Emissione {
     public void setTratta(Tratta tratta) {
         this.tratta = tratta;
     }*/
-
-
-    @Override
-    public Biglietto emettiBiglietto(String tipologia, Double price) {
-        return new Biglietto(tipologia, price);
-    }
 
 
 }

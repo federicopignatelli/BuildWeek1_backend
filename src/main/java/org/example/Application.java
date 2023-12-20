@@ -1,13 +1,9 @@
 package org.example;
 
-import org.example.Entities.Biglietto;
-import org.example.Entities.Distributore;
-import org.example.Entities.Distributorefisico;
-import org.example.EntitiesDAO.BigliettoDAO;
-import org.example.EntitiesDAO.DistributoreDAO;
-import org.slf4j.ILoggerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,7 +26,7 @@ public class Application {
         Biglietto biglietto = new Biglietto("SESSANTAMINUTI", 1.70);
         bid.create(biglietto, da);
         System.out.println(da.toString());*/
-        /*logger.info("Ciao");*/
+
 
 
         entityManager.close();

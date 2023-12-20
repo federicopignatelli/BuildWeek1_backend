@@ -4,7 +4,6 @@ import org.example.Entities.Biglietto;
 import org.example.Entities.Distributore;
 import org.example.Entities.Distributoreautomatico;
 import org.example.Entities.Distributorefisico;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
