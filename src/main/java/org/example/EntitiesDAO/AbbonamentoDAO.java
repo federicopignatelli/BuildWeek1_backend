@@ -1,23 +1,60 @@
 package org.example.EntitiesDAO;
 
 import org.example.Entities.Abbonamento;
+import org.example.Entities.Tratta;
 
-import javax.persistence.EntityManager;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 public class AbbonamentoDAO {
-    EntityManager em;
+    private final EntityManager entityManager;
 
-    public AbbonamentoDAO(EntityManager em) {
-        this.em = em;
+    public AbbonamentoDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public void create(Abbonamento abbonamento) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(abbonamento);
+        transaction.commit();
     }
 
-    ;
-
-    public void delete(Abbonamento abbonamento) {
+    public Abbonamento findById(long id){
+        return entityManager.find(Abbonamento.class, id);
     }
 
-    ;
+    public void delete(long id) {
+        Abbonamento found = entityManager.find(Abbonamento.class, id);
+        if(found != null){
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.remove(found);
+            transaction.commit();
+        }else{
+            System.err.println("Abbonamento non trovato!");
+        }
+    }
+
+    //funzione per la verifica rapida della validità di un abbonamento
+    // in base al numero di tessera
+
+    public boolean verificaValidita(String cardNumber){
+        LocalDate today = LocalDate.now();
+        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND a.dataScadenzaAbbondamento > :today"; //filtra gli abbonamenti della tessera passata come parametro
+        TypedQuery<Abbonamento> query = entityManager.createQuery(queryString, Abbonamento.class);
+        query.setParameter("cardNumber", cardNumber);
+        query.setParameter("today", today );
+        //eseguo la query restituendo il risultato
+        try{
+            Abbonamento abbonamento = query.getSingleResult();
+            //se ci sono risultati è true
+            return true;
+        }catch(NoResultException e){
+            //se non ci sono risultati è false
+            return false;
+        }
+
+
+    }
 }
