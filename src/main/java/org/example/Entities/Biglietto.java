@@ -38,9 +38,9 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(Tipologia_biglietto tipologia_biglietto, Double prezzo, LocalDate dataemissioneBiglietto /*Tratta tratta,*/) {
+    public Biglietto(String tipologia_biglietto, Double prezzo, LocalDate dataemissioneBiglietto /*Tratta tratta,*/) {
         this.id_biglietto = getId_biglietto();
-        this.tipologia_biglietto = tipologia_biglietto;
+        this.tipologia_biglietto = Tipologia_biglietto.getType(tipologia_biglietto);
         this.prezzo = prezzo;
         this.dataemissioneBiglietto = dataemissioneBiglietto;
 //        this.tratta = tratta;

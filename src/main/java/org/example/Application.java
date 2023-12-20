@@ -24,10 +24,10 @@ public class Application {
 
         /*Distributore ds = new Distributorefisico("Padova", "FISICO", 0, 34, "Gimmy S.N.C");*/
 
-        Distributore da = new Distributorefisico("Missingi", "AUTOMATICO", 0, 0, "ABBONAMENTI");
+        Distributore da = new Distributorefisico("Milano", "FISICO", 0, 0, "Biglietteria al Santo' s.n.c");
         dm.save(da);
-       /* Biglietto biglietto = new Biglietto(Tipologia_biglietto.NOVANTAMINUTI, 2.50, LocalDate.of(2022, 2, 21));
-        bid.create(biglietto, da);*/
+        Biglietto biglietto = new Biglietto("SESSANTAMINUTI", 1.70, LocalDate.of(2023, 12, 20));
+        bid.create(biglietto, da);
         System.out.println(da.toString());
 
         entityManager.close();

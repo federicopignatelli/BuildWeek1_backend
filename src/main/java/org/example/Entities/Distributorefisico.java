@@ -60,9 +60,6 @@ public Distributorefisico(){}
             ivaList.add(stringBuilder.toString());
         }while(!ivaList.contains(stringBuilder.toString()));
 
-
-
-
         return stringBuilder.toString();
     }
 }
