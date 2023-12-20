@@ -56,13 +56,22 @@ public class Application {
         MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         Tratta colosseo = new Tratta("Colosseo","Testaccio", LocalTime.of(0,20,41),19);
-        Tratta eur = new Tratta("Termini","Trevi", LocalTime.of(1,1,21),39);
-//        trattaDAO.save(colosseo);
-        trattaDAO.save(eur);
-        Mezzo arpa = new Mezzo(MezzoType.TRAM, 50, LocalDate.of(2022,7,2),colosseo);
-        Mezzo tram1 = new Mezzo(MezzoType.TRAM,140,LocalDate.of(2023,9,6),eur);
-        mezzoDAO.save(tram1);
+        Tratta eur = new Tratta("Termini","Trevi", LocalTime.of(0,10,21),9);
+        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100, LocalDate.of(2022,4,21));
+        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170, LocalDate.of(2023,6,25));
+        Mezzo tram1 = new Mezzo(MezzoType.TRAM,140,LocalDate.of(2023,1,16));
+        Mezzo tram2 = new Mezzo(MezzoType.TRAM,110,LocalDate.of(2022,10,11));
+/*      ---->addMezzo     aggiunge un mezzo a una tratta    */
+//        eur.addMezzo(arpa1);
+//        eur.addMezzo(arpa2);
+//        eur.addMezzo(tram1);
+//        eur.addMezzo(tram2);
+//        trattaDAO.save(eur);
 //        mezzoDAO.save(tram1);
+//        mezzoDAO.save(tram2);
+//        mezzoDAO.save(arpa1);
+//        mezzoDAO.save(arpa2);
+
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //
         // Distributorefisico ds= new Distributorefisico("Padova", "FISICO", 30, 34);

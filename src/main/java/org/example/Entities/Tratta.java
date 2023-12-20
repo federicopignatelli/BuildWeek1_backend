@@ -3,6 +3,7 @@ package org.example.Entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,8 +24,8 @@ public class Tratta {
     @Column(name = "km_tratta",precision = 10, scale=2)
         private double kmTratta;
 //        private List<Mezzo> mezziTratta;
-@OneToMany(mappedBy = "tratte")
-private List <Mezzo> mezzi;
+@OneToMany(mappedBy = "tratte", cascade = CascadeType.ALL)
+private List <Mezzo> mezzi = new ArrayList<>();
 
 @ManyToOne
 @JoinColumn (name = "biglietti")
@@ -33,7 +34,7 @@ private Biglietto biglietti;
 @OneToMany(mappedBy="tratte")
 private List<Abbonamento> abbonamenti;
 
-
+    /*----------------------< Costruttori >---------------------------*/
 
     public Tratta (){
         }
@@ -44,6 +45,7 @@ private List<Abbonamento> abbonamenti;
         this.durataTratta = durataTratta;
         this.kmTratta = kmTratta;
     }
+    /*--------------------< Getter and Setter >--------------------------*/
 
     public long getId_tratta() {
         return id_tratta;
@@ -100,6 +102,13 @@ private List<Abbonamento> abbonamenti;
     public void setMezziTratta(List<Mezzo> mezziTratta) {
         this.mezziTratta = mezziTratta;
     }*/
+
+
+/*---------------------------< Metodi >-----------------------------*/
+public void addMezzo(Mezzo mezzo){
+    mezzi.add(mezzo);
+    mezzo.setTratte(this);
+}
 
     @Override
     public String toString() {

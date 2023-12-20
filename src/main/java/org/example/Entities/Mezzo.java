@@ -31,7 +31,7 @@ public class Mezzo {
     @OneToMany(mappedBy = "mezzi")
     private List<Manutenzione> manutenzione;
     @ManyToOne
-    @JoinColumn (name = "tratte")
+    @JoinColumn (name = "tratta_id")
     private Tratta tratte;
 
     @Column
@@ -43,12 +43,12 @@ public class Mezzo {
     public Mezzo() {
     }
 
-    public Mezzo(MezzoType mezzoType, int capienza, LocalDate periodo_servizio, Tratta tratte) {
+    public Mezzo(MezzoType mezzoType, int capienza, LocalDate periodo_servizio) {
         this.mezzoType = mezzoType;
         this.capienza = capienza;
         this.periodo_servizio = periodo_servizio;
-        this.tratte = tratte;
-        this.durata_tratta = tratte.getDurataTratta();
+//        this.tratte = tratte;
+//        this.durata_tratta = tratte.getDurataTratta();
         this.targa = generaTarga();
     }
     /*--------------------< Getter and Setter >--------------------------*/
@@ -80,6 +80,14 @@ public class Mezzo {
     public int getTot_biglietti_vidimati() {
         return tot_biglietti_vidimati;
     }
+
+    public void setTratte(Tratta tratte) {
+        this.tratte = tratte;
+        if (tratte != null) {
+            this.durata_tratta = tratte.getDurataTratta();
+        }
+    }
+
     /*---------------------------< Metodi >-----------------------------*/
     public static void eseguiTratta(){
 
