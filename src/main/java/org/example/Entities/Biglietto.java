@@ -41,13 +41,17 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(String tipologia_biglietto, Double prezzo /*Tratta tratta,*/) {
+    public Biglietto(String tipologia_biglietto,Distributore distributori_fisico) {
         this.id_biglietto = getId_biglietto();
         this.tipologia_biglietto = Tipologia_biglietto.valueOf(tipologia_biglietto);
-        this.prezzo = prezzo;
+        /*this.prezzo = prezzo;*/
         this.dataemissioneBiglietto = LocalDate.now();
-//        this.tratta = tratta;
         this.vidimazione = false;
+        this.setDistributori_fisico((Distributorefisico) distributori_fisico);
+    }
+
+    public Biglietto(Distributorefisico distributori_fisico) {
+        this.distributori_fisico = distributori_fisico;
     }
 
     /*    public Mezzo getMezzo() {
@@ -71,6 +75,10 @@ public class Biglietto {
 
     public void setTipologia_biglietto(Tipologia_biglietto tipologia_biglietto) {
         this.tipologia_biglietto = tipologia_biglietto;
+    }
+
+    public Distributorefisico getDistributori_fisico() {
+        return distributori_fisico;
     }
 
     public Double getPrezzo() {
@@ -108,6 +116,12 @@ public class Biglietto {
 
     public void setMezzo(MezzoType mezzo) {
         this.mezzo = mezzo;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Biglietto{" + "id_biglietto=" + id_biglietto + ", tipologia_biglietto=" + tipologia_biglietto + ", mezzo=" + mezzo + ", prezzo=" + prezzo +  " vidimazione=" + vidimazione + ", tratta=" + tratta + ", distributori_automatici=" + distributori_automatici + ", distributori_fisico=" + distributori_fisico + '}';
     }
 }
 

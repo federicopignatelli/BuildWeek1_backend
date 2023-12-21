@@ -17,15 +17,13 @@ public class DistributorefisicoDAO {
 
     Logger logger = LoggerFactory.getLogger(DistributorefisicoDAO.class);
 
-    public void save(Distributorefisico ds) {
-        /*Query dfExist=em.createQuery("SELECT d FROM Distributorefisico d WHERE d.companyName =:nome");*/
+    /*public void save(Distributorefisico ds) {
+        *//*Query dfExist=em.createQuery("SELECT d FROM Distributorefisico d WHERE d.companyName =:nome");*//*
 
         Query dfExist = em.createNamedQuery("existsByCompanyNameLike");
         String name = ds.getCompanyName();
-       /* dfExist.setParameter("companyName", name);*/
+       *//* dfExist.setParameter("companyName", name);*//*
         List<Distributorefisico> distList= dfExist.getResultList();
-
-
         try {
             if (distList.isEmpty()) {
                 em.persist(ds);
@@ -35,13 +33,12 @@ public class DistributorefisicoDAO {
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
-            em.getTransaction().rollback();
         } finally {
             em.getTransaction().commit();
         }
 
 
-    }
+    }*/
 
 
     /*public List getPiva(String piva){

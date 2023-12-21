@@ -18,7 +18,7 @@ public class Distributorefisico extends Distributore implements iva {
 
     @Column (name = "p_iva", unique = true, nullable = false, length = 30)
     private String pIva;
-    @OneToMany (mappedBy = "distributori_fisico")
+    @OneToMany (mappedBy = "distributori_fisico", cascade = CascadeType.ALL)
     private List<Biglietto> biglietti;
 
     /*---------------------------< Costruttori >----------------------*/
