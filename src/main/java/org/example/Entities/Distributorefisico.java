@@ -2,10 +2,7 @@ package org.example.Entities;
 
 import org.example.Entities.Interface.iva;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +10,12 @@ import java.util.Set;
 
 @Entity
 @Table (name = "distributore_fisico")
+@NamedQueries (
+        {@NamedQuery (name = "existsByCompanyNameLike", query = "select d " +
+        "from Distributorefisico d where d.companyName like :name"),
+        @NamedQuery (name =
+        "Distributorefisico.updateByBigliettivenduti", query = "update Distributorefisico d set d.bigliettivenduti = " +
+        "d.bigliettivenduti+:valoreIn where d.companyName like :name"),})
 public class Distributorefisico extends Distributore implements iva {
     @Column (name = "name_company", nullable = false)
     private String companyName;
@@ -37,6 +40,7 @@ public class Distributorefisico extends Distributore implements iva {
         this.companyName = companyName;
         this.pIva = generatePiva();
     }
+
     /*--------------------< Getter and setter >-----------------------------------*/
     public String getCompanyName() {
         return companyName;
@@ -73,6 +77,7 @@ public class Distributorefisico extends Distributore implements iva {
 
     @Override
     public String toString() {
-        return "Distributorefisico{" + "companyName='" + companyName + '\'' + ", pIva='" + pIva + '\'' + ", biglietti=" + biglietti + ", idBiglietteria=" + idBiglietteria + ", locazione='" + locazione + '\'' + ", tipologia=" + tipologia + ", bigliettivenduti=" + bigliettivenduti + ", abbonamentiVenduti=" + abbonamentiVenduti + '}';
+        return "Distributorefisico{" + "companyName='" + companyName + '\'' + ", pIva='" + pIva + '\'' + ", biglietti"
+                + "=" + biglietti + ", idBiglietteria=" + idBiglietteria + ", locazione='" + locazione + '\'' + ", " + "tipologia=" + tipologia + ", bigliettivenduti=" + bigliettivenduti + ", abbonamentiVenduti=" + abbonamentiVenduti + '}';
     }
 }

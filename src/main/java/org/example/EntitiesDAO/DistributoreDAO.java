@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 
@@ -17,18 +18,30 @@ public class DistributoreDAO {
     public final EntityManager em;
 
     public DistributoreDAO(EntityManager em){this.em = em;}
-    public void save(Distributore dis){
-        DistributorefisicoDAO df = new DistributorefisicoDAO(em);
+    public void save(Distributore distributore){
+        //generazione o no di distributore se eseiste o meno
         em.getTransaction().begin();
-        if(dis instanceof Distributorefisico ){
-            Distributorefisico ds= (Distributorefisico) dis;
-            logger.error("sono dentro");
-            df.save(ds);
+        if (distributore instanceof Distributorefisico){
+            TypedQuery<Distributorefisico> queryDf=em.createNamedQuery("existsByCompanyNameLike", Distributorefisico.class);
+            queryDf.setParameter("name", ((Distributorefisico) distributore).getCompanyName());
+            List<Distributorefisico> list=queryDf.getResultList();
+            if (list.isEmpty()){
+                em.persist(distributore);
+                em.getTransaction().commit();
             }else{
-            DistributoreautomaticoDAO da=new DistributoreautomaticoDAO(em);
-            da.save(dis);
+                logger.error("Distributore fisico già esistente");
+                }
+        }else{
+            TypedQuery<Distributoreautomatico> queryex=em.createNamedQuery("existbyMachineCode", Distributoreautomatico.class);
+            queryex.setParameter("codiceMacchina", ((Distributoreautomatico) distributore).getCodiceMacchina());
+            List<Distributoreautomatico> listex=queryex.getResultList();
+            if (listex.isEmpty()){
+                em.persist(distributore);
+                em.getTransaction().commit();
+            }else{
+                logger.error("Distributore automatico già esistente");
+            }
         }
-
         em.getTransaction().commit();
     }
 

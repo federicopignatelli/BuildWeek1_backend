@@ -1,9 +1,11 @@
 package org.example.EntitiesDAO;
 
 import org.example.Entities.Abbonamento;
-import org.example.Entities.Tratta;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 
 public class AbbonamentoDAO {
@@ -20,18 +22,18 @@ public class AbbonamentoDAO {
         transaction.commit();
     }
 
-    public Abbonamento findById(long id){
+    public Abbonamento findById(long id) {
         return entityManager.find(Abbonamento.class, id);
     }
 
     public void delete(long id) {
         Abbonamento found = entityManager.find(Abbonamento.class, id);
-        if(found != null){
+        if (found != null) {
             EntityTransaction transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.remove(found);
             transaction.commit();
-        }else{
+        } else {
             System.err.println("Abbonamento non trovato!");
         }
     }
@@ -39,18 +41,19 @@ public class AbbonamentoDAO {
     //funzione per la verifica rapida della validità di un abbonamento
     // in base al numero di tessera
 
-    public boolean verificaValidita(String cardNumber){
+    public boolean verificaValidita(String cardNumber) {
         LocalDate today = LocalDate.now();
-        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND a.dataScadenzaAbbondamento > :today"; //filtra gli abbonamenti della tessera passata come parametro
+        String queryString = "SELECT a FROM Abbonamento a WHERE a.card.cardNumber = :cardNumber AND a" +
+                ".dataScadenzaAbbondamento > :today"; //filtra gli abbonamenti della tessera passata come parametro
         TypedQuery<Abbonamento> query = entityManager.createQuery(queryString, Abbonamento.class);
         query.setParameter("cardNumber", cardNumber);
-        query.setParameter("today", today );
+        query.setParameter("today", today);
         //eseguo la query restituendo il risultato
-        try{
+        try {
             Abbonamento abbonamento = query.getSingleResult();
             //se ci sono risultati è true
             return true;
-        }catch(NoResultException e){
+        } catch (NoResultException e) {
             //se non ci sono risultati è false
             return false;
         }
