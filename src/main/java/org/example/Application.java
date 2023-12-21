@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Application {
     public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
-    private static Logger logger = LoggerFactory.getLogger(Application.class);
+    public static Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) {
         EntityManager entityManager = managerFactory.createEntityManager();
@@ -28,10 +28,10 @@ public class Application {
         TrattaDAO trattaDao = new TrattaDAO(entityManager);
 
 
-        Distributore distributore = new Distributoreautomatico("Milano", "AUTOMATICO", 0,"ZHDBGPMP","ABBONAMENTI");
+        Distributore distributore = new Distributoreautomatico("Milano", "AUTOMATICO","ABBONAMENTI");
         distributoreDao.save(distributore);
-        /*Biglietto biglietto = new Biglietto("NOVANTAMINUTI", 1.50);
-        bigliettoDao.create(biglietto, distributore);*/
+        Biglietto biglietto = new Biglietto("GIORNALIERO", 1.50);
+        bigliettoDao.creaBiglietto(biglietto, distributore);
 
         entityManager.close();
         managerFactory.close();

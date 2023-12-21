@@ -42,7 +42,7 @@ public class DistributoreDAO {
                 logger.error("Distributore automatico già esistente");
             }
         }
-        em.getTransaction().commit();
+
     }
 
 

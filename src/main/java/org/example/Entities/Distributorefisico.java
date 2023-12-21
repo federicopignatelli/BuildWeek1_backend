@@ -10,12 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table (name = "distributore_fisico")
-@NamedQueries (
-        {@NamedQuery (name = "existsByCompanyNameLike", query = "select d " +
-        "from Distributorefisico d where d.companyName like :name"),
-        @NamedQuery (name =
-        "Distributorefisico.updateByBigliettivenduti", query = "update Distributorefisico d set d.bigliettivenduti = " +
-        "d.bigliettivenduti+:valoreIn where d.companyName like :name"),})
+@NamedQueries ({@NamedQuery (name = "existsByCompanyNameLike", query = "select d " + "from Distributorefisico d " +
+        "where" + " d.companyName like :name")})
 public class Distributorefisico extends Distributore implements iva {
     @Column (name = "name_company", nullable = false)
     private String companyName;
@@ -30,13 +26,11 @@ public class Distributorefisico extends Distributore implements iva {
     public Distributorefisico() {
     }
 
-    public Distributorefisico(String locazione, String tipologia, long bigliettivenduti, long abbonamentiVenduti,
-                              String companyName) {
+    public Distributorefisico(String locazione, String tipologia, String companyName) {
         this.idBiglietteria = getIdBiglietteria();
         this.locazione = locazione;
         this.tipologia = Tipologia.getName(tipologia);
-        this.bigliettivenduti = bigliettivenduti;
-        this.abbonamentiVenduti = abbonamentiVenduti;
+
         this.companyName = companyName;
         this.pIva = generatePiva();
     }
@@ -78,6 +72,6 @@ public class Distributorefisico extends Distributore implements iva {
     @Override
     public String toString() {
         return "Distributorefisico{" + "companyName='" + companyName + '\'' + ", pIva='" + pIva + '\'' + ", biglietti"
-                + "=" + biglietti + ", idBiglietteria=" + idBiglietteria + ", locazione='" + locazione + '\'' + ", " + "tipologia=" + tipologia + ", bigliettivenduti=" + bigliettivenduti + ", abbonamentiVenduti=" + abbonamentiVenduti + '}';
+                + "=" + biglietti + ", idBiglietteria=" + idBiglietteria + ", locazione='" + locazione + '\'' + ", " + "tipologia=" + tipologia + '}';
     }
 }

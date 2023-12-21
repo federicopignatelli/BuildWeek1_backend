@@ -28,9 +28,6 @@ public class User {
     @OneToOne (fetch = FetchType.EAGER)
     private Card card;
 
-    @OneToMany (fetch = FetchType.LAZY , mappedBy = "users")
-    private List<Biglietto> biglietto;
-
     /*----------------------< Costruttori >---------------------------*/
     public User() {
     }

@@ -15,13 +15,9 @@ public class Distributore {
     @Column (name = "tipologia", insertable = true, nullable = false)
     @Enumerated (EnumType.STRING)
     protected Tipologia tipologia;
-    @Column (name = "biglietti_venduti", columnDefinition = "INTEGER DEFAULT 0", nullable = false, insertable = true,
-            updatable = true)
-    protected long bigliettivenduti;
+
     //da AGGIUNGERE CONTATORE OGNI VOLTA CHE SI AGGIUNGE UN BIGLIETTO
-    @Column (name = "abbonamenti_venduti", columnDefinition = "INTEGER DEFAULT 0", nullable = false, insertable =
-            true, updatable = true)
-    protected long abbonamentiVenduti;
+
 
     public Distributore() {
     }
@@ -46,18 +42,9 @@ public class Distributore {
         return tipologia;
     }
 
-    public long getBigliettivenduti() {
-        return bigliettivenduti;
-    }
 
-    public long getAbbonamentiVenduti() {
-        return abbonamentiVenduti;
-    }
     //--> Setter
 
-    public void setBigliettivenduti(long bigliettivenduti) {
-        this.bigliettivenduti = bigliettivenduti;
-    }
 
 
     /*---------------------------< Metodi >-----------------------------*/

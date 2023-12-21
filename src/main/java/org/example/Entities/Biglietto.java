@@ -15,6 +15,7 @@ public class Biglietto {
     @Id
     @GeneratedValue
     private Long id_biglietto;
+    @Enumerated (EnumType.STRING)
     private Tipologia_biglietto tipologia_biglietto;
     @Enumerated (EnumType.STRING)
     private MezzoType mezzo;
@@ -23,9 +24,6 @@ public class Biglietto {
 
     private boolean vidimazione;
 
-    @ManyToOne
-    @JoinColumn (name = "users")
-    User users;
 
     @OneToMany (mappedBy = "biglietti")
     private List<Tratta> tratta;
@@ -107,17 +105,10 @@ public class Biglietto {
     public void setVidimazione(boolean vidimazione) {
         this.vidimazione = vidimazione;
     }
-     /*    public Tratta getTratta() {
-        return tratta;
+
+    public void setMezzo(MezzoType mezzo) {
+        this.mezzo = mezzo;
     }
-
-    public void setTratta(Tratta tratta) {
-        this.tratta = tratta;
-    }*/
-
-
-
-
 }
 
 
