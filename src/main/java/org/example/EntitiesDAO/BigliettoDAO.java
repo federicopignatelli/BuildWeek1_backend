@@ -4,6 +4,7 @@ import org.example.Entities.*;
 import org.example.Entities.ENUM.Tipologia_biglietto;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -119,12 +120,20 @@ public class BigliettoDAO {
         }
     }
 
+
     public MezzoType calculateMezzo(Biglietto biglietto) {
         if ((biglietto.getTipologia_biglietto() == Tipologia_biglietto.NOVANTAMINUTI) || (biglietto.getTipologia_biglietto() == Tipologia_biglietto.SESSANTAMINUTI)) {
             return MezzoType.TRAM;
-        }else{
+        } else {
             return MezzoType.AUTOBUS;
         }
+    }
+
+    public void findAll(String name) {
+       TypedQuery<Long> query = em.createNamedQuery("findAllBiglietti", Long.class);
+        query.setParameter("companyName", name);
+        List<Long> result = query.getResultList();
+        System.out.println("Sono stati trovati "+result.size()+ " biglietti corrispondenti al rivenditore " + name);
     }
 }
 

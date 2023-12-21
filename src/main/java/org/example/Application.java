@@ -27,7 +27,7 @@ public class Application {
         Biglietto biglietto;
 
         try {
-            Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");
+            Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","Biglietteria al Duomo");
             /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
             Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
             bid.save(biglietto1,distributori_fisico);
@@ -35,11 +35,9 @@ public class Application {
         } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
-        } finally {
-            entityManager.close();
-            managerFactory.close();
         }
 
+        bid.findAll("Biglietteria al Duomo");
 
         entityManager.close();
         managerFactory.close();
