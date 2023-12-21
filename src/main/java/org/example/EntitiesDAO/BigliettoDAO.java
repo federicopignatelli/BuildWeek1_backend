@@ -1,9 +1,7 @@
 package org.example.EntitiesDAO;
 
-import org.example.Entities.Biglietto;
-import org.example.Entities.Distributore;
-import org.example.Entities.Distributoreautomatico;
-import org.example.Entities.Distributorefisico;
+import org.example.Entities.*;
+import org.example.Entities.ENUM.Tipologia_biglietto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -41,12 +39,16 @@ public class BigliettoDAO {
                         dis.save(fisico);
                         System.out.println("Il rivenditore automatico " + ((Distributoreautomatico) fisico).getCodiceMacchina() + " è stato creato con successo");
                         biglietto.setDistributori_automatico((Distributoreautomatico) fisico);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
                     } else {
                         Distributoreautomatico d =
-                                esistenzaDistributoreAutomatico(biglietto.getDistributori_automatici()
-                                .getCodiceMacchina());
+                                esistenzaDistributoreAutomatico(biglietto.getDistributori_automatici().getCodiceMacchina());
 
                         biglietto.setDistributori_automatico(d);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
+
                     }
                     /**/
                     em.persist(biglietto);
@@ -65,12 +67,17 @@ public class BigliettoDAO {
                     if (esistenzaDistributoreFisico(((Distributorefisico) fisico).getCompanyName()) == null) {
                         dis.save(fisico);
                         biglietto.setDistributori_fisico((Distributorefisico) fisico);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
                         System.out.println((Distributorefisico) fisico);
                         System.out.println("Il rivenditore " + ((Distributorefisico) fisico).getCompanyName() + " è " + "stato creato con successo! ");
                     } else {
                         Distributorefisico d =
                                 esistenzaDistributoreFisico(((Distributorefisico) fisico).getCompanyName());
                         biglietto.setDistributori_fisico(d);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
+
                     }
                     em.persist(biglietto);
                 } catch (RuntimeException e) {
@@ -112,6 +119,13 @@ public class BigliettoDAO {
         }
     }
 
+    public MezzoType calculateMezzo(Biglietto biglietto) {
+        if ((biglietto.getTipologia_biglietto() == Tipologia_biglietto.NOVANTAMINUTI) || (biglietto.getTipologia_biglietto() == Tipologia_biglietto.SESSANTAMINUTI)) {
+            return MezzoType.TRAM;
+        }else{
+            return MezzoType.AUTOBUS;
+        }
+    }
 }
 
 

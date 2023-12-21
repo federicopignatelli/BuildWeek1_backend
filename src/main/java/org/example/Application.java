@@ -27,11 +27,10 @@ public class Application {
         Biglietto biglietto;
 
         try {
-            /*Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
-            Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
+            Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");
+            /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
             Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
-
-            bid.save(biglietto1,distributori_automatici);
+            bid.save(biglietto1,distributori_fisico);
 
         } catch (Exception e) {
             logger.error(e.getMessage());
