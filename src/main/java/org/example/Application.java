@@ -32,10 +32,8 @@ public class Application {
         Biglietto biglietto;
 
         try {
-            /*
-             * Distributore distributori_fisico = new
-             * Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");
-             */
+              /*Distributore distributori_fisico = new
+              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
             Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
             Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
 
@@ -49,9 +47,9 @@ public class Application {
             managerFactory.close();
         }
 
-        // ********************************************* MEZZI - TRATTE - VIAGGI
-        // *************************************************************************************
-        MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
+       /* // ********************************************* MEZZI - TRATTE - VIAGGI
+        // **************************************************************************************/
+        /*MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
         Tratta colosseo = new Tratta("Colosseo", "Testaccio", 19);
@@ -62,7 +60,7 @@ public class Application {
         Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170);
         Mezzo tram1 = new Mezzo(MezzoType.TRAM, 140);
         Mezzo tram2 = new Mezzo(MezzoType.TRAM, 110);
-        /* ---->addMezzo aggiunge un mezzo a una tratta */
+        *//* ---->addMezzo aggiunge un mezzo a una tratta *//*
         // eur.addMezzo(arpa1);
         // colosseo.addMezzo(tram2);
         // pescara.addMezzo(arpa2);
@@ -90,11 +88,11 @@ public class Application {
         // viaggioDAO.save(viaggio2);
         // Viaggio viaggio3 = new
         // Viaggio(arpa2,pescara,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
-        // viaggioDAO.save(viaggio3);
+        // viaggioDAO.save(viaggio3);*/
 
-        viaggioDAO.stampaTotTappeEtempoEffTratta();
+        /*viaggioDAO.stampaTotTappeEtempoEffTratta();*/
 
-        // ********************************************* fine MEZZI - TRATTE - VIAGGI
+       /* // ********************************************* fine MEZZI - TRATTE - VIAGGI
         // *************************************************************************************
 
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
@@ -125,7 +123,7 @@ public class Application {
         Abbonamento abbGianni = abbDAO.findById(2);
         // verifica validità abbonamento
         boolean isValid = abbDAO.verificaValidita("023");
-        System.out.println(isValid);
+        System.out.println(isValid);*/
 
         System.out.println("ciaone");
 
