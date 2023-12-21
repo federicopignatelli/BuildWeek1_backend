@@ -27,21 +27,19 @@ public class Application {
         Biglietto biglietto;
 
         try {
-            Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","Biglietti&Biglietti");
-            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI", distributori_fisico);
-            bid.save(biglietto1, distributori_fisico);
+            /*Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
+            Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
+            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
 
-        }catch (Exception e) {
+            bid.save(biglietto1,distributori_automatici);
+
+        } catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
-        }finally {
+        } finally {
             entityManager.close();
             managerFactory.close();
         }
-
-
-
-
 
 
         entityManager.close();

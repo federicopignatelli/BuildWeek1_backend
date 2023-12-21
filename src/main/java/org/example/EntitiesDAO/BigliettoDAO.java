@@ -2,12 +2,11 @@ package org.example.EntitiesDAO;
 
 import org.example.Entities.Biglietto;
 import org.example.Entities.Distributore;
+import org.example.Entities.Distributoreautomatico;
 import org.example.Entities.Distributorefisico;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
-import java.sql.SQLException;
 import java.util.List;
 
 import static org.example.Application.logger;
@@ -22,7 +21,7 @@ public class BigliettoDAO {
     }
 
     public void save(Biglietto biglietto, Distributore fisico) {
-        DistributoreDAO dis= new DistributoreDAO(em);
+        DistributoreDAO dis = new DistributoreDAO(em);
         if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
@@ -34,49 +33,84 @@ public class BigliettoDAO {
                 case GIORNALIERO -> 15.00;
                 case CENTOVENTIMINUTI -> 5.45;
             };
-
             biglietto.setPrezzo(prezzo);
-            try{
-                Distributorefisico d = esistenzaDistributoreFisico(biglietto.getDistributori_fisico().getCompanyName());
-                if(esistenzaDistributoreFisico(biglietto.getDistributori_fisico().getCompanyName())==null) {
-                    dis.save(fisico);
-                    System.out.println(d);
-                    System.out.println("Il rivenditore " + ((Distributorefisico) fisico).getCompanyName() + " è stato creato con successo: ");
-                }else{
-                    biglietto.setDistributori_fisico(d);
+            if (fisico instanceof Distributoreautomatico) {
+                logger.error("sono automatic");
+                try {
+                    if (esistenzaDistributoreAutomatico(((Distributoreautomatico) fisico).getCodiceMacchina()) == null) {
+                        dis.save(fisico);
+                        System.out.println("Il rivenditore automatico " + ((Distributoreautomatico) fisico).getCodiceMacchina() + " è stato creato con successo");
+                        biglietto.setDistributori_automatico((Distributoreautomatico) fisico);
+                    } else {
+                        Distributoreautomatico d =
+                                esistenzaDistributoreAutomatico(biglietto.getDistributori_automatici()
+                                .getCodiceMacchina());
 
+                        biglietto.setDistributori_automatico(d);
+                    }
+                    /**/
+                    em.persist(biglietto);
+                } catch (Exception e) {
+                    logger.error(e.getMessage());
+                    em.getTransaction().rollback();
+
+                } finally {
+                    em.getTransaction().commit();
+                    System.out.println("Biglietto: " + "con id " + biglietto.getId_biglietto() + " acquistato con " + "successo");
                 }
-                em.persist(biglietto);
-            }catch(RuntimeException e){
-                logger.error(e.getMessage());
-                em.getTransaction().rollback();
-            }finally {
-                em.getTransaction().commit();
-                System.out.println("Biglietto: " + "con id " + biglietto.getId_biglietto() + " acquistato con successo");
+            } else {
+                /*---------------------------- controllo istance distributore
+                fisico-----------------------------------*/
+                try {
+                    if (esistenzaDistributoreFisico(((Distributorefisico) fisico).getCompanyName()) == null) {
+                        dis.save(fisico);
+                        biglietto.setDistributori_fisico((Distributorefisico) fisico);
+                        System.out.println((Distributorefisico) fisico);
+                        System.out.println("Il rivenditore " + ((Distributorefisico) fisico).getCompanyName() + " è " + "stato creato con successo! ");
+                    } else {
+                        Distributorefisico d =
+                                esistenzaDistributoreFisico(((Distributorefisico) fisico).getCompanyName());
+                        biglietto.setDistributori_fisico(d);
+                    }
+                    em.persist(biglietto);
+                } catch (RuntimeException e) {
+                    logger.error(e.getMessage());
+                    em.getTransaction().rollback();
+                } finally {
+                    em.getTransaction().commit();
+                    System.out.println("Biglietto: " + "con id " + biglietto.getId_biglietto() + " acquistato con " + "successo");
+                }
             }
-        }catch (Exception e) {
+        } catch (RuntimeException e) {
             logger.error(e.getMessage());
+            em.getTransaction().rollback();
         }
-
-
-
-
     }
 
     public Distributorefisico esistenzaDistributoreFisico(String companyName) {
-        TypedQuery<Distributorefisico> query = em.createNamedQuery("existsByCompanyNameLike",Distributorefisico.class);
+        TypedQuery<Distributorefisico> query = em.createNamedQuery("existsByCompanyNameLike", Distributorefisico.class);
         query.setParameter("name", companyName);
         List<Distributorefisico> distributorefisico = query.getResultList();
         /*System.out.println(d);*/
-        if(distributorefisico.isEmpty()) {
+        if (distributorefisico.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             return distributorefisico.get(0);
         }
     }
 
+    public Distributoreautomatico esistenzaDistributoreAutomatico(String code) {
+        TypedQuery<Distributoreautomatico> query = em.createNamedQuery("existbyMachineCode",
+                Distributoreautomatico.class);
+        query.setParameter("codiceMacchina", code);
+        List<Distributoreautomatico> distributoreautomatico = query.getResultList();
 
+        if (distributoreautomatico.isEmpty()) {
+            return null;
+        } else {
+            return distributoreautomatico.get(0);
+        }
+    }
 
 }
 

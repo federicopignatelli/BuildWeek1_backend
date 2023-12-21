@@ -54,12 +54,12 @@ public class Distributoreautomatico extends Distributore {
 
     public String genCode() {
         Random random = new Random();
-        String codiceMacchina = "";
+        StringBuilder codiceMacchina = new StringBuilder();
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < 8; i++) {
-            codiceMacchina += characters.charAt(random.nextInt(1, 26));
+            codiceMacchina.append(characters.charAt(random.nextInt(1, 26)));
         }
-        System.out.println(codiceMacchina);
-        return codiceMacchina;
+        System.out.println(codiceMacchina.toString());
+        return codiceMacchina.toString();
     }
 }

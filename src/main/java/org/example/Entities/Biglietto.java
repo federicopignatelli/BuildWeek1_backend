@@ -41,14 +41,22 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(String tipologia_biglietto,Distributore distributori_fisico) {
+    public Biglietto(String tipologia_biglietto) {
         this.id_biglietto = getId_biglietto();
         this.tipologia_biglietto = Tipologia_biglietto.valueOf(tipologia_biglietto);
         /*this.prezzo = prezzo;*/
         this.dataemissioneBiglietto = LocalDate.now();
         this.vidimazione = false;
-        this.setDistributori_fisico((Distributorefisico) distributori_fisico);
+        /*this.setDistributori_automatico( (Distributoreautomatico) distributori_automatici);*/
     }
+    /*public Biglietto(String tipologia_biglietto, Distributore distributori_fisico) {
+        this.id_biglietto = getId_biglietto();
+        this.tipologia_biglietto = Tipologia_biglietto.valueOf(tipologia_biglietto);
+        this.dataemissioneBiglietto = LocalDate.now();
+        this.vidimazione = false;
+        *//*this.setDistributori_fisico( (Distributorefisico) distributori_automatici);*//*
+    }*/
+
 
     public Biglietto(Distributorefisico distributori_fisico) {
         this.distributori_fisico = distributori_fisico;
@@ -79,6 +87,10 @@ public class Biglietto {
 
     public Distributorefisico getDistributori_fisico() {
         return distributori_fisico;
+    }
+
+    public Distributoreautomatico getDistributori_automatici() {
+        return distributori_automatici;
     }
 
     public Double getPrezzo() {
