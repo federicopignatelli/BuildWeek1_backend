@@ -22,7 +22,7 @@ public class Mezzo {
     @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
     @OneToMany(mappedBy = "mezzi")
-    private List<Manutenzione> manutenzione;
+    private List<Manutenzione> manutenzione = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "mezzo_tratta",
@@ -111,6 +111,14 @@ public class Mezzo {
         return targa.toString();
     }
 
+    public void addManutenzione(Manutenzione newMan){
+        if(manutenzione == null){
+            manutenzione = new ArrayList<>();
+        }
+        manutenzione.add(newMan);
+        newMan.setMezzi(this);
+        System.out.println("Il Mezzo ora si trova in manutenzione!");
+    }
     /*---------------------------< Override >-----------------------------*/
 
     @Override

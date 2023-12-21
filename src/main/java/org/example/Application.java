@@ -47,10 +47,12 @@ public class Application {
         // dm.save(ds);
         // System.out.println(ds.toString());
 
-//********************************************* MEZZI - TRATTE - VIAGGI *************************************************************************************
+//********************************************* MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
         MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
+        ManutenzioneDAO manutDao = new ManutenzioneDAO(entityManager);
+
         Tratta colosseo = new Tratta("Colosseo","Testaccio",19);
         Tratta eur = new Tratta("Termini","Trevi",9);
         Tratta pescara = new Tratta("Pescara","chieti",20);
@@ -60,34 +62,38 @@ public class Application {
         Mezzo tram1 = new Mezzo(MezzoType.TRAM,140);
         Mezzo tram2 = new Mezzo(MezzoType.TRAM,110);
 /*      ---->addMezzo     aggiunge un mezzo a una tratta    */
-//        eur.addMezzo(arpa1);
-//        colosseo.addMezzo(tram2);
-//        pescara.addMezzo(arpa2);
-//
-//        trattaDAO.save(eur);
-//        trattaDAO.save(colosseo);
-//        trattaDAO.save(pescara);
-//
-//        mezzoDAO.save(tram1);
-//        mezzoDAO.save(tram2);
-//        mezzoDAO.save(arpa1);
-//        mezzoDAO.save(arpa2);
-//
-//        Viaggio viaggio1 = new Viaggio(arpa1,eur,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
-//        viaggioDAO.save(viaggio1);
-//        Viaggio viaggio1b = new Viaggio(arpa1,pescara,LocalDateTime.now().plusMinutes(200),LocalDateTime.now().plusMinutes(312));
-//        viaggioDAO.save(viaggio1b);
-//        Viaggio viaggio1c = new Viaggio(arpa1,eur,LocalDateTime.now().plusMinutes(300),LocalDateTime.now().plusMinutes(342));
-//        viaggioDAO.save(viaggio1c);
-//        Viaggio viaggio2 = new Viaggio(tram2,colosseo,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
-//        viaggioDAO.save(viaggio2);
-//        Viaggio viaggio3 = new Viaggio(arpa2,pescara,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
-//        viaggioDAO.save(viaggio3);
+        eur.addMezzo(arpa1);
+        colosseo.addMezzo(tram2);
+        pescara.addMezzo(arpa2);
+
+        trattaDAO.save(eur);
+        trattaDAO.save(colosseo);
+        trattaDAO.save(pescara);
+
+        mezzoDAO.save(tram1);
+        mezzoDAO.save(tram2);
+        mezzoDAO.save(arpa1);
+        mezzoDAO.save(arpa2);
+
+        Viaggio viaggio1 = new Viaggio(arpa1,eur,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+        viaggioDAO.save(viaggio1);
+        Viaggio viaggio1b = new Viaggio(arpa1,pescara,LocalDateTime.now().plusMinutes(200),LocalDateTime.now().plusMinutes(312));
+        viaggioDAO.save(viaggio1b);
+        Viaggio viaggio1c = new Viaggio(arpa1,eur,LocalDateTime.now().plusMinutes(300),LocalDateTime.now().plusMinutes(342));
+        viaggioDAO.save(viaggio1c);
+        Viaggio viaggio2 = new Viaggio(tram2,colosseo,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+        viaggioDAO.save(viaggio2);
+        Viaggio viaggio3 = new Viaggio(arpa2,pescara,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+        viaggioDAO.save(viaggio3);
+
+
+        Manutenzione pistone = new Manutenzione(arpa1,"Sanauto",LocalDate.now(),LocalDate.now().plusDays(15),"Pistone rotto");
+        arpa1.addManutenzione(pistone);
+        manutDao.save(pistone);
+
 
         viaggioDAO.stampaTotTappeEtempoEffTratta();
-
-
-//********************************************* fine  MEZZI - TRATTE - VIAGGI *************************************************************************************
+//********************************************* fine  MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
 
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //

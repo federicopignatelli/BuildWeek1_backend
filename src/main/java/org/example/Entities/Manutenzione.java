@@ -2,41 +2,48 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Random;
+
 @Entity
 public class Manutenzione {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "manutenzione_id")
     private Long manutenzioneId;
     @Column ( nullable = false, insertable = true)
     private int numero_manutenzione;
     @Enumerated(EnumType.STRING)
-    private VeicoloType veicoloType;
+    private MezzoType veicoloType;
     @Column ( nullable = false, insertable = true, length = 30)
     private String officina;
     @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate data_inizio;
     @Column ( nullable = false, insertable = true, length = 10)
     private LocalDate data_fine;
-    @Column ( nullable = false, insertable = true, length = 20)
+    @Column ( nullable = false, insertable = true, length = 40)
     private String descrizione_manutenzione;
     @Column ( nullable = false, insertable = true)
     private double costo;
     @ManyToOne
-    @JoinColumn(name = "manutenzione")
+    @JoinColumn(name = "mezzi")
     private Mezzo mezzi;
+    @Column(name = "targa_mezzo")
+    private String targaMezzo;
     /*----------------------< Costruttori >---------------------------*/
 
     public Manutenzione() {
     }
 
-    public Manutenzione( VeicoloType veicoloType, String officina, LocalDate data_inizio, LocalDate data_fine, String descrizione_manutenzione, double costo) {
-        this.numero_manutenzione = getNumero_manutenzione();
-        this.veicoloType = veicoloType;
+    public Manutenzione( Mezzo mezzi, String officina, LocalDate data_inizio, LocalDate data_fine, String descrizione_manutenzione) {
+        Random rm = new Random();
+        this.numero_manutenzione = rm.nextInt(15,1500000);
         this.officina = officina;
         this.data_inizio = data_inizio;
         this.data_fine = data_fine;
         this.descrizione_manutenzione = descrizione_manutenzione;
-        this.costo = costo;
+        this.costo = 100 + rm.nextInt(901);
+        setMezzi(mezzi);
     }
 
     /*--------------------< Getter and Setter >--------------------------*/
@@ -45,7 +52,7 @@ public class Manutenzione {
         return numero_manutenzione;
     }
 
-    public VeicoloType getVeicoloType() {
+    public MezzoType getVeicoloType() {
         return veicoloType;
     }
 
@@ -68,10 +75,28 @@ public class Manutenzione {
     public double getCosto() {
         return costo;
     }
+
+    public void setMezzi(Mezzo mezzi) {
+        this.mezzi = mezzi;
+        aggiornaTarga();
+        aggiornaVeicoloType();
+    }
+
     /*---------------------------< Metodi >-----------------------------*/
-
-
-
+    public void aggiornaTarga(){
+        if(this.mezzi != null){
+            this.targaMezzo =this.mezzi.getTarga();
+        } else{
+            this.targaMezzo = null ;
+        }
+    }
+    public void aggiornaVeicoloType() {
+        if (this.mezzi != null) {
+            this.veicoloType = this.mezzi.getMezzoType();
+        } else {
+            this.veicoloType = null;
+        }
+    }
 
 
     /*---------------------------< Override >-----------------------------*/
