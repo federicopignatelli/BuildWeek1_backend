@@ -3,6 +3,7 @@ package org.example.Entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -11,55 +12,41 @@ import java.util.UUID;
 @Table(name = "mezzi")
 public class Mezzo {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "mezzo_id")
     private Long mezzoId;
     @Enumerated(EnumType.STRING)
     private MezzoType mezzoType;
     @Column ( nullable = false, insertable = true)
     private int capienza;
-//    @ManyToOne
-//    @JoinColumn(name = "mezzi_tratta")
-//    private Tratta tratte;
-//    @ManyToOne
-//    @JoinColumn(name = "mezzi_tratta")
-//    private boolean manutenzione;
-    @Column ( nullable = false, insertable = true, length = 10)
-    private LocalDate periodo_servizio;
     @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
     @OneToMany(mappedBy = "mezzi")
     private List<Manutenzione> manutenzione;
-    @ManyToOne
-    @JoinColumn (name = "tratta_id")
-    private Tratta tratte;
+    @ManyToMany
+    @JoinTable(
+            name = "mezzo_tratta",
+            joinColumns = @JoinColumn(name = "mezzo_id"),
+            inverseJoinColumns = @JoinColumn(name = "tratta_id")
+    )
+    private List<Tratta> tratte = new ArrayList<>();
 
-    @Column
-    private LocalTime durata_tratta;
     @Column(unique = true)
     private String targa;
-
-    @Column(name = "num_percorrenza")
-    private long numeroPercorrenza;
+    @OneToMany(mappedBy = "mezzo")
+    private List<Viaggio> viaggi = new ArrayList<>();
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
     }
 
-    public Mezzo(MezzoType mezzoType, int capienza, LocalDate periodo_servizio) {
+    public Mezzo(MezzoType mezzoType, int capienza) {
         this.mezzoType = mezzoType;
         this.capienza = capienza;
-        this.periodo_servizio = periodo_servizio;
-//        this.tratte = tratte;
-//        this.durata_tratta = tratte.getDurataTratta();
         this.targa = generaTarga();
-        this.numeroPercorrenza = getNumeroPercorrenza();
     }
     /*--------------------< Getter and Setter >--------------------------*/
 
-    public long getNumeroPercorrenza() {
-        return numeroPercorrenza;
-    }
 
     public Long getMezzoId() {
         return mezzoId;
@@ -73,34 +60,36 @@ public class Mezzo {
         return capienza;
     }
 
-/*    public Tratta getTratte() {
+    public List<Tratta> getTratte() {
         return tratte;
     }
-
-    public boolean isManutenzione() {
-        return manutenzione;
-    }*/
-
-    public LocalDate getPeriodo_servizio() {
-        return periodo_servizio;
-    }
-
     public int getTot_biglietti_vidimati() {
         return tot_biglietti_vidimati;
     }
 
-    public void setTratte(Tratta tratte) {
+    public void setTratte(List<Tratta> tratte) {
         this.tratte = tratte;
-        if (tratte != null) {
-            this.durata_tratta = tratte.getDurataTratta();
+    }
+    public void addTratta(Tratta tratta){
+        if(tratte == null){
+            tratte = new ArrayList<>();
+        }
+        tratte.add(tratta);
+        if(!tratta.getMezzi().contains(this)){
+            tratta.addMezzo(this);
         }
     }
-    public String getTarga(){return targa;}
-    /*---------------------------< Metodi >-----------------------------*/
-    public static void percorriTratta(Mezzo mezzi, Tratta tratta){
-        long idMezzo = mezzi.getMezzoId();
-        long idTratta = tratta.getId_tratta();
 
+    public String getTarga(){return targa;}
+
+    public List<Viaggio> getViaggi() {
+        return viaggi;
+    }
+
+    /*---------------------------< Metodi >-----------------------------*/
+    public void addViaggio(Viaggio viaggio){
+        viaggi.add(viaggio);
+        viaggio.setMezzo(this);
     }
     public String generaTarga(){
         Random rm = new Random();
@@ -123,16 +112,18 @@ public class Mezzo {
     }
 
     /*---------------------------< Override >-----------------------------*/
+
     @Override
     public String toString() {
         return "Mezzo{" +
                 "mezzoId=" + mezzoId +
                 ", mezzoType=" + mezzoType +
                 ", capienza=" + capienza +
-                /*", tratte=" + tratte +
-                ", manutenzione=" + manutenzione +*/
-                ", periodo_servizio=" + periodo_servizio +
                 ", tot_biglietti_vidimati=" + tot_biglietti_vidimati +
+                ", manutenzione=" + manutenzione +
+                ", tratte=" + tratte +
+                ", targa='" + targa + '\'' +
+                ", viaggi=" + viaggi +
                 '}';
     }
 }
