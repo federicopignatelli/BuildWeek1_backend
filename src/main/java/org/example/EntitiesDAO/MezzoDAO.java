@@ -38,37 +38,39 @@ public class MezzoDAO {
 //        long idMezzo = mezzi.getMezzoId();
 //        long idTratta = tratta.getId_tratta();
 //        long valoreIncrementale = 1;
+//
 //        transaction.begin();
-//        String targaMezzo = mezzi.getTarga();
+//
 //        Query findMezzo = em.createQuery("SELECT n FROM Mezzo n WHERE n.targa = :targa");
+//        findMezzo.setParameter("targa", mezzi.getTarga());
+//        // Esecuzione della query e salvataggio dei risultati in una lista
+//        List mezziList = findMezzo.getResultList();
+//        //controllo se la lista dei mezzi è vuota e rollback
+//        if(mezziList.isEmpty()){
+//            System.out.println("Non esiste veicolo assegnato a quella targa!!!");
+//            transaction.rollback();
+//            return;
+//        }
+//        //estrazione del primo Mezzo trovato nella lista
+//        Mezzo risultatoMezzo = (Mezzo) mezziList.get(0);
+//
 //        Query findTratta = em.createQuery("SELECT a FROM Mezzo a JOIN a.Tratta r WHERE r.tratta_id = :idTratta ");
+//        findTratta.setParameter("idTratta", idTratta);
+//        List trattaList = findTratta.getResultList();
+//
+//        if(trattaList.isEmpty()){
+//            System.out.println("Non esiste veicolo assegnato a quella targa!!!");
+//            transaction.rollback();
+//            return;
+//        }
+//
 //        Query countAdd = em.createQuery("UPDATE Mezzo g SET g" +
 //                ".num_percorrenza=g.num_percorrenza + :valoreIncrementale WHERE g.targa =:targa");
 //
-//
-//
-//
-//        findMezzo.setParameter("targa", mezzi.getTarga());
-//        List mezziList = findMezzo.getResultList();
-//        System.out.println(mezziList.size());
-//        Mezzo risultatoMezzo = (Mezzo) mezziList.get(0);
-//        findTratta.setParameter("idTratta", idTratta);
-//        List trattaList = findTratta.getResultList();
-//        System.out.println(trattaList.size());
-//        trattaList.stream().findFirst().equals(risultatoMezzo);
-//        do {
-//            for(int i = 0; i < trattaList.size(); i++) {
-//                Mezzo mezzox = (Mezzo) trattaList.get(i);
-//                if (Objects.equals(mezzox.getTarga(), risultatoMezzo.getTarga())) {
-//                    countAdd.setParameter("valoreIncrementale", valoreIncrementale);
-//                    countAdd.setParameter("targa", risultatoMezzo.getTarga());
-//                    countAdd.executeUpdate();
-//                    transaction.commit();
-//                } else if (trattaList.isEmpty()) {
-//                    System.out.println("Non esiste veicolo assegnato a quella targa!!!");
-//                }
-//            }
-//        } while (mezzox)
+//        countAdd.setParameter("valoreIncrementale", valoreIncrementale);
+//        countAdd.setParameter("targa", risultatoMezzo.getTarga());
+//        countAdd.executeUpdate();
+//        transaction.commit();
 //
 //    }
 }

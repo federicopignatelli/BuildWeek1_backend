@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "tratta")
 public class Tratta {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_tratta;  // Chiave primaria
     @Column(name = "zona_partenza",nullable = false)
         private String zonaPartenza;
@@ -24,7 +24,7 @@ public class Tratta {
     @Column(name = "km_tratta",precision = 10, scale=2)
         private double kmTratta;
 //        private List<Mezzo> mezziTratta;
-@OneToMany(mappedBy = "tratte", cascade = CascadeType.ALL)
+@ManyToMany(mappedBy = "tratte")
 private List <Mezzo> mezzi = new ArrayList<>();
 
 @ManyToOne
@@ -87,6 +87,10 @@ private List<Abbonamento> abbonamenti;
         this.durataMediaPercorsa = durataMediaPercorsa;
     }
 
+    public List<Mezzo> getMezzi() {
+        return mezzi;
+    }
+
     public double getKmTratta() {
         return kmTratta;
     }
@@ -107,7 +111,13 @@ private List<Abbonamento> abbonamenti;
 /*---------------------------< Metodi >-----------------------------*/
 public void addMezzo(Mezzo mezzo){
     mezzi.add(mezzo);
-    mezzo.setTratte(this);
+    if(mezzi==null){
+        mezzi = new ArrayList<>();
+    }
+    mezzi.add(mezzo);
+    if(!mezzo.getTratte().contains(this)){
+        mezzo.addTratta(this);
+    }
 }
 
     @Override

@@ -62,15 +62,15 @@ public class Application {
         Mezzo tram1 = new Mezzo(MezzoType.TRAM,140,LocalDate.of(2023,1,16));
         Mezzo tram2 = new Mezzo(MezzoType.TRAM,110,LocalDate.of(2022,10,11));
 /*      ---->addMezzo     aggiunge un mezzo a una tratta    */
-//        eur.addMezzo(arpa1);
-//        eur.addMezzo(arpa2);
-//        eur.addMezzo(tram1);
-//        eur.addMezzo(tram2);
-//        trattaDAO.save(eur);
-//        mezzoDAO.save(tram1);
-//        mezzoDAO.save(tram2);
-//        mezzoDAO.save(arpa1);
-//        mezzoDAO.save(arpa2);
+        eur.addMezzo(arpa1);
+        eur.addMezzo(arpa2);
+        eur.addMezzo(tram1);
+        eur.addMezzo(tram2);
+        trattaDAO.save(eur);
+        mezzoDAO.save(tram1);
+        mezzoDAO.save(tram2);
+        mezzoDAO.save(arpa1);
+        mezzoDAO.save(arpa2);
 
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //

@@ -3,6 +3,7 @@ package org.example.Entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Table(name = "mezzi")
 public class Mezzo {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "mezzo_id")
     private Long mezzoId;
     @Enumerated(EnumType.STRING)
@@ -30,9 +31,13 @@ public class Mezzo {
     private int tot_biglietti_vidimati;
     @OneToMany(mappedBy = "mezzi")
     private List<Manutenzione> manutenzione;
-    @ManyToOne
-    @JoinColumn (name = "tratta_id")
-    private Tratta tratte;
+    @ManyToMany
+    @JoinTable(
+            name = "mezzo_tratta",
+            joinColumns = @JoinColumn(name = "mezzo_id"),
+            inverseJoinColumns = @JoinColumn(name = "tratta_id")
+    )
+    private List<Tratta> tratte = new ArrayList<>();
 
     @Column
     private LocalTime durata_tratta;
@@ -73,13 +78,9 @@ public class Mezzo {
         return capienza;
     }
 
-/*    public Tratta getTratte() {
+    public List<Tratta> getTratte() {
         return tratte;
     }
-
-    public boolean isManutenzione() {
-        return manutenzione;
-    }*/
 
     public LocalDate getPeriodo_servizio() {
         return periodo_servizio;
@@ -89,12 +90,19 @@ public class Mezzo {
         return tot_biglietti_vidimati;
     }
 
-    public void setTratte(Tratta tratte) {
+    public void setTratte(List<Tratta> tratte) {
         this.tratte = tratte;
-        if (tratte != null) {
-            this.durata_tratta = tratte.getDurataTratta();
+    }
+    public void addTratta(Tratta tratta){
+        if(tratte == null){
+            tratte = new ArrayList<>();
+        }
+        tratte.add(tratta);
+        if(!tratta.getMezzi().contains(this)){
+            tratta.addMezzo(this);
         }
     }
+
     public String getTarga(){return targa;}
     /*---------------------------< Metodi >-----------------------------*/
     public static void percorriTratta(Mezzo mezzi, Tratta tratta){
