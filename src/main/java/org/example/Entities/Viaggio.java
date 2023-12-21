@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@NamedQuery(name = "Viaggio.totDiTratteDiMezzo", query = "SELECT v.mezzo.id, COUNT(v) FROM Viaggio v GROUP BY v.mezzo.id")
+@NamedQuery(name = "Viaggio.durataSingoliViaggi", query = "SELECT v.mezzo.id, v.tratta.id, EXTRACT(EPOCH FROM (v.oraArrivo - v.oraPartenza)) / 60 FROM Viaggio v")
 public class Viaggio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,14 @@ public class Viaggio {
 
 
     public Viaggio() {
+    }
+
+    public Viaggio(Mezzo mezzo, Tratta tratta, LocalDateTime oraPartenza, LocalDateTime oraArrivo) {
+        this.mezzo = mezzo;
+        this.tratta = tratta;
+        this.oraPartenza = oraPartenza;
+        this.oraArrivo = oraArrivo;
+        aggiornaTargaMezzo();
     }
 
     public Long getId() {
