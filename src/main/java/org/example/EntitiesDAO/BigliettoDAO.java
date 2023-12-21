@@ -25,12 +25,13 @@ public class BigliettoDAO {
 
         //VERIFICO CHE ESISTA GIA IL VENDITORE
         Query qEsistenzaInDistributoreAutomatico = em.createQuery("update Distributoreautomatico f set f" +
-                ".bigliettivenduti=f.bigliettivenduti + " + ":valoreIn where f.id = :id");
+                ".bigliettivenduti=f.bigliettivenduti  + :valoreIn where f.id = :id");
 
         Query qEsistenzaInDistributoreFisico = em.createQuery("update Distributorefisico g set g" +
                 ".bigliettivenduti=g.bigliettivenduti + " + ":valoreIn where g.id =:id");
-
+        //DA CORREGGERE
         Query esistenza = em.createQuery("select d from Distributoreautomatico d where d.id = :thisid");
+        /*Query esistenzaDf = em.createQuery("select d from Distributorefisico d where d.id = :thisid");*/
         esistenza.setParameter("thisid", distributore.getIdBiglietteria());
         List resul = esistenza.getResultList();
 

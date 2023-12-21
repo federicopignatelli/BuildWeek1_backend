@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table (name = "distributore_fisico")
 public class Distributorefisico extends Distributore implements iva {
-    @Column (name = "name_company", nullable = false, unique = true)
+    @Column (name = "name_company", nullable = false)
     private String companyName;
 
     @Column (name = "p_iva", unique = true, nullable = false, length = 30)
@@ -37,7 +37,10 @@ public class Distributorefisico extends Distributore implements iva {
         this.companyName = companyName;
         this.pIva = generatePiva();
     }
-
+    /*--------------------< Getter and setter >-----------------------------------*/
+    public String getCompanyName() {
+        return companyName;
+    }
     /*---------------------------< Metodi >----------------------*/
 
 
@@ -65,5 +68,11 @@ public class Distributorefisico extends Distributore implements iva {
         } while (!ivaList.contains(stringBuilder.toString()));
 
         return stringBuilder.toString();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Distributorefisico{" + "companyName='" + companyName + '\'' + ", pIva='" + pIva + '\'' + ", biglietti=" + biglietti + ", idBiglietteria=" + idBiglietteria + ", locazione='" + locazione + '\'' + ", tipologia=" + tipologia + ", bigliettivenduti=" + bigliettivenduti + ", abbonamentiVenduti=" + abbonamentiVenduti + '}';
     }
 }
