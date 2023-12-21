@@ -26,29 +26,22 @@ public class Application {
         AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
         Biglietto biglietto;
 
-        /*dm.save(da);*/
-
-        Distributoreautomatico da = new Distributoreautomatico();
         try {
-            Distributore df = new Distributorefisico("Napoli", "FISICO", "stazione.napoli");
-            /*Biglietto napoliCagliari = new Biglietto("NOVANTAMINUTI", 5.45);*/
-            /*da = new Distributoreautomatico("Milano Centrale", "AUTOMATICO", "BOTH");*/
-            dm.save(df);
-            /*bid.erogBiglietto("SESSANTAMINUTI", da);*/
-            /*bid.getDistributore(df);*/
-            try{
+            Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","Biglietti&Biglietti");
+            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI", distributori_fisico);
+            bid.save(biglietto1, distributori_fisico);
 
-                biglietto=new Biglietto("NOVANTAMINUTI",  df);
-                bid.save(biglietto,df);
-
-            }catch(Exception e){
-                logger.error(e.getMessage(), e);
-            }
-
-
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+        }catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }finally {
+            entityManager.close();
+            managerFactory.close();
         }
+
+
+
+
 
 
         entityManager.close();

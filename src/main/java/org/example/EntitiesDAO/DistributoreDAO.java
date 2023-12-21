@@ -19,54 +19,22 @@ public class DistributoreDAO {
     public final EntityManager em;
 
     public DistributoreDAO(EntityManager em){this.em = em;}
+
     public void save(Distributore distributore){
-        //generazione o no di distributore se eseiste o meno
-        em.getTransaction().begin();
-        if(em.getTransaction().isActive()){
-            controlodistributore(distributore);
-        }else{
-            EntityTransaction tra = em.getTransaction();
-            try {
-                tra.begin();
-                controlodistributore(distributore);
-                tra.commit();
-            }catch (Exception e){
-                if(tra.isActive()){
-                    tra.rollback();
-                }
-            }
+        if(!em.getTransaction().isActive()){
+            em.getTransaction().begin();
         }
 
-    }
+        em.persist(distributore);
 
-    public void controlodistributore(Distributore distributore){
-        if (distributore instanceof Distributoreautomatico){
-            TypedQuery<Distributoreautomatico> queryex=em.createNamedQuery("existbyMachineCode", Distributoreautomatico.class);
-            queryex.setParameter("codiceMacchina", ((Distributoreautomatico) distributore).getCodiceMacchina());
-            List<Distributoreautomatico> listex=queryex.getResultList();
-            if (listex.isEmpty()){
-                em.persist(distributore);
-                em.getTransaction().commit();
-            }else{
-                logger.error("Distributore automatico già esistente");
-            }
-        } else if (distributore instanceof Distributorefisico) {
-            TypedQuery<Distributorefisico> queryDf=em.createNamedQuery("existsByCompanyNameLike", Distributorefisico.class);
-            queryDf.setParameter("name", ((Distributorefisico) distributore).getCompanyName());
-            List<Distributorefisico> list=queryDf.getResultList();
-            if (list.isEmpty()){
-                em.persist(distributore);
-                em.getTransaction().commit();
-            }else{
-                logger.error("Distributore fisico già esistente");
-            }
+        if(!em.getTransaction().isActive()){
+            em.getTransaction().commit();
         }
+        System.out.println(distributore.getIdBiglietteria());
     }
-
-    //Ritorna il distributore dando l'id
-    public Distributorefisico getDi(Long id) {
-        return em.find(Distributorefisico.class,id);
+    public Distributore getById(Distributore d){
+        Distributorefisico di=em.find(Distributorefisico.class ,d.getIdBiglietteria());
+        System.out.println(di.toString());
+        return di;
     }
-
-
 }
