@@ -1,6 +1,6 @@
 package org.example.EntitiesDAO;
 
-import org.example.Entities.Abbonamento;
+import org.example.Entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -15,9 +15,15 @@ public class AbbonamentoDAO {
         this.entityManager = entityManager;
     }
 
-    public void create(Abbonamento abbonamento) {
+    public void create(Abbonamento abbonamento, Card card, Distributore distributore) {
         EntityTransaction transaction = entityManager.getTransaction();
+        if(distributore instanceof Distributorefisico) {
+            abbonamento.setDistributorefisico((Distributorefisico) distributore);
+        }else{
+            abbonamento.setDistributoreautomatico((Distributoreautomatico) distributore);
+        }
         transaction.begin();
+        abbonamento.setCard(card);
         entityManager.persist(abbonamento);
         transaction.commit();
     }
@@ -52,6 +58,7 @@ public class AbbonamentoDAO {
         try {
             Abbonamento abbonamento = query.getSingleResult();
             //se ci sono risultati è true
+            System.err.println("Abbonamento scaduto il: " + abbonamento.getDataScadenzaAbbondamento());
             return true;
         } catch (NoResultException e) {
             //se non ci sono risultati è false

@@ -6,27 +6,30 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "abbonamenti")
+@Table (name = "abbonamenti")
+@NamedQueries ({@NamedQuery (name = "existsByCardCardNumber", query = "select card from " +
+        "Abbonamento card where card.card.cardNumber = :cardNumber")})
+
 public class Abbonamento {
     @Id
     @GeneratedValue
     private Long id_abbondamento;
 
     private LocalDate dataemissioneAbbondamento;
-    @Enumerated(EnumType.STRING)
+    @Enumerated (EnumType.STRING)
     private Tipologia_abbonamento tipologia_abbonamento;
     private Double prezzo;
     private LocalDate dataScadenzaAbbondamento;
 
     @ManyToOne
-    @JoinColumn(name="tratte")
+    @JoinColumn (name = "tratte")
     private Tratta tratte;
 
     @ManyToOne
-    @JoinColumn(name = "distributore_automatico")
+    @JoinColumn (name = "distributore_automatico")
     private Distributoreautomatico distributoreautomatico;
     @ManyToOne
-    @JoinColumn(name = "distributore")
+    @JoinColumn (name = "distributore_fisico")
     private Distributorefisico distributorefisico;
 
     @ManyToOne (optional = false)
@@ -37,16 +40,15 @@ public class Abbonamento {
     public Abbonamento() {
     }
 
-    public Abbonamento(/*User user,*/ LocalDate dataemissioneAbbondamento, Tipologia_abbonamento tipologia_abbonamento, /*Mezzo mezzo*/ /*Tratta tratta*/ Double prezzo, LocalDate dataScadenzaAbbondamento, Card card) {
+    public Abbonamento(/*User user,*/ LocalDate dataemissioneAbbondamento,
+                                      Tipologia_abbonamento tipologia_abbonamento, Double prezzo,
+                                      LocalDate dataScadenzaAbbondamento) {
         this.id_abbondamento = getId_abbondamento();
-//        this.user = user;
         this.dataemissioneAbbondamento = dataemissioneAbbondamento;
         this.tipologia_abbonamento = tipologia_abbonamento;
-//        this.mezzo = mezzo;
-//        this.tratta = tratta;
         this.prezzo = prezzo;
         this.dataScadenzaAbbondamento = dataScadenzaAbbondamento;
-        this.card = card;
+
     }
 
     public Long getId_abbondamento() {
@@ -77,21 +79,21 @@ public class Abbonamento {
         this.tipologia_abbonamento = tipologia_abbonamento;
     }
 
-//    public Mezzo getMezzo() {
-//        return mezzo;
-//    }
-
-//    public void setMezzo(Mezzo mezzo) {
-//        this.mezzo = mezzo;
-//    }
-
-/*    public Tratta getTratta() {
-        return tratta;
+    public void setDistributorefisico(Distributorefisico distributorefisico) {
+        this.distributorefisico = distributorefisico;
     }
 
-    public void setTratta(Tratta tratta) {
-        this.tratta = tratta;
-    }*/
+    public void setDistributoreautomatico(Distributoreautomatico distributoreautomatico) {
+        this.distributoreautomatico = distributoreautomatico;
+    }
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     public Double getPrezzo() {
         return prezzo;
@@ -108,6 +110,20 @@ public class Abbonamento {
     public void setDataScadenzaAbbondamento(LocalDate dataScadenzaAbbondamento) {
         this.dataScadenzaAbbondamento = dataScadenzaAbbondamento;
     }
+//    public Mezzo getMezzo() {
+//        return mezzo;
+//    }
 
+//    public void setMezzo(Mezzo mezzo) {
+//        this.mezzo = mezzo;
+//    }
+
+/*    public Tratta getTratta() {
+        return tratta;
+    }
+
+    public void setTratta(Tratta tratta) {
+        this.tratta = tratta;
+    }*/
 
 }

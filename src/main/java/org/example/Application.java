@@ -1,9 +1,7 @@
 package org.example;
 
-import org.example.Entities.Biglietto;
-import org.example.Entities.Distributore;
-import org.example.Entities.Distributoreautomatico;
-import org.example.Entities.Distributorefisico;
+import org.example.Entities.*;
+import org.example.Entities.ENUM.Tipologia_abbonamento;
 import org.example.EntitiesDAO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Application {
@@ -26,13 +25,14 @@ public class Application {
         DistributoreDAO distributoreDao = new DistributoreDAO(entityManager);
         MezzoDAO mezzoDao = new MezzoDAO(entityManager);
         TrattaDAO trattaDao = new TrattaDAO(entityManager);
-
-
-        Distributore distributore = new Distributoreautomatico("Milano", "AUTOMATICO","ABBONAMENTI");
-        distributoreDao.save(distributore);
-        Biglietto biglietto = new Biglietto("GIORNALIERO", 1.50);
-        bigliettoDao.creaBiglietto(biglietto, distributore);
-
+        /*Distributore dis= new Distributorefisico("Via dei Gimmy", "FISICO","Biglietteria al tramonto s.n.c");
+        distributoreDao.save(dis);
+        User gimmy = new User("Gimmy","Gimmy", LocalDate.of(2001,7,23),"Via dei Gimmy");
+        userDao.save(gimmy);
+        Card card = new Card(LocalDate.now(), gimmy );
+        cardDAO.create(card);
+        Abbonamento abbonamento = new Abbonamento(LocalDate.now(), Tipologia_abbonamento.ANNUALE, 1000.00, LocalDate.now().plusYears(1));
+        abbonamentoDao.create(abbonamento, card,dis);*/
         entityManager.close();
         managerFactory.close();
 

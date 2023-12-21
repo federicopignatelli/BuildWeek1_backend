@@ -46,6 +46,7 @@ public class Distributoreautomatico extends Distributore {
         return servizi;
     }
 
+
     @Override
     public String toString() {
         return "----------------------------------" + "\n" + "|> id:" + getIdBiglietteria() + "\n" + "|> Locazione: " + getLocazione() + "\n" + "|> tipologia:" + getTipologia() + "\t" + "\n" + "|> bigliettivenduti: " + "\n" + "|> abbonamentiVenduti: " + "\n" + "|> Servizi: " + getServizi() + "\n" + "--------------------------------";

@@ -30,7 +30,6 @@ public class Distributorefisico extends Distributore implements iva {
         this.idBiglietteria = getIdBiglietteria();
         this.locazione = locazione;
         this.tipologia = Tipologia.getName(tipologia);
-
         this.companyName = companyName;
         this.pIva = generatePiva();
     }
