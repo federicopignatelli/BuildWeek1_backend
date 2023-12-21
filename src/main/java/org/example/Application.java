@@ -1,25 +1,17 @@
 package org.example;
 
-import org.example.Entities.Mezzo;
-import org.example.Entities.MezzoType;
-import org.example.Entities.Tratta;
-import org.example.EntitiesDAO.MezzoDAO;
-import org.example.EntitiesDAO.TrattaDAO;
+import org.example.Entities.*;
+import org.example.EntitiesDAO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.example.Entities.Abbonamento;
-import org.example.Entities.Card;
 import org.example.Entities.ENUM.Tipologia_abbonamento;
-import org.example.Entities.User;
-import org.example.EntitiesDAO.AbbonamentoDAO;
-import org.example.EntitiesDAO.CardDAO;
-import org.example.EntitiesDAO.UserDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Application {
@@ -55,6 +47,7 @@ public class Application {
 //********************************************* MEZZI - TRATTE *************************************************************************************
         MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
+        ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
         Tratta colosseo = new Tratta("Colosseo","Testaccio", LocalTime.of(0,20,41),19);
         Tratta eur = new Tratta("Termini","Trevi", LocalTime.of(0,10,21),9);
         Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100, LocalDate.of(2022,4,21));
@@ -71,6 +64,30 @@ public class Application {
         mezzoDAO.save(tram2);
         mezzoDAO.save(arpa1);
         mezzoDAO.save(arpa2);
+
+//        trattaDAO.save(colosseo);
+//        trattaDAO.save(eur);
+//        mezzoDAO.save(tram1);
+//        mezzoDAO.save(tram2);
+//        mezzoDAO.save(arpa1);
+//        mezzoDAO.save(arpa2);
+
+
+        Viaggio viaggio1 = new Viaggio();
+        viaggio1.setMezzo(arpa1);
+        viaggio1.aggiornaTargaMezzo();
+        viaggio1.setTratta(eur);
+        viaggio1.setOraPartenza(LocalDateTime.now());
+        viaggio1.setOraArrivo(LocalDateTime.now().plusMinutes(38));
+        viaggioDAO.save(viaggio1);
+
+        Viaggio viaggio2 = new Viaggio();
+        viaggio2.setMezzo(arpa1);
+        viaggio2.aggiornaTargaMezzo();
+        viaggio2.setTratta(eur);
+        viaggio2.setOraPartenza(LocalDateTime.now().plusMinutes(60));
+        viaggio2.setOraArrivo(LocalDateTime.now().plusMinutes(98));
+        viaggioDAO.save(viaggio2);
 
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //

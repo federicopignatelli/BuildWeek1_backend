@@ -46,6 +46,8 @@ public class Mezzo {
 
     @Column(name = "num_percorrenza")
     private long numeroPercorrenza;
+    @OneToMany(mappedBy = "mezzo")
+    private List<Viaggio> viaggi = new ArrayList<>();
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
@@ -104,7 +106,16 @@ public class Mezzo {
     }
 
     public String getTarga(){return targa;}
+
+    public List<Viaggio> getViaggi() {
+        return viaggi;
+    }
+
     /*---------------------------< Metodi >-----------------------------*/
+    public void addViaggio(Viaggio viaggio){
+        viaggi.add(viaggio);
+        viaggio.setMezzo(this);
+    }
     public static void percorriTratta(Mezzo mezzi, Tratta tratta){
         long idMezzo = mezzi.getMezzoId();
         long idTratta = tratta.getId_tratta();

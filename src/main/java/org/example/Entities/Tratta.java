@@ -33,6 +33,8 @@ private Biglietto biglietti;
 
 @OneToMany(mappedBy="tratte")
 private List<Abbonamento> abbonamenti;
+@OneToMany(mappedBy = "tratta")
+private List<Viaggio> viaggi = new ArrayList<>();
 
     /*----------------------< Costruttori >---------------------------*/
 
@@ -109,6 +111,10 @@ private List<Abbonamento> abbonamenti;
 
 
 /*---------------------------< Metodi >-----------------------------*/
+    public void addViaggio(Viaggio viaggio){
+        viaggi.add(viaggio);
+        viaggio.setTratta(this);
+    }
 public void addMezzo(Mezzo mezzo){
     mezzi.add(mezzo);
     if(mezzi==null){
