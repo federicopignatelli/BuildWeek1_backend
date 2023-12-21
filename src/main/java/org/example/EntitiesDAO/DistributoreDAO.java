@@ -14,13 +14,17 @@ public class DistributoreDAO {
     public void save(Distributore dis){
         em.getTransaction().begin();
 
-        em.persist(dis);
+        if(dis instanceof Distributorefisico) {
+            DistributorefisicoDAO df = new DistributorefisicoDAO(em);
+            df.save(dis);
+        }else{
+            DistributoreautomaticoDAO da=new DistributoreautomaticoDAO(em);
+            da.save(dis);
+        }
 
         em.getTransaction().commit();
     }
 
-    public void createDistributore(Distributorefisico d){
-    }
 
     //Ritorna il distributore dando l'id
     public Distributore getDi(long id){

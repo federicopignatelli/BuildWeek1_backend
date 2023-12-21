@@ -1,5 +1,6 @@
 package org.example.EntitiesDAO;
 
+import org.example.Entities.Distributore;
 import org.example.Entities.Distributorefisico;
 
 import javax.persistence.EntityManager;
@@ -13,12 +14,12 @@ public class DistributorefisicoDAO {
     public DistributorefisicoDAO(EntityManager entityManager){this.em=entityManager;}
 
 
-   /* public void save (Distributorefisico ds){
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
+    public void save (Distributore ds){
+
+
         em.persist(ds);
-        transaction.commit();
-    }*/
+
+    }
 
 
     /*public List getPiva(String piva){

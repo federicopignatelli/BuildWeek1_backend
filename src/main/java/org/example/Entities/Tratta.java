@@ -2,6 +2,8 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,14 +18,14 @@ public class Tratta {
     @Column(name = "capolinea_arrivo",nullable = false)
         private String capolineaArrivo;
     @Column(name = "durata_tratta",nullable = false)
-        private LocalDate durataTratta;
-    @Column(name = "durata_media_percorsa",nullable = false)
-        private LocalDate durataMediaPercorsa;
+        private LocalTime durataTratta;
+    @Column(name = "durata_media_percorsa",nullable = true)
+        private LocalTime durataMediaPercorsa;
     @Column(name = "km_tratta",precision = 10, scale=2)
         private double kmTratta;
 //        private List<Mezzo> mezziTratta;
-@OneToMany(mappedBy = "tratte")
-private List <Mezzo> mezzi;
+@OneToMany(mappedBy = "tratte", cascade = CascadeType.ALL)
+private List <Mezzo> mezzi = new ArrayList<>();
 
 @ManyToOne
 @JoinColumn (name = "biglietti")
@@ -32,20 +34,18 @@ private Biglietto biglietti;
 @OneToMany(mappedBy="tratte")
 private List<Abbonamento> abbonamenti;
 
-
+    /*----------------------< Costruttori >---------------------------*/
 
     public Tratta (){
         }
 
-    public Tratta(long id_tratta, String zonaPartenza, String capolineaArrivo, LocalDate durataTratta, LocalDate durataMediaPercorsa, double kmTratta/*List<Mezzo> mezziTratta*/) {
-        this.id_tratta = id_tratta;
+    public Tratta( String zonaPartenza, String capolineaArrivo, LocalTime durataTratta, double kmTratta) {
         this.zonaPartenza = zonaPartenza;
         this.capolineaArrivo = capolineaArrivo;
         this.durataTratta = durataTratta;
-        this.durataMediaPercorsa = durataMediaPercorsa;
         this.kmTratta = kmTratta;
-//        this.mezziTratta = mezziTratta;
     }
+    /*--------------------< Getter and Setter >--------------------------*/
 
     public long getId_tratta() {
         return id_tratta;
@@ -71,19 +71,19 @@ private List<Abbonamento> abbonamenti;
         this.capolineaArrivo = capolineaArrivo;
     }
 
-    public LocalDate getDurataTratta() {
+    public LocalTime getDurataTratta() {
         return durataTratta;
     }
 
-    public void setDurataTratta(LocalDate durataTratta) {
+    public void setDurataTratta(LocalTime durataTratta) {
         this.durataTratta = durataTratta;
     }
 
-    public LocalDate getDurataMediaPercorsa() {
+    public LocalTime getDurataMediaPercorsa() {
         return durataMediaPercorsa;
     }
 
-    public void setDurataMediaPercorsa(LocalDate durataMediaPercorsa) {
+    public void setDurataMediaPercorsa(LocalTime durataMediaPercorsa) {
         this.durataMediaPercorsa = durataMediaPercorsa;
     }
 
@@ -102,6 +102,13 @@ private List<Abbonamento> abbonamenti;
     public void setMezziTratta(List<Mezzo> mezziTratta) {
         this.mezziTratta = mezziTratta;
     }*/
+
+
+/*---------------------------< Metodi >-----------------------------*/
+public void addMezzo(Mezzo mezzo){
+    mezzi.add(mezzo);
+    mezzo.setTratte(this);
+}
 
     @Override
     public String toString() {

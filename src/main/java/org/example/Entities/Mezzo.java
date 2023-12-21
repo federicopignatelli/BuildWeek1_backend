@@ -2,12 +2,16 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 @Entity
 @Table(name = "mezzi")
 public class Mezzo {
     @Id
+    @GeneratedValue
     @Column (name = "mezzo_id")
     private Long mezzoId;
     @Enumerated(EnumType.STRING)
@@ -27,22 +31,35 @@ public class Mezzo {
     @OneToMany(mappedBy = "mezzi")
     private List<Manutenzione> manutenzione;
     @ManyToOne
-    @JoinColumn (name = "tratte")
+    @JoinColumn (name = "tratta_id")
     private Tratta tratte;
+
+    @Column
+    private LocalTime durata_tratta;
+    @Column(unique = true)
+    private String targa;
+
+    @Column(name = "num_percorrenza")
+    private long numeroPercorrenza;
+
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
     }
 
-public Mezzo( MezzoType mezzoType, int capienza, /*Tratta tratte, boolean manutenzione,*/ LocalDate periodo_servizio, int tot_biglietti_vidimati) {
-        this.mezzoId = getMezzoId();
+    public Mezzo(MezzoType mezzoType, int capienza, LocalDate periodo_servizio) {
         this.mezzoType = mezzoType;
         this.capienza = capienza;
-//        this.tratte = tratte;
-//        this.manutenzione = manutenzione;
         this.periodo_servizio = periodo_servizio;
-        this.tot_biglietti_vidimati = tot_biglietti_vidimati;
+//        this.tratte = tratte;
+//        this.durata_tratta = tratte.getDurataTratta();
+        this.targa = generaTarga();
+        this.numeroPercorrenza = getNumeroPercorrenza();
     }
     /*--------------------< Getter and Setter >--------------------------*/
+
+    public long getNumeroPercorrenza() {
+        return numeroPercorrenza;
+    }
 
     public Long getMezzoId() {
         return mezzoId;
@@ -71,9 +88,39 @@ public Mezzo( MezzoType mezzoType, int capienza, /*Tratta tratte, boolean manute
     public int getTot_biglietti_vidimati() {
         return tot_biglietti_vidimati;
     }
+
+    public void setTratte(Tratta tratte) {
+        this.tratte = tratte;
+        if (tratte != null) {
+            this.durata_tratta = tratte.getDurataTratta();
+        }
+    }
+    public String getTarga(){return targa;}
     /*---------------------------< Metodi >-----------------------------*/
+    public static void percorriTratta(Mezzo mezzi, Tratta tratta){
+        long idMezzo = mezzi.getMezzoId();
+        long idTratta = tratta.getId_tratta();
 
-
+    }
+    public String generaTarga(){
+        Random rm = new Random();
+        StringBuilder targa = new StringBuilder(7);
+        for(int i = 0; i<2; i++){
+            char lettera = (char)('A'+ rm.nextInt(26));
+            targa.append(lettera);
+        }
+        targa.append(" ");
+        for(int i = 0; i<3; i++){
+            int numero = rm.nextInt(10);
+            targa.append(numero);
+        }
+        targa.append(" ");
+        for(int i = 0; i<2; i++){
+            char lettera = (char)('A'+ rm.nextInt(26));
+            targa.append(lettera);
+        }
+        return targa.toString();
+    }
 
     /*---------------------------< Override >-----------------------------*/
     @Override
