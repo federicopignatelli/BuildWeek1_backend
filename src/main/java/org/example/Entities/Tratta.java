@@ -17,13 +17,9 @@ public class Tratta {
         private String zonaPartenza;
     @Column(name = "capolinea_arrivo",nullable = false)
         private String capolineaArrivo;
-    @Column(name = "durata_tratta",nullable = false)
-        private LocalTime durataTratta;
-    @Column(name = "durata_media_percorsa",nullable = true)
-        private LocalTime durataMediaPercorsa;
     @Column(name = "km_tratta",precision = 10, scale=2)
         private double kmTratta;
-//        private List<Mezzo> mezziTratta;
+
 @ManyToMany(mappedBy = "tratte")
 private List <Mezzo> mezzi = new ArrayList<>();
 
@@ -41,10 +37,9 @@ private List<Viaggio> viaggi = new ArrayList<>();
     public Tratta (){
         }
 
-    public Tratta( String zonaPartenza, String capolineaArrivo, LocalTime durataTratta, double kmTratta) {
+    public Tratta( String zonaPartenza, String capolineaArrivo, double kmTratta) {
         this.zonaPartenza = zonaPartenza;
         this.capolineaArrivo = capolineaArrivo;
-        this.durataTratta = durataTratta;
         this.kmTratta = kmTratta;
     }
     /*--------------------< Getter and Setter >--------------------------*/
@@ -73,22 +68,6 @@ private List<Viaggio> viaggi = new ArrayList<>();
         this.capolineaArrivo = capolineaArrivo;
     }
 
-    public LocalTime getDurataTratta() {
-        return durataTratta;
-    }
-
-    public void setDurataTratta(LocalTime durataTratta) {
-        this.durataTratta = durataTratta;
-    }
-
-    public LocalTime getDurataMediaPercorsa() {
-        return durataMediaPercorsa;
-    }
-
-    public void setDurataMediaPercorsa(LocalTime durataMediaPercorsa) {
-        this.durataMediaPercorsa = durataMediaPercorsa;
-    }
-
     public List<Mezzo> getMezzi() {
         return mezzi;
     }
@@ -100,14 +79,6 @@ private List<Viaggio> viaggi = new ArrayList<>();
     public void setKmTratta(double kmTratta) {
         this.kmTratta = kmTratta;
     }
-
-/*    public List<Mezzo> getMezziTratta() {
-        return mezziTratta;
-    }
-
-    public void setMezziTratta(List<Mezzo> mezziTratta) {
-        this.mezziTratta = mezziTratta;
-    }*/
 
 
 /*---------------------------< Metodi >-----------------------------*/
@@ -132,10 +103,11 @@ public void addMezzo(Mezzo mezzo){
                 "id_tratta=" + id_tratta +
                 ", zonaPartenza='" + zonaPartenza + '\'' +
                 ", capolineaArrivo='" + capolineaArrivo + '\'' +
-                ", durataTratta=" + durataTratta +
-                ", durataMediaPercorsa=" + durataMediaPercorsa +
                 ", kmTratta=" + kmTratta +
-//                ", mezziTratta=" + mezziTratta +
+                ", mezzi=" + mezzi +
+                ", biglietti=" + biglietti +
+                ", abbonamenti=" + abbonamenti +
+                ", viaggi=" + viaggi +
                 '}';
     }
 }
