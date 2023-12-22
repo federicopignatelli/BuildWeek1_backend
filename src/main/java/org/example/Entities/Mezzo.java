@@ -35,6 +35,8 @@ public class Mezzo {
     private String targa;
     @OneToMany(mappedBy = "mezzo")
     private List<Viaggio> viaggi = new ArrayList<>();
+    @Column(name = "in_manutenzione", nullable = false)
+    private boolean inManutenzione;
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
@@ -86,6 +88,10 @@ public class Mezzo {
         return viaggi;
     }
 
+    public void setInManutenzione(boolean inManutenzione) {
+        this.inManutenzione = inManutenzione;
+    }
+
     /*---------------------------< Metodi >-----------------------------*/
     public void addViaggio(Viaggio viaggio){
         viaggi.add(viaggio);
@@ -117,6 +123,7 @@ public class Mezzo {
         }
         manutenzione.add(newMan);
         newMan.setMezzi(this);
+        setInManutenzione(true);
         System.out.println("Il Mezzo ora si trova in manutenzione!");
     }
     /*---------------------------< Override >-----------------------------*/
