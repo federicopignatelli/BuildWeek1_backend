@@ -11,10 +11,16 @@ import java.util.Locale;
 
 @Entity
 @Table (name = "biglietti")
+@NamedQueries(
+        {@NamedQuery(name = "findAllBiglietti", query = "SELECT biglietto.id_biglietto " +
+                "FROM Biglietto biglietto JOIN biglietto.distributori_fisico df " +
+                "WHERE df.companyName LIKE :companyName"),
+                @NamedQuery (name = "findByVeicle", query = "select d from Biglietto d WHERE d.mezzo =:mezzo")})
 public class Biglietto {
     @Id
     @GeneratedValue
     private Long id_biglietto;
+    @Enumerated (EnumType.STRING)
     private Tipologia_biglietto tipologia_biglietto;
     @Enumerated (EnumType.STRING)
     private MezzoType mezzo;
@@ -23,9 +29,6 @@ public class Biglietto {
 
     private boolean vidimazione;
 
-    @ManyToOne
-    @JoinColumn (name = "users")
-    User users;
 
     @OneToMany (mappedBy = "biglietti")
     private List<Tratta> tratta;
@@ -43,13 +46,25 @@ public class Biglietto {
     public Biglietto() {
     }
 
-    public Biglietto(String tipologia_biglietto, Double prezzo /*Tratta tratta,*/) {
+    public Biglietto(String tipologia_biglietto) {
         this.id_biglietto = getId_biglietto();
-        this.tipologia_biglietto = Tipologia_biglietto.getType(tipologia_biglietto);
-        this.prezzo = prezzo;
+        this.tipologia_biglietto = Tipologia_biglietto.valueOf(tipologia_biglietto);
+        /*this.prezzo = prezzo;*/
         this.dataemissioneBiglietto = LocalDate.now();
-//        this.tratta = tratta;
         this.vidimazione = false;
+        /*this.setDistributori_automatico( (Distributoreautomatico) distributori_automatici);*/
+    }
+    /*public Biglietto(String tipologia_biglietto, Distributore distributori_fisico) {
+        this.id_biglietto = getId_biglietto();
+        this.tipologia_biglietto = Tipologia_biglietto.valueOf(tipologia_biglietto);
+        this.dataemissioneBiglietto = LocalDate.now();
+        this.vidimazione = false;
+        *//*this.setDistributori_fisico( (Distributorefisico) distributori_automatici);*//*
+    }*/
+
+
+    public Biglietto(Distributorefisico distributori_fisico) {
+        this.distributori_fisico = distributori_fisico;
     }
 
     /*    public Mezzo getMezzo() {
@@ -73,6 +88,14 @@ public class Biglietto {
 
     public void setTipologia_biglietto(Tipologia_biglietto tipologia_biglietto) {
         this.tipologia_biglietto = tipologia_biglietto;
+    }
+
+    public Distributorefisico getDistributori_fisico() {
+        return distributori_fisico;
+    }
+
+    public Distributoreautomatico getDistributori_automatici() {
+        return distributori_automatici;
     }
 
     public Double getPrezzo() {
@@ -107,15 +130,16 @@ public class Biglietto {
     public void setVidimazione(boolean vidimazione) {
         this.vidimazione = vidimazione;
     }
-     /*    public Tratta getTratta() {
-        return tratta;
+
+    public void setMezzo(MezzoType mezzo) {
+        this.mezzo = mezzo;
     }
 
-    public void setTratta(Tratta tratta) {
-        this.tratta = tratta;
-    }*/
 
-
+    @Override
+    public String toString() {
+        return "Biglietto{" + "id_biglietto=" + id_biglietto + ", tipologia_biglietto=" + tipologia_biglietto + ", mezzo=" + mezzo + ", prezzo=" + prezzo +  " vidimazione=" + vidimazione + ", tratta=" + tratta + ", distributori_automatici=" + distributori_automatici + ", distributori_fisico=" + distributori_fisico + '}';
+    }
 }
 
 

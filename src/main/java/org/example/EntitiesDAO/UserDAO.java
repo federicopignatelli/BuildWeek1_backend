@@ -1,5 +1,6 @@
 package org.example.EntitiesDAO;
 
+import org.example.Entities.Card;
 import org.example.Entities.Tratta;
 import org.example.Entities.User;
 
@@ -14,7 +15,7 @@ public class UserDAO {
         this.em = em;
     }
 
-    public void save(User user){
+    public void save(User user) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(user);

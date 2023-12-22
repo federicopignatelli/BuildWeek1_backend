@@ -3,6 +3,7 @@ package org.example.Entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.Random;
 import java.util.Set;
 
 @Entity
@@ -33,9 +34,8 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardNumber, LocalDate issueDate, User user) {
-        this.id = id;
-        this.cardNumber = cardNumber;
+    public Card( LocalDate issueDate, User user) {
+        this.cardNumber = genCardNumber();
         this.issueDate = issueDate;
         this.stopDate = issueDate.plusYears(1);
         this.user = user;
@@ -73,5 +73,17 @@ public class Card {
         this.user = user;
     }
 
+
     /*---------------------------< Metodi >-----------------------------*/
+
+    public String genCardNumber() {
+        Random random = new Random();
+        String codiceMacchina = "";
+        String characters = "1234567890";
+        for (int i = 0; i < 8; i++) {
+            codiceMacchina += characters.charAt(random.nextInt(1, 10));
+        }
+        System.out.println(codiceMacchina);
+        return codiceMacchina;
+    }
 }

@@ -3,33 +3,50 @@ package org.example.EntitiesDAO;
 import org.example.Entities.Distributore;
 import org.example.Entities.Distributoreautomatico;
 import org.example.Entities.Distributorefisico;
-import org.example.Entities.Tipologia;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 
+
 public class DistributoreDAO {
+    Logger logger = LoggerFactory.getLogger(DistributoreDAO.class);
     public final EntityManager em;
 
-    public DistributoreDAO(EntityManager em){this.em = em;}
-    public void save(Distributore dis){
-        em.getTransaction().begin();
+    public DistributoreDAO(EntityManager em) {
+        this.em = em;
+    }
 
-        if(dis instanceof Distributorefisico) {
-            DistributorefisicoDAO df = new DistributorefisicoDAO(em);
-            df.save(dis);
-        }else{
-            DistributoreautomaticoDAO da=new DistributoreautomaticoDAO(em);
-            da.save(dis);
+    public void save(Distributore distributore) {
+        if (!em.getTransaction().isActive()) {
+            em.getTransaction().begin();
+        }
+        try{
+            if (distributore instanceof Distributoreautomatico) {
+                em.persist(distributore);
+            } else if (distributore instanceof Distributorefisico) {
+                em.persist(distributore);
+            }
+        }catch(RuntimeException e){
+            logger.error(e.getMessage());
         }
 
-        em.getTransaction().commit();
+
+
+        if (!em.getTransaction().isActive()) {
+            em.getTransaction().commit();
+        }
+        System.out.println(distributore.getIdBiglietteria());
     }
 
-
-    //Ritorna il distributore dando l'id
-    public Distributore getDi(long id){
-        return em.find(Distributore.class,id);
+    public Distributore getById(Distributore d) {
+        Distributorefisico di = em.find(Distributorefisico.class, d.getIdBiglietteria());
+        System.out.println(di.toString());
+        return di;
     }
+    public void getDistributoreDb(){
 
 
+
+    }
 }
