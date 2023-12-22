@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.example.Application.logger;
@@ -28,7 +29,6 @@ public class BigliettoDAO {
             em.getTransaction().begin();
         }
         try {
-
             double prezzo = switch (biglietto.getTipologia_biglietto()) {
                 case NOVANTAMINUTI -> 1.55;
                 case SESSANTAMINUTI -> 1.25;
@@ -167,11 +167,19 @@ public class BigliettoDAO {
         else {
             queryVidima.setParameter("thisIdb", id_biglietto);
             queryVidima.executeUpdate();
-            System.out.println("Il biglietto " + id_biglietto + " è stato timbrato: Buon viaggio e buone feste;\n"+ result.toString());
+
         }
+
 
         em.getTransaction().commit();
 
+    }
+    public void numeroBigliettiData(LocalDate data){
+        TypedQuery<Biglietto> query = em.createNamedQuery("bigliettiInUnPeriodo", Biglietto.class);
+        query.setParameter("thisDate", data);
+        List <Biglietto> biglietti = query.getResultList();
+        int i = biglietti.size();
+        System.out.println(i);
     }
 }
 

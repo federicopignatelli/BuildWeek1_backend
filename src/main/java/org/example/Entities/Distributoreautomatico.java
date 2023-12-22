@@ -59,7 +59,7 @@ public class Distributoreautomatico extends Distributore {
         for (int i = 0; i < 8; i++) {
             codiceMacchina.append(characters.charAt(random.nextInt(1, 26)));
         }
-        System.out.println(codiceMacchina.toString());
+        System.out.println("codice distributore: "+codiceMacchina.toString());
         return codiceMacchina.toString();
     }
 }

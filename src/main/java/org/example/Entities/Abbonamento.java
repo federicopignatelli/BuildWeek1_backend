@@ -58,8 +58,7 @@ public class Abbonamento {
     public Abbonamento() {
     }
 
-    public Abbonamento(/*User user,*/ LocalDate dataemissioneAbbondamento, String tipologia_abbonamento,
-                                      Double prezzo, LocalDate dataScadenzaAbbondamento) {
+    public Abbonamento(LocalDate dataemissioneAbbondamento, String tipologia_abbonamento, Double prezzo, LocalDate dataScadenzaAbbondamento) {
         this.id_abbondamento = getId_abbondamento();
         this.dataemissioneAbbondamento = dataemissioneAbbondamento;
         this.tipologia_abbonamento = Tipologia_abbonamento.getTypeAbb(tipologia_abbonamento);
@@ -125,7 +124,6 @@ public class Abbonamento {
         return  "id:" + getId_abbondamento()+ "\n"+
                 "Prezzo: " + getPrezzo() + "\n" +
                 "Scade il: " + getDataScadenzaAbbondamento()
-                + "\n" + "Tipologia: " + getTipologia_abbonamento() +
-                "\n"+ "Carta Numero: " + getCard().getCardNumber()+"\n";
+                + "\n" + "Tipologia: " + getTipologia_abbonamento();
     }
 }
