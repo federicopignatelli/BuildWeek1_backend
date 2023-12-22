@@ -1,6 +1,6 @@
 package org.example;
 
-<<<<<<<HEAD
+
 
 import org.example.Entities.Biglietto;
 import org.example.Entities.Distributore;
