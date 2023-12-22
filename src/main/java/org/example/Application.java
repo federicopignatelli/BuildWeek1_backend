@@ -36,28 +36,6 @@ public class Application {
 
 
 
-
-                try {
-                        /*Distributore distributori_fisico = new Distributorefisico("Firenze", "FISICO",
-                                        "Biglietti dai fratelli Gimmy");*/
-                        Distributore distributori_automatici = new Distributoreautomatico("Milano",
-                                 "AUTOMATICO", "BOTH");
-                        Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
-                        bid.save(biglietto1, distributori_automatici);
-                        // try {
-                        // /*Distributore distributori_fisico = new
-                        // Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
-                        //
-                        //
-                        //
-                        // bid.save(biglietto1, distributori_automatici);
-
-
-                } catch (Exception e) {
-                        logger.error(e.getMessage());
-                        e.printStackTrace();
-                }
-
                 ca.getUserByUserByCard("54378455");
 
 
