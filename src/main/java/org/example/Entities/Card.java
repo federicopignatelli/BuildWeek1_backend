@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table (name = "card")
+@NamedQueries ({@NamedQuery (name = "getCard", query = "select c from Card c where c.cardNumber = :cardNumber")})
 public class Card {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -85,5 +86,17 @@ public class Card {
         }
         System.out.println(codiceMacchina);
         return codiceMacchina;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", issueDate=" + issueDate +
+                ", stopDate=" + stopDate +
+                ", user=" + user +
+                ", abbonamenti=" + abbonamenti +
+                '}';
     }
 }

@@ -22,8 +22,16 @@ public class UserDAO {
         transaction.commit();
     }
 
-    public User findById(long id){
-        return em.find(User.class, id);
+    public void findById(long id){
+        if(!em.getTransaction().isActive()){
+            em.getTransaction().begin();
+        }
+        User user = em.find(User.class, id);
+        System.out.println(user.toString());
+        if(em.getTransaction().isActive()) {
+            em.getTransaction().commit();
+        }
+
     }
 
     public void findByIdandDelete(long id){

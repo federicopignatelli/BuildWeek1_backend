@@ -24,27 +24,27 @@ public class Application {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        EntityManager entityManager = managerFactory.createEntityManager();
-        DistributoreDAO dm = new DistributoreDAO(entityManager);
-        BigliettoDAO bid = new BigliettoDAO(entityManager);
-        AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
-        Biglietto biglietto;
+//        EntityManager entityManager = managerFactory.createEntityManager();
+//        DistributoreDAO dm = new DistributoreDAO(entityManager);
+//        BigliettoDAO bid = new BigliettoDAO(entityManager);
+//        AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
+//        Biglietto biglietto;
 
 
 //********************************************* MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
-        MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
-        TrattaDAO trattaDAO = new TrattaDAO(entityManager);
-        ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
-        ManutenzioneDAO manutDao = new ManutenzioneDAO(entityManager);
+//        MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
+//        TrattaDAO trattaDAO = new TrattaDAO(entityManager);
+//        ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
+//        ManutenzioneDAO manutDao = new ManutenzioneDAO(entityManager);
 
-        Tratta colosseo = new Tratta("Colosseo","Testaccio",19);
-        Tratta eur = new Tratta("Termini","Trevi",9);
-        Tratta pescara = new Tratta("Pescara","chieti",20);
-
-        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100);
-        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170);
-        Mezzo tram1 = new Mezzo(MezzoType.TRAM,140);
-        Mezzo tram2 = new Mezzo(MezzoType.TRAM,110);
+//        Tratta colosseo = new Tratta("Colosseo","Testaccio",19);
+//        Tratta eur = new Tratta("Termini","Trevi",9);
+//        Tratta pescara = new Tratta("Pescara","chieti",20);
+//
+//        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100);
+//        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170);
+//        Mezzo tram1 = new Mezzo(MezzoType.TRAM,140);
+//        Mezzo tram2 = new Mezzo(MezzoType.TRAM,110);
 /*      ---->addMezzo     aggiunge un mezzo a una tratta    */
 //        eur.addMezzo(arpa1);
 //        colosseo.addMezzo(tram2);
@@ -76,34 +76,34 @@ public class Application {
 //        manutDao.save(pistone);
 
 
-        viaggioDAO.stampaTotTappeEtempoEffTratta();
+//        viaggioDAO.stampaTotTappeEtempoEffTratta();
 //********************************************* fine  MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
-        try {
-            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
-            /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
-            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
-            bid.save(biglietto1,distributori_fisico);
-        try {
-              /*Distributore distributori_fisico = new
-              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
-            Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
-           
-
-            bid.save(biglietto1, distributori_automatici);
-
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-
-        bid.findAll("Biglietti dai fratelli Gimmy");
+//        try {
+//            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
+//            /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
+//            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
+//            bid.save(biglietto1,distributori_fisico);
+//        try {
+//              /*Distributore distributori_fisico = new
+//              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
+//            Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
+//
+//
+//            bid.save(biglietto1, distributori_automatici);
+//
+//        } catch (Exception e) {
+//            logger.error(e.getMessage());
+//            e.printStackTrace();
+//        }
+//
+//        bid.findAll("Biglietti dai fratelli Gimmy");
 
 
         /*System.out.println("Inserisci il codice macchina: ");
         String codiceMacchina = scan.nextLine();*/
 
 
-        bid.findCountTicketByMezzo(MezzoType.AUTOBUS);
+//        bid.findCountTicketByMezzo(MezzoType.AUTOBUS);
 
        /* // ********************************************* MEZZI - TRATTE - VIAGGI
         // **************************************************************************************/
@@ -183,12 +183,12 @@ public class Application {
         boolean isValid = abbDAO.verificaValidita("023");
         System.out.println(isValid);*/
 
-        System.out.println("ciaone");
-
-        entityManager.close();
-        managerFactory.close();
+//        System.out.println("ciaone");
+//
+//        entityManager.close();
+//        managerFactory.close();
 
     }
 
 }
-}
+//}
