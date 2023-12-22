@@ -29,8 +29,6 @@ public class Demo {
             logger.error(e.getMessage());
         }
 
-
-
         // codice tessera 34780792
         // codice tessera 54378455
 
