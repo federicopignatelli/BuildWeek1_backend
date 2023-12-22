@@ -2,10 +2,7 @@ package org.example.Entities;
 
 import org.example.Entities.Interface.iva;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.List;
@@ -13,13 +10,15 @@ import java.util.Set;
 
 @Entity
 @Table (name = "distributore_fisico")
+@NamedQueries ({@NamedQuery (name = "existsByCompanyNameLike", query = "select d " + "from Distributorefisico d " +
+        "where" + " d.companyName like :name")})
 public class Distributorefisico extends Distributore implements iva {
-    @Column (name = "name_company", nullable = false, unique = true)
+    @Column (name = "name_company", nullable = false)
     private String companyName;
 
     @Column (name = "p_iva", unique = true, nullable = false, length = 30)
     private String pIva;
-    @OneToMany (mappedBy = "distributori_fisico")
+    @OneToMany (mappedBy = "distributori_fisico", cascade = CascadeType.ALL)
     private List<Biglietto> biglietti;
 
     /*---------------------------< Costruttori >----------------------*/
@@ -27,17 +26,18 @@ public class Distributorefisico extends Distributore implements iva {
     public Distributorefisico() {
     }
 
-    public Distributorefisico(String locazione, String tipologia, long bigliettivenduti, long abbonamentiVenduti,
-                              String companyName) {
+    public Distributorefisico(String locazione, String tipologia, String companyName) {
         this.idBiglietteria = getIdBiglietteria();
         this.locazione = locazione;
         this.tipologia = Tipologia.getName(tipologia);
-        this.bigliettivenduti = bigliettivenduti;
-        this.abbonamentiVenduti = abbonamentiVenduti;
         this.companyName = companyName;
         this.pIva = generatePiva();
     }
 
+    /*--------------------< Getter and setter >-----------------------------------*/
+    public String getCompanyName() {
+        return companyName;
+    }
     /*---------------------------< Metodi >----------------------*/
 
 
@@ -65,5 +65,12 @@ public class Distributorefisico extends Distributore implements iva {
         } while (!ivaList.contains(stringBuilder.toString()));
 
         return stringBuilder.toString();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Distributorefisico{" + "companyName='" + companyName + '\'' + ", pIva='" + pIva + '\'' + ", biglietti"
+                + "=" + biglietti + ", idBiglietteria=" + idBiglietteria + ", locazione='" + locazione + '\'' + ", " + "tipologia=" + tipologia + '}';
     }
 }

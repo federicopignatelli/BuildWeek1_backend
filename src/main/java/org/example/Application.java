@@ -1,99 +1,157 @@
 package org.example;
 
 import org.example.Entities.*;
-import org.example.EntitiesDAO.*;
+import org.example.EntitiesDAO.AbbonamentoDAO;
+import org.example.EntitiesDAO.BigliettoDAO;
+import org.example.EntitiesDAO.DistributoreDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.example.Entities.ENUM.Tipologia_abbonamento;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Application {
     public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
-    private static Logger logger = LoggerFactory.getLogger(Application.class);
+    public static Logger logger = LoggerFactory.getLogger(Application.class);
+    static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         EntityManager entityManager = managerFactory.createEntityManager();
-        // Distributorefisico ds= new Distributorefisico("Padova", "FISICO", 30, 34);
-        /*
-         * DistributoreDAO dm = new DistributoreDAO(entityManager);
-         * BigliettoDAO bid = new BigliettoDAO(entityManager);
-         * 
-         *//*
-            * Distributore ds = new Distributorefisico("Padova", "FISICO", 0, 34,
-            * "Gimmy S.N.C");
-            *//*
-               * 
-               * Distributore da = new Distributorefisico("Milano", "FISICO", 0, 0,
-               * "Biglietteria al crepuscolo' s.n.c");
-               * dm.save(da);
-               * Biglietto biglietto = new Biglietto("SESSANTAMINUTI", 1.70);
-               * bid.create(biglietto, da);
-               * System.out.println(da.toString());
-               */
+        DistributoreDAO dm = new DistributoreDAO(entityManager);
+        BigliettoDAO bid = new BigliettoDAO(entityManager);
+        AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
+        Biglietto biglietto;
 
-        // DistributoreDAO dm= new DistributoreDAO(entityManager);
-        // Distributoreautomatico ds= new Distributoreautomatico("Padova", "AUTOMATICO",
-        // 30, 34, "ABBONAMENTI");
-        // dm.save(ds);
-        // System.out.println(ds.toString());
 
-//********************************************* MEZZI - TRATTE - VIAGGI *************************************************************************************
+//********************************************* MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
         MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
+        ManutenzioneDAO manutDao = new ManutenzioneDAO(entityManager);
+
         Tratta colosseo = new Tratta("Colosseo","Testaccio",19);
         Tratta eur = new Tratta("Termini","Trevi",9);
+        Tratta pescara = new Tratta("Pescara","chieti",20);
+
         Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100);
         Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170);
         Mezzo tram1 = new Mezzo(MezzoType.TRAM,140);
         Mezzo tram2 = new Mezzo(MezzoType.TRAM,110);
 /*      ---->addMezzo     aggiunge un mezzo a una tratta    */
-        eur.addMezzo(arpa1);
-        eur.addMezzo(arpa2);
-        eur.addMezzo(tram1);
-        eur.addMezzo(tram2);
-        trattaDAO.save(eur);
-        mezzoDAO.save(tram1);
-        mezzoDAO.save(tram2);
-        mezzoDAO.save(arpa1);
-        mezzoDAO.save(arpa2);
-
-//        trattaDAO.save(colosseo);
+//        eur.addMezzo(arpa1);
+//        colosseo.addMezzo(tram2);
+//        pescara.addMezzo(arpa2);
+//
 //        trattaDAO.save(eur);
+//        trattaDAO.save(colosseo);
+//        trattaDAO.save(pescara);
+//
 //        mezzoDAO.save(tram1);
 //        mezzoDAO.save(tram2);
 //        mezzoDAO.save(arpa1);
 //        mezzoDAO.save(arpa2);
+//
+//        Viaggio viaggio1 = new Viaggio(arpa1,eur,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+//        viaggioDAO.save(viaggio1);
+//        Viaggio viaggio1b = new Viaggio(arpa1,pescara,LocalDateTime.now().plusMinutes(200),LocalDateTime.now().plusMinutes(312));
+//        viaggioDAO.save(viaggio1b);
+//        Viaggio viaggio1c = new Viaggio(arpa1,eur,LocalDateTime.now().plusMinutes(300),LocalDateTime.now().plusMinutes(342));
+//        viaggioDAO.save(viaggio1c);
+//        Viaggio viaggio2 = new Viaggio(tram2,colosseo,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+//        viaggioDAO.save(viaggio2);
+//        Viaggio viaggio3 = new Viaggio(arpa2,pescara,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+//        viaggioDAO.save(viaggio3);
+//
+//
+//        Manutenzione pistone = new Manutenzione(arpa1,"Sanauto",LocalDate.now(),LocalDate.now().plusDays(15),"Pistone rotto");
+//        arpa1.addManutenzione(pistone);
+//        manutDao.save(pistone);
 
 
-        Viaggio viaggio1 = new Viaggio();
-        viaggio1.setMezzo(arpa1);
-        viaggio1.aggiornaTargaMezzo();
-        viaggio1.setTratta(eur);
-        viaggio1.setOraPartenza(LocalDateTime.now());
-        viaggio1.setOraArrivo(LocalDateTime.now().plusMinutes(38));
-        viaggioDAO.save(viaggio1);
+        viaggioDAO.stampaTotTappeEtempoEffTratta();
+//********************************************* fine  MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
+        try {
+            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
+            /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
+            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
+            bid.save(biglietto1,distributori_fisico);
+        try {
+              /*Distributore distributori_fisico = new
+              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
+            Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
+           
 
-        Viaggio viaggio2 = new Viaggio();
-        viaggio2.setMezzo(arpa1);
-        viaggio2.aggiornaTargaMezzo();
-        viaggio2.setTratta(eur);
-        viaggio2.setOraPartenza(LocalDateTime.now().plusMinutes(60));
-        viaggio2.setOraArrivo(LocalDateTime.now().plusMinutes(98));
-        viaggioDAO.save(viaggio2);
+            bid.save(biglietto1, distributori_automatici);
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
+
+        bid.findAll("Biglietti dai fratelli Gimmy");
 
 
+        /*System.out.println("Inserisci il codice macchina: ");
+        String codiceMacchina = scan.nextLine();*/
 
 
+        bid.findCountTicketByMezzo(MezzoType.AUTOBUS);
 
-//********************************************* fine  MEZZI - TRATTE - VIAGGI *************************************************************************************
+       /* // ********************************************* MEZZI - TRATTE - VIAGGI
+        // **************************************************************************************/
+        /*MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
+        TrattaDAO trattaDAO = new TrattaDAO(entityManager);
+        ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
+        Tratta colosseo = new Tratta("Colosseo", "Testaccio", 19);
+        Tratta eur = new Tratta("Termini", "Trevi", 9);
+        Tratta pescara = new Tratta("Pescara", "chieti", 20);
+
+        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100);
+        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170);
+        Mezzo tram1 = new Mezzo(MezzoType.TRAM, 140);
+        Mezzo tram2 = new Mezzo(MezzoType.TRAM, 110);
+        *//* ---->addMezzo aggiunge un mezzo a una tratta *//*
+        // eur.addMezzo(arpa1);
+        // colosseo.addMezzo(tram2);
+        // pescara.addMezzo(arpa2);
+        //
+        // trattaDAO.save(eur);
+        // trattaDAO.save(colosseo);
+        // trattaDAO.save(pescara);
+        //
+        // mezzoDAO.save(tram1);
+        // mezzoDAO.save(tram2);
+        // mezzoDAO.save(arpa1);
+        // mezzoDAO.save(arpa2);
+        //
+        // Viaggio viaggio1 = new
+        // Viaggio(arpa1,eur,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+        // viaggioDAO.save(viaggio1);
+        // Viaggio viaggio1b = new
+        // Viaggio(arpa1,pescara,LocalDateTime.now().plusMinutes(200),LocalDateTime.now().plusMinutes(312));
+        // viaggioDAO.save(viaggio1b);
+        // Viaggio viaggio1c = new
+        // Viaggio(arpa1,eur,LocalDateTime.now().plusMinutes(300),LocalDateTime.now().plusMinutes(342));
+        // viaggioDAO.save(viaggio1c);
+        // Viaggio viaggio2 = new
+        // Viaggio(tram2,colosseo,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+        // viaggioDAO.save(viaggio2);
+        // Viaggio viaggio3 = new
+        // Viaggio(arpa2,pescara,LocalDateTime.now(),LocalDateTime.now().plusMinutes(50));
+        // viaggioDAO.save(viaggio3);*/
+
+        /*viaggioDAO.stampaTotTappeEtempoEffTratta();*/
+
+       /* // ********************************************* fine MEZZI - TRATTE - VIAGGI
+        // *************************************************************************************
 
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //
@@ -123,12 +181,14 @@ public class Application {
         Abbonamento abbGianni = abbDAO.findById(2);
         // verifica validità abbonamento
         boolean isValid = abbDAO.verificaValidita("023");
-        System.out.println(isValid);
+        System.out.println(isValid);*/
 
         System.out.println("ciaone");
 
         entityManager.close();
         managerFactory.close();
+
     }
 
+}
 }

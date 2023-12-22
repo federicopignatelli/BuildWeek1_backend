@@ -1,15 +1,17 @@
 package org.example.EntitiesDAO;
 
-import org.example.Entities.Biglietto;
-import org.example.Entities.Distributore;
-import org.example.Entities.Distributoreautomatico;
-import org.example.Entities.Distributorefisico;
+import org.example.Entities.*;
+import org.example.Entities.ENUM.Tipologia_biglietto;
+
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
+
+import static org.example.Application.logger;
 
 
 public class BigliettoDAO {
@@ -20,96 +22,139 @@ public class BigliettoDAO {
         this.em = em;
     }
 
-    //Funzione che assegna Distributore al biglietto controllando il tipo di distributore passato;
+    public void save(Biglietto biglietto, Distributore fisico) {
+        DistributoreDAO dis = new DistributoreDAO(em);
+        if (!em.getTransaction().isActive()) {
+            em.getTransaction().begin();
+        }
+        try {
 
-    public void create(Biglietto bi, Distributore distributore) {
-        Long valueIn = 1L;
-        em.getTransaction().begin();
+            double prezzo = switch (biglietto.getTipologia_biglietto()) {
+                case NOVANTAMINUTI -> 1.55;
+                case SESSANTAMINUTI -> 1.25;
+                case GIORNALIERO -> 15.00;
+                case CENTOVENTIMINUTI -> 5.45;
+            };
+            biglietto.setPrezzo(prezzo);
+            if (fisico instanceof Distributoreautomatico) {
+                logger.error("sono automatic");
+                try {
+                    if (esistenzaDistributoreAutomatico(((Distributoreautomatico) fisico).getCodiceMacchina()) == null) {
+                        dis.save(fisico);
+                        System.out.println("Il rivenditore automatico " + ((Distributoreautomatico) fisico).getCodiceMacchina() + " è stato creato con successo");
+                        biglietto.setDistributori_automatico((Distributoreautomatico) fisico);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
+                    } else {
+                        Distributoreautomatico d =
+                                esistenzaDistributoreAutomatico(biglietto.getDistributori_automatici().getCodiceMacchina());
 
-        //VERIFICO CHE ESISTA GIA IL VENDITORE
-        Query qEsistenzaInDistributoreAutomatico = em.createQuery("update Distributoreautomatico f set f" +
-                ".bigliettivenduti=f.bigliettivenduti + " + ":valoreIn where f.id = :id");
+                        biglietto.setDistributori_automatico(d);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
 
-        Query qEsistenzaInDistributoreFisico = em.createQuery("update Distributorefisico g set g" +
-                ".bigliettivenduti=g.bigliettivenduti + " + ":valoreIn where g.id =:id");
+                    }
+                    /**/
+                    em.persist(biglietto);
+                } catch (Exception e) {
+                    logger.error(e.getMessage());
+                    em.getTransaction().rollback();
 
-        Query esistenza = em.createQuery("select d from Distributoreautomatico d where d.id = :thisid");
-        esistenza.setParameter("thisid", distributore.getIdBiglietteria());
-        List resul = esistenza.getResultList();
-
-        if (resul.size() != 1) /*LA LISTA è VUOTA QUINDI CREO ANCHE IL BIGLIETTO CON IL NUOVO DISTRIBUTORE*/ {
-            /*CONTROLLO L'ISTANZA DI DISTRIBUTORE SE è AUTOMATICO O FISSO*/
-            if (distributore instanceof Distributorefisico) {
-                /*--> QUESTO SERVE PER CREARE IL VALORE ID NELLA TABELLA BIGLIETTO*/
-                bi.setDistributori_fisico((Distributorefisico) distributore);
-                distributore.setBigliettivenduti(distributore.getBigliettivenduti());
-                System.out.println("Biglietto salvato");
+                } finally {
+                    em.getTransaction().commit();
+                    System.out.println("Biglietto: " + "con id " + biglietto.getId_biglietto() + " acquistato con " + "successo");
+                }
             } else {
-                /*--> QUESTO SERVE PER CREARE IL VALORE ID NELLA TABELLA BIGLIETTO*/
-                bi.setDistributori_automatico((Distributoreautomatico) distributore);
-                distributore.setBigliettivenduti(distributore.getBigliettivenduti());
-                System.out.println("Biglietto salvato");
+                /*---------------------------- controllo istance distributore
+                fisico-----------------------------------*/
+                try {
+                    if (esistenzaDistributoreFisico(((Distributorefisico) fisico).getCompanyName()) == null) {
+                        dis.save(fisico);
+                        biglietto.setDistributori_fisico((Distributorefisico) fisico);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
+                        System.out.println((Distributorefisico) fisico);
+                        System.out.println("Il rivenditore " + ((Distributorefisico) fisico).getCompanyName() + " è " + "stato creato con successo! ");
+                    } else {
+                        Distributorefisico d =
+                                esistenzaDistributoreFisico(((Distributorefisico) fisico).getCompanyName());
+                        biglietto.setDistributori_fisico(d);
+                        //----------------------------//
+                        biglietto.setMezzo(calculateMezzo(biglietto));
 
-            }
-        } else /* IN QUESTO CASO ESISTE IL VENDITORE */ {
-            if (distributore instanceof Distributoreautomatico) {
-                System.out.println("Esisto già");
-                Distributoreautomatico c = (Distributoreautomatico) resul.get(0);
-                Long idBigl = c.getIdBiglietteria();
-                qEsistenzaInDistributoreAutomatico.setParameter("valoreIn", valueIn);
-                qEsistenzaInDistributoreAutomatico.setParameter("id", idBigl);
-                qEsistenzaInDistributoreAutomatico.executeUpdate();
-
-            } else {
-                Distributorefisico c = (Distributorefisico) resul.get(0);
-                Long idBigl = c.getIdBiglietteria();
-                qEsistenzaInDistributoreFisico.setParameter("valoreIn", valueIn);
-                qEsistenzaInDistributoreFisico.setParameter("id", idBigl);
-                qEsistenzaInDistributoreFisico.executeUpdate();
-            }
-
-        }
-        em.persist(bi);
-        em.getTransaction().commit();
-    }
-
-    public void delete(Biglietto bi) {
-    }
-
-        private LocalDate dataVidimazione;
-
-        public BigliettoDAO(LocalDate dataVidimazione) {
-            this.dataVidimazione = dataVidimazione;
-        }
-
-        public LocalDate getDataVidimazione() {
-            return dataVidimazione;
-        }
-    }
-
-    class MezzoDiTrasporto {
-        private String nome;
-        private List<Biglietto> biglietti;
-
-        public MezzoDiTrasporto(String nome) {
-            this.nome = nome;
-            this.biglietti = new ArrayList<>();
-        }
-
-        public void aggiungiBiglietto(Biglietto biglietto) {
-            biglietti.add(biglietto);
-        }
-
-        public int contaBigliettiVidimati(LocalDate inizioPeriodo, LocalDate finePeriodo) {
-            int conteggio = 0;
-            for (Biglietto biglietto : biglietti) {
-                LocalDate dataVidimazione = biglietto.getDataVidimazione();
-                if (dataVidimazione.isEqual(inizioPeriodo) || (dataVidimazione.isAfter(inizioPeriodo) && dataVidimazione.isBefore(finePeriodo))) {
-                    conteggio++;
+                    }
+                    em.persist(biglietto);
+                } catch (RuntimeException e) {
+                    logger.error(e.getMessage());
+                    em.getTransaction().rollback();
+                } finally {
+                    em.getTransaction().commit();
+                    System.out.println("Biglietto: " + "con id " + biglietto.getId_biglietto() + " acquistato con " + "successo");
                 }
             }
-            return conteggio;
+        } catch (RuntimeException e) {
+            logger.error(e.getMessage());
+            em.getTransaction().rollback();
         }
     }
+
+    public Distributorefisico esistenzaDistributoreFisico(String companyName) {
+        TypedQuery<Distributorefisico> query = em.createNamedQuery("existsByCompanyNameLike", Distributorefisico.class);
+        query.setParameter("name", companyName);
+        List<Distributorefisico> distributorefisico = query.getResultList();
+        /*System.out.println(d);*/
+        if (distributorefisico.isEmpty()) {
+            return null;
+        } else {
+            return distributorefisico.get(0);
+        }
+    }
+
+    public Distributoreautomatico esistenzaDistributoreAutomatico(String code) {
+        TypedQuery<Distributoreautomatico> query = em.createNamedQuery("existbyMachineCode",
+                Distributoreautomatico.class);
+        query.setParameter("codiceMacchina", code);
+        List<Distributoreautomatico> distributoreautomatico = query.getResultList();
+
+        if (distributoreautomatico.isEmpty()) {
+            return null;
+        } else {
+            return distributoreautomatico.get(0);
+        }
+    }
+
+    /*--------------------------------< Conteggio Biglietti >---------------------------------*/
+    //Conteggi biglietti per singolo venditore attribuendo o codice macchina o companyName
+    public MezzoType calculateMezzo(Biglietto biglietto) {
+        if ((biglietto.getTipologia_biglietto() == Tipologia_biglietto.NOVANTAMINUTI) || (biglietto.getTipologia_biglietto() == Tipologia_biglietto.SESSANTAMINUTI)) {
+            return MezzoType.TRAM;
+        } else {
+            return MezzoType.AUTOBUS;
+        }
+    }
+
+    public void findAll(String name) {
+        TypedQuery<Long> query = em.createNamedQuery("findAllBiglietti", Long.class);
+        query.setParameter("companyName", name);
+        List<Long> result = query.getResultList();
+        System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al rivenditore " + name);
+    }
+
+    public void findAllDa(String name) {
+        TypedQuery<Distributoreautomatico> query = em.createNamedQuery("existbyMachineCode",
+                Distributoreautomatico.class);
+        query.setParameter("codiceMacchina", name);
+        List<Distributoreautomatico> result = query.getResultList();
+        System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al rivenditore " + name);
+    }
+    /*---------------------------------------------------------------------------------------*/
+
+    public void findCountTicketByMezzo(MezzoType mezzo){
+        TypedQuery<Biglietto> query = em.createNamedQuery("findByVeicle", Biglietto.class);
+        query.setParameter("mezzo", mezzo);
+        List<Biglietto> result = query.getResultList();
+        System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al mezzo " + mezzo);
+    }
+}
 
 

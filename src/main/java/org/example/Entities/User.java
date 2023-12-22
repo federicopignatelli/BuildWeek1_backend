@@ -25,30 +25,21 @@ public class User {
     private String residentialAddress;
 
     //FETCH TYPE EAGER PERCHE VOGLIO RECUPERARE ANCHE I DATI RELATIVI ALLA TESSERE UTENTE
-    @OneToOne (fetch = FetchType.EAGER)
-    private Card card;
 
-    @OneToMany (fetch = FetchType.LAZY , mappedBy = "users")
-    private List<Biglietto> biglietto;
 
     /*----------------------< Costruttori >---------------------------*/
     public User() {
     }
 
     public User(String userName, String userLastName, LocalDate birthDate, String residentialAddress) {
-        this.userId = userId;
         this.userName = userName;
         this.userLastName = userLastName;
         this.birthDate = birthDate;
         this.residentialAddress = residentialAddress;
-
     }
 
     //DA VERIFICARE SE EFFETIVAMENTE SERVE UN COSTRUTTORE SOLO CON LA CARD
     // VERIFICA FATTA DOPO L'IMPLEMENTAZIONE DEI METODI
-    public User(Card card) {
-        this.card = card;
-    }
 
     /*--------------------< Getter and Setter >--------------------------*/
     //--> GETTER
@@ -72,9 +63,7 @@ public class User {
         return residentialAddress;
     }
 
-    public Card getCard() {
-        return card;
-    }
+
 
 
     /*---------------------------< Metodi >-----------------------------*/
