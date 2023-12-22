@@ -39,10 +39,10 @@ public class Application {
         Tratta eur = new Tratta("Termini","Trevi",9);
         Tratta pescara = new Tratta("Pescara","chieti",20);
 
-        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS, 100);
-        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS, 170);
-        Mezzo tram1 = new Mezzo(MezzoType.TRAM,140);
-        Mezzo tram2 = new Mezzo(MezzoType.TRAM,110);
+        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS);
+        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS);
+        Mezzo tram1 = new Mezzo(MezzoType.TRAM);
+        Mezzo tram2 = new Mezzo(MezzoType.TRAM);
 /*      ---->addMezzo     aggiunge un mezzo a una tratta    */
 //        eur.addMezzo(arpa1);
 //        colosseo.addMezzo(tram2);

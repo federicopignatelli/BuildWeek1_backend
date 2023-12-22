@@ -42,10 +42,14 @@ public class Mezzo {
     public Mezzo() {
     }
 
-    public Mezzo(MezzoType mezzoType, int capienza) {
+    public Mezzo(MezzoType mezzoType) {
         this.mezzoType = mezzoType;
-        this.capienza = capienza;
         this.targa = generaTarga();
+        if (mezzoType == MezzoType.AUTOBUS) {
+            this.capienza = 98;
+        } else if (mezzoType == MezzoType.TRAM) {
+            this.capienza = 42;
+        }
     }
     /*--------------------< Getter and Setter >--------------------------*/
 
