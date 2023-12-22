@@ -21,6 +21,8 @@ public class Mezzo {
     private int capienza;
     @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
+    @Column(unique = true)
+    private String targa;
     @OneToMany(mappedBy = "mezzi")
     private List<Manutenzione> manutenzione = new ArrayList<>();
     @ManyToMany
@@ -30,11 +32,10 @@ public class Mezzo {
             inverseJoinColumns = @JoinColumn(name = "tratta_id")
     )
     private List<Tratta> tratte = new ArrayList<>();
-
-    @Column(unique = true)
-    private String targa;
     @OneToMany(mappedBy = "mezzo")
     private List<Viaggio> viaggi = new ArrayList<>();
+    @Column(name = "in_manutenzione", nullable = false)
+    private boolean inManutenzione;
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
@@ -86,6 +87,10 @@ public class Mezzo {
         return viaggi;
     }
 
+    public void setInManutenzione(boolean inManutenzione) {
+        this.inManutenzione = inManutenzione;
+    }
+
     /*---------------------------< Metodi >-----------------------------*/
     public void addViaggio(Viaggio viaggio){
         viaggi.add(viaggio);
@@ -117,6 +122,7 @@ public class Mezzo {
         }
         manutenzione.add(newMan);
         newMan.setMezzi(this);
+        setInManutenzione(true);
         System.out.println("Il Mezzo ora si trova in manutenzione!");
     }
     /*---------------------------< Override >-----------------------------*/
