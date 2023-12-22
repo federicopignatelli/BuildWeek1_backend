@@ -1,6 +1,9 @@
 package org.example;
 
-import org.example.Entities.*;
+import org.example.Entities.Biglietto;
+import org.example.Entities.Distributore;
+import org.example.Entities.Distributoreautomatico;
+import org.example.Entities.Distributorefisico;
 import org.example.EntitiesDAO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Application {
@@ -26,39 +28,36 @@ public class Application {
         Biglietto biglietto;
 
 
+
+            /*try {
+              Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","Biglietteria al Mare");
+                Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
+                Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
+
+                bid.save(biglietto1, distributori_fisico);
+
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                e.printStackTrace();
+            }*/
+
+        bid.timbraBiglietto(255L);
+
        /* Abbonamento ab = new Abbonamento(LocalDate.now(), "MENSILE", 50.50, LocalDate.now().plusMonths(1));
         User gimmy= new User("Gimmy", "DellaMontagna", LocalDate.of(1880,2,23), "Via dei Gimmy GimmyA");
         user.save(gimmy);
         Card card = new Card(LocalDate.now(), gimmy);
         cardDAO.create(card);*/
 
-        abb.verificaValidita("54378455");
-
+        /*abb.verificaValidita("54378455");*/
         /*Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
         dm.save(distributori_fisico);
         abb.create(ab , card , distributori_fisico );*/
 
 
-       /* try {
-            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli
-            Gimmy");
-            *//*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*//*
-            Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
-            bid.save(biglietto1,distributori_fisico);
-        try {
-              *//*Distributore distributori_fisico = new
-              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*//*
-            Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
 
 
-            bid.save(biglietto1, distributori_automatici);
-
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
-
-        bid.findAll("Biglietti dai fratelli Gimmy");*/
+        bid.findAll("Biglietteria al Mare");
 
 
         /*System.out.println("Inserisci il codice macchina: ");

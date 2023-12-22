@@ -21,6 +21,8 @@ public class Mezzo {
     private int capienza;
     @Column ( nullable = false, insertable = true)
     private int tot_biglietti_vidimati;
+    @Column(unique = true)
+    private String targa;
     @OneToMany(mappedBy = "mezzi")
     private List<Manutenzione> manutenzione;
     @ManyToMany
@@ -30,9 +32,6 @@ public class Mezzo {
             inverseJoinColumns = @JoinColumn(name = "tratta_id")
     )
     private List<Tratta> tratte = new ArrayList<>();
-
-    @Column(unique = true)
-    private String targa;
     @OneToMany(mappedBy = "mezzo")
     private List<Viaggio> viaggi = new ArrayList<>();
 
