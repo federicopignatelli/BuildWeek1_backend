@@ -155,6 +155,24 @@ public class BigliettoDAO {
         List<Biglietto> result = query.getResultList();
         System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al mezzo " + mezzo);
     }
+    public void timbraBiglietto(Long id_biglietto) {
+        TypedQuery<Biglietto> query2 = em.createNamedQuery("findBigliettoByID", Biglietto.class);
+        Query queryVidima = em.createQuery("update Biglietto b set b.vidimazione = true where b.id_biglietto = :thisIdb");
+        em.getTransaction().begin();
+        query2.setParameter("thisIdB", id_biglietto);
+        Biglietto result=(Biglietto) query2.getSingleResult();
+        if(result.getVidimazione()){
+            System.err.println("Il biglietto è già stato timbrato, acquistane un'altro dall'autista;");
+        }
+        else {
+            queryVidima.setParameter("thisIdb", id_biglietto);
+            queryVidima.executeUpdate();
+            System.out.println("Il biglietto " + id_biglietto + " è stato timbrato: Buon viaggio e buone feste;\n"+ result.toString());
+        }
+
+        em.getTransaction().commit();
+
+    }
 }
 
 
