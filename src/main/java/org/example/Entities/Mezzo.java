@@ -24,7 +24,7 @@ public class Mezzo {
     @Column(unique = true)
     private String targa;
     @OneToMany(mappedBy = "mezzi")
-    private List<Manutenzione> manutenzione;
+    private List<Manutenzione> manutenzione = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "mezzo_tratta",
@@ -34,6 +34,8 @@ public class Mezzo {
     private List<Tratta> tratte = new ArrayList<>();
     @OneToMany(mappedBy = "mezzo")
     private List<Viaggio> viaggi = new ArrayList<>();
+    @Column(name = "in_manutenzione", nullable = false)
+    private boolean inManutenzione;
 
     /*----------------------< Costruttori >---------------------------*/
     public Mezzo() {
@@ -85,6 +87,10 @@ public class Mezzo {
         return viaggi;
     }
 
+    public void setInManutenzione(boolean inManutenzione) {
+        this.inManutenzione = inManutenzione;
+    }
+
     /*---------------------------< Metodi >-----------------------------*/
     public void addViaggio(Viaggio viaggio){
         viaggi.add(viaggio);
@@ -110,6 +116,15 @@ public class Mezzo {
         return targa.toString();
     }
 
+    public void addManutenzione(Manutenzione newMan){
+        if(manutenzione == null){
+            manutenzione = new ArrayList<>();
+        }
+        manutenzione.add(newMan);
+        newMan.setMezzi(this);
+        setInManutenzione(true);
+        System.out.println("Il Mezzo ora si trova in manutenzione!");
+    }
     /*---------------------------< Override >-----------------------------*/
 
     @Override
