@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table (name = "card")
+@NamedQueries ({@NamedQuery (name = "getCard", query = "select c from Card c where c.cardNumber = :cardNumber")})
 public class Card {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

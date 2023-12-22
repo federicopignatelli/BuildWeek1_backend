@@ -1,22 +1,15 @@
 package org.example;
 
 import org.example.Entities.*;
-import org.example.EntitiesDAO.AbbonamentoDAO;
-import org.example.EntitiesDAO.BigliettoDAO;
-import org.example.EntitiesDAO.DistributoreDAO;
+import org.example.EntitiesDAO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 public class Application {
     public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
@@ -28,19 +21,35 @@ public class Application {
         DistributoreDAO dm = new DistributoreDAO(entityManager);
         BigliettoDAO bid = new BigliettoDAO(entityManager);
         AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
+        UserDAO user = new UserDAO(entityManager);
+        CardDAO cardDAO = new CardDAO(entityManager);
         Biglietto biglietto;
 
 
-        try {
-            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
-            /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
+       /* Abbonamento ab = new Abbonamento(LocalDate.now(), "MENSILE", 50.50, LocalDate.now().plusMonths(1));
+        User gimmy= new User("Gimmy", "DellaMontagna", LocalDate.of(1880,2,23), "Via dei Gimmy GimmyA");
+        user.save(gimmy);
+        Card card = new Card(LocalDate.now(), gimmy);
+        cardDAO.create(card);*/
+
+        abb.verificaValidita("54378455");
+
+        /*Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
+        dm.save(distributori_fisico);
+        abb.create(ab , card , distributori_fisico );*/
+
+
+       /* try {
+            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli
+            Gimmy");
+            *//*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*//*
             Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
             bid.save(biglietto1,distributori_fisico);
         try {
-              /*Distributore distributori_fisico = new
-              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*/
+              *//*Distributore distributori_fisico = new
+              Distributorefisico("Milano","FISICO","BigliettiANDBiglietti");*//*
             Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");
-           
+
 
             bid.save(biglietto1, distributori_automatici);
 
@@ -49,17 +58,16 @@ public class Application {
             e.printStackTrace();
         }
 
-        bid.findAll("Biglietti dai fratelli Gimmy");
+        bid.findAll("Biglietti dai fratelli Gimmy");*/
 
 
         /*System.out.println("Inserisci il codice macchina: ");
         String codiceMacchina = scan.nextLine();*/
 
 
-        bid.findCountTicketByMezzo(MezzoType.AUTOBUS);
+        /*bid.findCountTicketByMezzo(MezzoType.AUTOBUS);*/
 
-       /* // ********************************************* MEZZI - TRATTE - VIAGGI
-        // **************************************************************************************/
+
         /*MezzoDAO mezzoDAO = new MezzoDAO(entityManager);
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
@@ -103,8 +111,6 @@ public class Application {
 
         /*viaggioDAO.stampaTotTappeEtempoEffTratta();*/
 
-       /* // ********************************************* fine MEZZI - TRATTE - VIAGGI
-        // *************************************************************************************
 
         // DistributorefisicoDAO df= new DistributorefisicoDAO(entityManager);
         //
@@ -112,7 +118,7 @@ public class Application {
         // df.save(ds);
 
         // creazione utente
-        User user1 = new User("Gianni", "Morandi", LocalDate.of(1975, 10, 3), "Roma, via Bianchi");
+        /*User user1 = new User("Gianni", "Morandi", LocalDate.of(1975, 10, 3), "Roma, via Bianchi");
         UserDAO userDAO = new UserDAO(entityManager);
         // userDAO.save(user1);
 
@@ -144,4 +150,4 @@ public class Application {
     }
 
 }
-}
+
