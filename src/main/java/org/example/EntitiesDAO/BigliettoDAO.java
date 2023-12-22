@@ -164,8 +164,9 @@ public class BigliettoDAO {
         else {
             queryVidima.setParameter("thisIdb", id_biglietto);
             queryVidima.executeUpdate();
-            System.out.println("Il biglietto " + id_biglietto + " è stato timbrato: Buon viaggio e buone feste;\n"+ result.toString());
+
         }
+
 
         em.getTransaction().commit();
 

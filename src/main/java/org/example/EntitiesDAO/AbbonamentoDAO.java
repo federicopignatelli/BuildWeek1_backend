@@ -97,7 +97,7 @@ public class AbbonamentoDAO {
     }
 
     public void getAbbScadutiByCard(String cardNumber) {
-        getAbbonamento(giveId("54378455").getId());
+        getAbbonamento(giveId(cardNumber).getId());
     }
     /*----------------------------------------------------------*/
 
