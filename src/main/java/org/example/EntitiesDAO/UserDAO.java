@@ -10,7 +10,6 @@ import javax.persistence.EntityTransaction;
 public class UserDAO {
     public final EntityManager em;
 
-
     public UserDAO(EntityManager em) {
         this.em = em;
     }
@@ -22,33 +21,26 @@ public class UserDAO {
         transaction.commit();
     }
 
-    public User findById(long id){
-        if(!em.getTransaction().isActive()){
+    public void findById(long id) {
+        if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
         }
-         User user = em.find(User.class, id);
-        if(user==null){
-            System.out.println("Non esiste");
-        }else{
-            System.out.println(user.toString());
+        User user = em.find(User.class, id);
+        System.out.println(user.toString());
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().commit();
         }
 
-        if(em.getTransaction().isActive()){
-            em.getTransaction().commit();
-            return user;
-        }else {
-            return user;
-        }
     }
 
-    public void findByIdandDelete(long id){
+    public void findByIdandDelete(long id) {
         User found = em.find(User.class, id);
-        if(found != null){
+        if (found != null) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
             em.remove(found);
             transaction.commit();
-        }else{
+        } else {
             System.err.println("User non trovato!");
         }
     }

@@ -1,11 +1,10 @@
 package org.example;
 
-
-
 import org.example.Entities.Biglietto;
 import org.example.Entities.Distributore;
 import org.example.Entities.Distributoreautomatico;
 import org.example.Entities.Distributorefisico;
+import org.example.Entities.*;
 
 import org.example.EntitiesDAO.*;
 import org.slf4j.Logger;
@@ -19,35 +18,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Application {
-        public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
-        public static Logger logger = LoggerFactory.getLogger(Application.class);
-        static Scanner scan = new Scanner(System.in);
+    public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
+    public static Logger logger = LoggerFactory.getLogger(Application.class);
+    static Scanner scan = new Scanner(System.in);
 
-        public static void main(String[] args) {
-                EntityManager entityManager = managerFactory.createEntityManager();
-                DistributoreDAO dm = new DistributoreDAO(entityManager);
-                BigliettoDAO bid = new BigliettoDAO(entityManager);
-                AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
-                UserDAO user = new UserDAO(entityManager);
-                CardDAO cardDAO = new CardDAO(entityManager);
-                Biglietto biglietto;
-                CardDAO ca=new CardDAO(entityManager);
+    public static void main(String[] args) {
 
+        EntityManager entityManager = managerFactory.createEntityManager();
+        DistributoreDAO dm = new DistributoreDAO(entityManager);
+        BigliettoDAO bid = new BigliettoDAO(entityManager);
+        AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
+        UserDAO user = new UserDAO(entityManager);
+        CardDAO cardDAO = new CardDAO(entityManager);
+        Biglietto biglietto;
+        CardDAO ca = new CardDAO(entityManager);
 
+        entityManager.close();
+        managerFactory.close();
 
-
-                ca.getUserByUserByCard("54378455");
-
-
-                /*DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy");
-                bid.numeroBigliettiData(LocalDate.parse("2023", formatter));
-
-                System.out.println("ciaone");*/
-
-
-                entityManager.close();
-                managerFactory.close();
-
-        }
-
+    }
 }

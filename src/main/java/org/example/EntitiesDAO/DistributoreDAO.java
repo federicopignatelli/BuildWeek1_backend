@@ -36,7 +36,7 @@ public class DistributoreDAO {
         if (!em.getTransaction().isActive()) {
             em.getTransaction().commit();
         }
-        System.out.println(distributore.getIdBiglietteria());
+        System.out.println("id biglietteria: "+distributore.getIdBiglietteria());
     }
 
     public Distributore getById(Distributore d) {
