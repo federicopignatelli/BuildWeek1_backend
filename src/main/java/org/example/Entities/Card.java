@@ -87,4 +87,9 @@ public class Card {
         System.out.println(codiceMacchina);
         return codiceMacchina;
     }
+
+    @Override
+    public String toString() {
+        return "User: " +getUser().toString();
+    }
 }

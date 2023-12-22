@@ -16,7 +16,9 @@ import java.util.List;
 
             @NamedQuery (name = "findBigliettoByID", query = "SELECT b FROM Biglietto b WHERE b.id_biglietto =:thisIdB "),
 
-        @NamedQuery (name = "vidima", query = "update Biglietto b set b.vidimazione = true where b.id_biglietto = :thisIdb")})
+        @NamedQuery (name = "vidima", query = "update Biglietto b set b.vidimazione = true where b.id_biglietto = :thisIdb"),
+
+        @NamedQuery (name = "bigliettiInUnPeriodo", query = "SELECT b FROM Biglietto b WHERE b.dataemissioneBiglietto=:thisDate"),})
 public class Biglietto {
     @Id
     @GeneratedValue
@@ -142,7 +144,7 @@ public class Biglietto {
                 "Prezzo |> " +  prezzo + "\n"+
                 "Timbrato |> " + vidimazione + "\n" +
                 /*"Tratta |>" + tratta + "\n" +*/
-                "Allle ore: " + LocalTime.now().format(formatter) + "\n" +
+                "Alle ore: " + LocalTime.now().format(formatter) + "\n" +
                 "-----------------------------------";
     }
 }

@@ -23,7 +23,22 @@ public class UserDAO {
     }
 
     public User findById(long id){
-        return em.find(User.class, id);
+        if(!em.getTransaction().isActive()){
+            em.getTransaction().begin();
+        }
+         User user = em.find(User.class, id);
+        if(user==null){
+            System.out.println("Non esiste");
+        }else{
+            System.out.println(user.toString());
+        }
+
+        if(em.getTransaction().isActive()){
+            em.getTransaction().commit();
+            return user;
+        }else {
+            return user;
+        }
     }
 
     public void findByIdandDelete(long id){

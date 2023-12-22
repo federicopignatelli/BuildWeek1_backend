@@ -68,4 +68,8 @@ public class User {
 
     /*---------------------------< Metodi >-----------------------------*/
 
+    @Override
+    public String toString() {
+        return getUserName() + "\n"+ getUserLastName() + " \n" + getUserId() + " \n" + getBirthDate() + " \n" + getResidentialAddress();
+    }
 }
