@@ -1,12 +1,12 @@
 package org.example;
 
-<<<<<<<HEAD
+
 
 import org.example.Entities.Biglietto;
 import org.example.Entities.Distributore;
 import org.example.Entities.Distributoreautomatico;
-import org.example.Entities.Distributorefisico;=======
-import org.example.Entities.*;>>>>>>>master
+import org.example.Entities.Distributorefisico;
+import org.example.Entities.*;
 import org.example.EntitiesDAO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,6 +92,7 @@ public class Application {
                 // arpa2.addManutenzione(pistone);
                 // manutDao.save(pistone);
 
+               
                 viaggioDAO.stampaTotTappeEtempoEffTratta();
 
                 Long mezzoId = 7L;
