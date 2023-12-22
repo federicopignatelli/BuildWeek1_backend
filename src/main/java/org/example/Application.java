@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -34,16 +35,16 @@ public class Application {
         TrattaDAO trattaDAO = new TrattaDAO(entityManager);
         ViaggioDAO viaggioDAO = new ViaggioDAO(entityManager);
         ManutenzioneDAO manutDao = new ManutenzioneDAO(entityManager);
-
-        Tratta colosseo = new Tratta("Colosseo","Testaccio",19);
-        Tratta eur = new Tratta("Termini","Trevi",9);
-        Tratta pescara = new Tratta("Pescara","chieti",20);
-
-        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS);
-        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS);
-        Mezzo tram1 = new Mezzo(MezzoType.TRAM);
-        Mezzo tram2 = new Mezzo(MezzoType.TRAM);
-/*      ---->addMezzo     aggiunge un mezzo a una tratta    */
+//
+//        Tratta colosseo = new Tratta("Colosseo","Testaccio",19);
+//        Tratta eur = new Tratta("Termini","Trevi",9);
+//        Tratta pescara = new Tratta("Pescara","chieti",20);
+//
+//        Mezzo arpa1 = new Mezzo(MezzoType.AUTOBUS);
+//        Mezzo arpa2 = new Mezzo(MezzoType.AUTOBUS);
+//        Mezzo tram1 = new Mezzo(MezzoType.TRAM);
+//        Mezzo tram2 = new Mezzo(MezzoType.TRAM);
+///*      ---->addMezzo     aggiunge un mezzo a una tratta    */
 //        eur.addMezzo(arpa1);
 //        colosseo.addMezzo(tram2);
 //        pescara.addMezzo(arpa2);
@@ -72,12 +73,54 @@ public class Application {
 //        Manutenzione pistone = new Manutenzione(arpa2,"Sanauto",LocalDate.now(),LocalDate.now().plusDays(15),"Pistone rotto");
 //        arpa2.addManutenzione(pistone);
 //        manutDao.save(pistone);
+//
+//
+//        viaggioDAO.stampaTotTappeEtempoEffTratta();
+//
+//        Long mezzoId = 7L;
+//        mezzoDAO.stampaInfoManutenzioneMezzo(mezzoId);
+        Scanner scanner = new Scanner(System.in);
 
+        // Creazione e salvataggio delle tratte
+        System.out.println("Inserisci i dettagli della tratta (formato: origine, destinazione, durata):");
+        String[] trattaInput = scanner.nextLine().split(",");
+        Tratta tratta = new Tratta(trattaInput[0].trim(), trattaInput[1].trim(), Integer.parseInt(trattaInput[2].trim()));
+        trattaDAO.save(tratta);
 
+        // Creazione e salvataggio dei mezzi
+        System.out.println("Inserisci il tipo di mezzo (AUTOBUS, TRAM):");
+        MezzoType mezzoType = MezzoType.valueOf(scanner.nextLine().toUpperCase());
+        Mezzo mezzo = new Mezzo(mezzoType);
+        mezzoDAO.save(mezzo);
+
+        // Assegnazione di un mezzo a una tratta
+        tratta.addMezzo(mezzo);
+        trattaDAO.save(tratta); // Assumendo che esista un metodo di aggiornamento
+
+        // Creazione e salvataggio di un viaggio
+        System.out.println("Inserisci l'ora di partenza e di arrivo del viaggio (formato yyyy-MM-ddTHH:mm):");
+        String oraPartenzaStr = scanner.nextLine();
+        String oraArrivoStr = scanner.nextLine();
+        LocalDateTime oraPartenza = LocalDateTime.parse(oraPartenzaStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        LocalDateTime oraArrivo = LocalDateTime.parse(oraArrivoStr, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        Viaggio viaggio = new Viaggio(mezzo, tratta, oraPartenza, oraArrivo);
+        viaggioDAO.save(viaggio);
+
+        // Creazione e salvataggio di una manutenzione
+        System.out.println("Inserisci i dettagli della manutenzione (formato: officina, descrizione, giorni di durata):");
+        String[] manutInput = scanner.nextLine().split(",");
+        LocalDate dataInizio = LocalDate.now();
+        LocalDate dataFine = dataInizio.plusDays(Long.parseLong(manutInput[2].trim()));
+        Manutenzione manutenzione = new Manutenzione(mezzo, manutInput[0].trim(), dataInizio, dataFine, manutInput[1].trim());
+        mezzo.addManutenzione(manutenzione);
+        manutDao.save(manutenzione);
+
+        // Stampa delle informazioni di viaggio e manutenzione
         viaggioDAO.stampaTotTappeEtempoEffTratta();
+        mezzoDAO.stampaInfoManutenzioneMezzo(mezzo.getMezzoId());
 
-        Long mezzoId = 7L;
-        mezzoDAO.stampaInfoManutenzioneMezzo(mezzoId);
+        // Chiusura dello Scanner e dell'EntityManager
+        scanner.close();
 //********************************************* fine  MEZZI - TRATTE - VIAGGI - MANUTENZIONI *************************************************************************************
         try {
             Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
