@@ -4,7 +4,6 @@ import org.example.Entities.*;
 import org.example.Entities.ENUM.Tipologia_biglietto;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -120,7 +119,8 @@ public class BigliettoDAO {
         }
     }
 
-
+    /*--------------------------------< Conteggio Biglietti >---------------------------------*/
+    //Conteggi biglietti per singolo venditore attribuendo o codice macchina o companyName
     public MezzoType calculateMezzo(Biglietto biglietto) {
         if ((biglietto.getTipologia_biglietto() == Tipologia_biglietto.NOVANTAMINUTI) || (biglietto.getTipologia_biglietto() == Tipologia_biglietto.SESSANTAMINUTI)) {
             return MezzoType.TRAM;
@@ -130,10 +130,26 @@ public class BigliettoDAO {
     }
 
     public void findAll(String name) {
-       TypedQuery<Long> query = em.createNamedQuery("findAllBiglietti", Long.class);
+        TypedQuery<Long> query = em.createNamedQuery("findAllBiglietti", Long.class);
         query.setParameter("companyName", name);
         List<Long> result = query.getResultList();
-        System.out.println("Sono stati trovati "+result.size()+ " biglietti corrispondenti al rivenditore " + name);
+        System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al rivenditore " + name);
+    }
+
+    public void findAllDa(String name) {
+        TypedQuery<Distributoreautomatico> query = em.createNamedQuery("existbyMachineCode",
+                Distributoreautomatico.class);
+        query.setParameter("codiceMacchina", name);
+        List<Distributoreautomatico> result = query.getResultList();
+        System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al rivenditore " + name);
+    }
+    /*---------------------------------------------------------------------------------------*/
+
+    public void findCountTicketByMezzo(MezzoType mezzo){
+        TypedQuery<Biglietto> query = em.createNamedQuery("findByVeicle", Biglietto.class);
+        query.setParameter("mezzo", mezzo);
+        List<Biglietto> result = query.getResultList();
+        System.out.println("Sono stati trovati " + result.size() + " biglietti corrispondenti al mezzo " + mezzo);
     }
 }
 

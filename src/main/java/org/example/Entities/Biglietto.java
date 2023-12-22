@@ -14,7 +14,8 @@ import java.util.Locale;
 @NamedQueries(
         {@NamedQuery(name = "findAllBiglietti", query = "SELECT biglietto.id_biglietto " +
                 "FROM Biglietto biglietto JOIN biglietto.distributori_fisico df " +
-                "WHERE df.companyName LIKE :companyName")})
+                "WHERE df.companyName LIKE :companyName"),
+                @NamedQuery (name = "findByVeicle", query = "select d from Biglietto d WHERE d.mezzo =:mezzo")})
 public class Biglietto {
     @Id
     @GeneratedValue

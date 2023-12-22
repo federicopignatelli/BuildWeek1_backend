@@ -30,7 +30,7 @@ public class DistributoreDAO {
         }catch(RuntimeException e){
             logger.error(e.getMessage());
         }
-        
+
 
 
         if (!em.getTransaction().isActive()) {
@@ -43,5 +43,10 @@ public class DistributoreDAO {
         Distributorefisico di = em.find(Distributorefisico.class, d.getIdBiglietteria());
         System.out.println(di.toString());
         return di;
+    }
+    public void getDistributoreDb(){
+
+
+
     }
 }

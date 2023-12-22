@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.Entities.Biglietto;
-import org.example.Entities.Distributore;
-import org.example.Entities.Distributoreautomatico;
-import org.example.Entities.Distributorefisico;
+import org.example.Entities.*;
 import org.example.EntitiesDAO.AbbonamentoDAO;
 import org.example.EntitiesDAO.BigliettoDAO;
 import org.example.EntitiesDAO.DistributoreDAO;
@@ -13,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.Scanner;
 
 public class Application {
     public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
     public static Logger logger = LoggerFactory.getLogger(Application.class);
-
+    static Scanner scan=new Scanner(System.in);
 
     public static void main(String[] args) {
         EntityManager entityManager = managerFactory.createEntityManager();
@@ -26,8 +24,9 @@ public class Application {
         AbbonamentoDAO abb = new AbbonamentoDAO(entityManager);
         Biglietto biglietto;
 
+
         try {
-            Distributore distributori_fisico = new Distributorefisico("Milano","FISICO","Biglietteria al Duomo");
+            Distributore distributori_fisico = new Distributorefisico("Firenze","FISICO","Biglietti dai fratelli Gimmy");
             /*Distributore distributori_automatici = new Distributoreautomatico("Milano", "AUTOMATICO", "BOTH");*/
             Biglietto biglietto1 = new Biglietto("SESSANTAMINUTI");
             bid.save(biglietto1,distributori_fisico);
@@ -37,7 +36,15 @@ public class Application {
             e.printStackTrace();
         }
 
-        bid.findAll("Biglietteria al Duomo");
+        bid.findAll("Biglietti dai fratelli Gimmy");
+
+
+        /*System.out.println("Inserisci il codice macchina: ");
+        String codiceMacchina = scan.nextLine();*/
+
+
+        bid.findCountTicketByMezzo(MezzoType.AUTOBUS);
+
 
         entityManager.close();
         managerFactory.close();
