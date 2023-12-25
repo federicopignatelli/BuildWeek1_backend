@@ -3,6 +3,8 @@ package org.example.frames.Menu;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Jmenu extends JMenuBar {
@@ -24,6 +26,7 @@ public class Jmenu extends JMenuBar {
         abbonamenti = new AbbonamentiMenu();
         biglietti = new BigliettiMenu();
         distribuzioni = new DistributoriMenu();
+
 
 
         menubar.add(mezzi.mezziMenu());
