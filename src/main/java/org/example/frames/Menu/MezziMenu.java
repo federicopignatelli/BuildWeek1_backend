@@ -1,8 +1,9 @@
 package org.example.frames.Menu;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class MezziMenu extends JMenu {
+public class MezziMenu extends JMenuBar {
 
     public MezziMenu() {
     }
@@ -23,7 +24,7 @@ public class MezziMenu extends JMenu {
         Mezzi.add(AggiungiMezzo);
 
         Mezzi.add(VisualizzaMezzi);
-
+        Mezzi.setForeground(Color.LIGHT_GRAY);
         return Mezzi;
     }
 

@@ -12,6 +12,10 @@ public class Frame extends JFrame {
         menu = new Jmenu();
         setJMenuBar(menu.menubar());
 
+
+
+
+
         add(menu, BorderLayout.NORTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());

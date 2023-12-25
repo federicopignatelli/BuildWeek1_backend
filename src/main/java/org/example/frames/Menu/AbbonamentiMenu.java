@@ -1,8 +1,9 @@
 package org.example.frames.Menu;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class AbbonamentiMenu extends JMenu {
+public class AbbonamentiMenu extends JMenuBar {
     private JMenu Abbonamenti;
     public AbbonamentiMenu(){};
 
@@ -12,9 +13,9 @@ public class AbbonamentiMenu extends JMenu {
         JMenuItem AbbonamentiDisponibili=new JMenuItem("Abbonamenti Disponibili");
         JMenuItem CercaAbbonamenti=new JMenuItem("Cerca Abbonamenti");
 
-        add(AbbonamentiDisponibili);
-        add(CercaAbbonamenti);
-
+        Abbonamenti.add(AbbonamentiDisponibili);
+        Abbonamenti.add(CercaAbbonamenti);
+        Abbonamenti.setForeground(Color.LIGHT_GRAY);
         return Abbonamenti;
     }
 
