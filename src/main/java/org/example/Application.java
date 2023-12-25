@@ -7,6 +7,7 @@ import org.example.Entities.Distributorefisico;
 import org.example.Entities.*;
 
 import org.example.EntitiesDAO.*;
+import org.example.frames.Frame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +22,7 @@ public class Application {
     public static final EntityManagerFactory managerFactory = Persistence.createEntityManagerFactory("bw1812");
     public static Logger logger = LoggerFactory.getLogger(Application.class);
     static Scanner scan = new Scanner(System.in);
+    Frame frame = new Frame();
 
     public static void main(String[] args) {
 
@@ -32,6 +34,8 @@ public class Application {
         CardDAO cardDAO = new CardDAO(entityManager);
         Biglietto biglietto;
         CardDAO ca = new CardDAO(entityManager);
+
+        new Frame();
 
         entityManager.close();
         managerFactory.close();
