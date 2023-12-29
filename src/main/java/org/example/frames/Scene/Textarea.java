@@ -7,11 +7,9 @@ public class Textarea extends JPanel{
     private JTextArea textarea;
     public Textarea(){
         textarea = new JTextArea();
-        setLayout(new BorderLayout());
-        add(textarea, BorderLayout.CENTER);
+        add(textarea);
         textarea.setEditable(true);
         textarea.setVisible(true);
         textarea.append("ciao");
-
     }
 }

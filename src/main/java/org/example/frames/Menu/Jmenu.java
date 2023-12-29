@@ -1,6 +1,7 @@
 package org.example.frames.Menu;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +9,6 @@ import java.awt.event.ActionListener;
 
 
 public class Jmenu extends JMenuBar {
-    JMenuBar menubar;
     private MezziMenu mezzi;
     private AbbonamentiMenu abbonamenti;
     private DistributoriMenu distribuzioni;
@@ -17,25 +17,24 @@ public class Jmenu extends JMenuBar {
     Border empty;
 
     public Jmenu() {
-    }
 
-    public JMenuBar menubar() {
-        menubar = new JMenuBar();
-        setBorder(empty);
+        setLayout(new FlowLayout());
+        setBorder(empty = BorderFactory.createEmptyBorder());
         mezzi = new MezziMenu();
         abbonamenti = new AbbonamentiMenu();
         biglietti = new BigliettiMenu();
         distribuzioni = new DistributoriMenu();
 
 
+        add(mezzi.mezziMenu(), FlowLayout.LEFT);
+        add(abbonamenti.getAbbonamentiMenu());
+        add(biglietti.BigliettiMenu());
+        add(distribuzioni.getDistributoriMenu());
+        setBackground(Color.DARK_GRAY);
 
-        menubar.add(mezzi.mezziMenu());
-        menubar.add(abbonamenti.getAbbonamentiMenu());
-        menubar.add(biglietti.BigliettiMenu());
-        menubar.add(distribuzioni.getDistributoriMenu());
-        menubar.setBackground(Color.DARK_GRAY);
-
-        return menubar;
+        setVisible(true);
     }
+
+
 
 }

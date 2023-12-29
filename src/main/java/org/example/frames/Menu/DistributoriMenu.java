@@ -22,13 +22,7 @@ public class DistributoriMenu{
         Distribuzioni = new JMenu("Distribuzioni");
         JMenuItem menu = new JMenuItem("Distributori Autorizzati");
         JMenuItem menu2 = new JMenuItem("Distributori Automatici");
-        menu2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(e.getActionCommand());
-                FramePrincipale.getInstance().add(new Distributoriautomatici(),BorderLayout.CENTER);
-            }
-        });
+
 
         Distribuzioni.add(menu);
         Distribuzioni.add(menu2);
