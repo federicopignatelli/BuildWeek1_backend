@@ -1,46 +1,28 @@
 package org.example.frames;
 
-import org.example.frames.Menu.Jmenu;
-import org.example.frames.Scene.CardContainer;
-import org.example.frames.Scene.Distributoriautomatici;
+import org.example.frames.View.SideMenu;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class FramePrincipale extends JFrame {
-    private CardContainer cardContainer;
-    private JPanel sezioni;
-    private Distributoriautomatici distributoriautomatici;
-    private Jmenu menu;
-    private JPanel cardContainerPanel=new JPanel();
+    private SideMenu menu=new SideMenu();
+
+
 
     public FramePrincipale() {
-        setTitle("GestioneTrasporti");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 700);
-        sezioni = new JPanel();
-        CardLayout cardLayout = new CardLayout();
-        sezioni.setLayout(cardLayout);
-        sezioni.setBackground(Color.BLACK);
-
-
-
-
-
+        super("GestioneTrasporti");
         setLayout(new BorderLayout());
-        add(new Jmenu(), BorderLayout.PAGE_START);
-        add(sezioni, BorderLayout.CENTER);
+
+
+
+        setJMenuBar(menu);
+        setSize(1000, 700);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
     }
 
-    /*public static FramePrincipale getInstance() {
-
-        return instance.;
-    }*/
-    public Distributoriautomatici getDistributoriautomatici() {
-        return distributoriautomatici;
-    }
 }
+
+
